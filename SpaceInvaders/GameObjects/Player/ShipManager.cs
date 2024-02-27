@@ -1,11 +1,10 @@
 ﻿using SpaceInvaders.GraphicalObjects;
 using System.Diagnostics;
 using SpaceInvaders.Commands;
-using SpaceInvaders.Time;
 
 namespace SpaceInvaders.GameObjects
 {
-    class ShipManager
+    internal sealed class ShipManager
     {
         public enum eMiState
         {
@@ -23,28 +22,28 @@ namespace SpaceInvaders.GameObjects
         }
 
         //keep missile here and add and remove it from sprite batch and game object manager as needed.
-        //store a refrence to the game object node as well.
+        //store a reference to the game object node as well.
         private ShipManager()
         {
             // Store the states
-            this.pStateReady = new ShipStateReady();
-            this.pStateMissileFlying = new ShipStateMissileFlying();
-            this.pStateEnd = new ShipStateEnd();
+            pStateReady = new ShipStateReady();
+            pStateMissileFlying = new ShipStateMissileFlying();
+            pStateEnd = new ShipStateEnd();
 
-            this.pEither = new MvEither();
-            this.pLeftO = new MvLeftOnly();
-            this.pRightO = new MvRightOnly();
-            this.pNeither = new MvNeither();
+            pEither = new MvEither();
+            pLeftO = new MvLeftOnly();
+            pRightO = new MvRightOnly();
+            pNeither = new MvNeither();
 
             //this.pDeathAnim = new ShipDeathAnimCMD();
 
-            this.pShip = new Ship(SpriteID.Hero, 256, 60);
-            pShip.setName(GameObjectTypeEnum.Hero);
+            pShip = new Ship(SpriteID.Hero, 256, 60);
+            pShip.setName(GameObjectType.Hero);
             pShip.getPSprite().setColor(255.0f, 255.0f, 0);
 
 
-            this.pMissile = new Missile(SpriteID.Missile, 0, 0);
-            pMissile.setName(GameObjectTypeEnum.Missile);
+            pMissile = new Missile(SpriteID.Missile, 0, 0);
+            pMissile.setName(GameObjectType.Missile);
             pMissile.getPSprite().setColor(0.0f, 255.0f, 0.0f);
         }
 
@@ -195,7 +194,7 @@ namespace SpaceInvaders.GameObjects
            
             pShipMan.pShip.ActivateCollisionSprite();
             pShipMan.pShip.setCoords(256, 60);
-            pShipMan.pShip.clearMark();
+            pShipMan.pShip.ClearMark();
             return pShipMan.pShip;
         }
 

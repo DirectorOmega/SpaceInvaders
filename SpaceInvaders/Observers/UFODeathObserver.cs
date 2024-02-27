@@ -1,5 +1,4 @@
-﻿using System;
-using SpaceInvaders.CollisionSystem;
+﻿using SpaceInvaders.CollisionSystem;
 using SpaceInvaders.GameObjects;
 using SpaceInvaders.GameState;
 using SpaceInvaders.Time;
@@ -7,19 +6,12 @@ using SpaceInvaders.Commands;
 
 namespace SpaceInvaders.Observers
 {
-
-
-    class UFORemoveObserver : ColObserver
+    internal sealed class UFORemoveObserver : ColObserver
     {
         UFO toRemove;
-        public UFORemoveObserver()
-        {
-        }
+        public UFORemoveObserver() { }
 
-        public UFORemoveObserver(UFO a)
-        {
-            this.toRemove = a;
-        }
+        public UFORemoveObserver(UFO a) => toRemove = a;
 
         public override void dClean()
         {
@@ -33,12 +25,12 @@ namespace SpaceInvaders.Observers
             //Debug.WriteLine("KillAlienObserver: {0} {1}", this.pSubject.getA(), this.pSubject.getB());
 
             // OK do some magic
-            UFO a = (UFO)this.pSubject.getB();
+            UFO a = (UFO)this.pSubject.GetB();
             //a.stopSound();
             //this.pSubject.getA().Remove();
-            if (!a.getMarked())
+            if (!a.IsMarked())
             {
-                a.markForDeath();
+                a.MarkForDeath();
                 //   Delay
                 //TODO: clean up this new
                 UFORemoveObserver pObserver = new UFORemoveObserver(a);
@@ -49,8 +41,8 @@ namespace SpaceInvaders.Observers
         public override void Execute()
         {
             toRemove.Remove();
-            toRemove.clearMark();
-            TimerManager.Add(TimeEventID.create, new UFOSpawnCMD((GameObject)GameObjectManager.Find(GameObjectTypeEnum.UFORoot).getGameObject()), GameStateManager.getRandomNumber(12, 38));
+            toRemove.ClearMark();
+            TimerManager.Add(TimeEventID.create, new UFOSpawnCMD((GameObject)GameObjectManager.Find(GameObjectType.UFORoot).GetGameObject()), GameStateManager.getRandomNumber(12, 38));
         }
     }
 
@@ -61,7 +53,7 @@ namespace SpaceInvaders.Observers
         IrrKlang.ISoundSource deathSound;
         public UFODeathSoundObserver()
         {
-            deathSound = SndEngine.getSoundSource("ufo_lowpitch.wav");
+            deathSound = SndEngine.GetSoundSource("ufo_lowpitch.wav");
         }
 
         public override void dClean()

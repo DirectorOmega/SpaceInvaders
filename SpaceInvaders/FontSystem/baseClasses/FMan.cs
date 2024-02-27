@@ -10,7 +10,6 @@ namespace SpaceInvaders.FontSystem
 #endif
         public FMan(int numStart, int deltaAdd): base(numStart,deltaAdd)
         {
-
         }
     }
 }

@@ -7,7 +7,7 @@ using SpaceInvaders.Time;
 
 namespace SpaceInvaders.Observers
 {
-    class ShipDeathObserver : ColObserver
+    internal sealed class ShipDeathObserver : ColObserver
     {
         Ship toRemove;
         IrrKlang.ISoundSource expSFX;
@@ -15,13 +15,12 @@ namespace SpaceInvaders.Observers
 
         public ShipDeathObserver()
         {
-            expSFX = SndEngine.getSoundSource("explosion.wav");
+            expSFX = SndEngine.GetSoundSource("explosion.wav");
             aniCMD = new AnimationSprite();
             aniCMD.Attach(GameSpriteManager.Find(SpriteID.Ship));
 
             aniCMD.Attach(ImageManager.Find(ImageID.HeroExp1));
             aniCMD.Attach(ImageManager.Find(ImageID.HeroExp2));
-
         }
 
         public ShipDeathObserver(Ship pShip)
@@ -36,7 +35,7 @@ namespace SpaceInvaders.Observers
 
         public override void Notify()
         {
-            Ship ship = (Ship)pSubject.getB();
+            Ship ship = (Ship)pSubject.GetB();
             
             GameStateManager.getActiveBombRoot().ClearChildren();
             SndEngine.Play2D(expSFX);
@@ -55,24 +54,20 @@ namespace SpaceInvaders.Observers
             //cause bugs.
             GameStateManager.ResumeCommands();
 
-            if(!ship.getMarked())
+            if(!ship.IsMarked())
             {
-                ship.markForDeath();
+                ship.MarkForDeath();
                 ShipManager.DeactivateShip();
                 ShipDeathObserver pOb = new ShipDeathObserver(ship);
                 DelayedObjectManager.Attach(pOb);
             }
-
-
         }
 
         public override void Execute()
         {
-            toRemove.clearMark();
+            toRemove.ClearMark();
             ShipManager.DeathAnim(3.0f);
             toRemove.Remove();
-
-
         }
     }
 }

@@ -1,17 +1,16 @@
 ﻿using SpaceInvaders.GraphicalObjects;
-using System;
 using System.Diagnostics;
 
 namespace SpaceInvaders.FontSystem
 {
-    class Font : FLink
+    internal sealed class Font : FLink
     {
 
         public Font()
                 : base()
         {
-            this.name = FontName.Uninitialized;
-            this.pFontSprite = new FontSprite();
+            name = FontName.Uninitialized;
+            pFontSprite = new FontSprite();
         }
 
         ~Font()
@@ -19,34 +18,34 @@ namespace SpaceInvaders.FontSystem
 #if (TRACK_DESTRUCTOR)
             Debug.WriteLine("~Font():{0} ", this.GetHashCode());
 #endif
-            this.name = FontName.Uninitialized;
-            this.pFontSprite = null;
+            name = FontName.Uninitialized;
+            pFontSprite = null;
         }
 
         public void updateScore(int score)
         {
-            Debug.Assert(this.pFontSprite != null);
-            if(score < 10) { this.pFontSprite.UpdateMessage("000" + score); }
-            else if(score < 100) { this.pFontSprite.UpdateMessage("00" + score); }
-            else if(score < 1000) { this.pFontSprite.UpdateMessage("0" + score); }
-            else { this.pFontSprite.UpdateMessage(""+score); }
+            Debug.Assert(pFontSprite != null);
+            if(score < 10) { pFontSprite.UpdateMessage("000" + score); }
+            else if(score < 100) { pFontSprite.UpdateMessage("00" + score); }
+            else if(score < 1000) { pFontSprite.UpdateMessage("0" + score); }
+            else { pFontSprite.UpdateMessage(""+score); }
         }
 
         public void updateCredit(int credits)
         {
-            Debug.Assert(this.pFontSprite != null);
-            if (credits < 10) { this.pFontSprite.UpdateMessage("0" + credits); }
-            else { this.pFontSprite.UpdateMessage("" + credits); }
+            Debug.Assert(pFontSprite != null);
+            if (credits < 10) { pFontSprite.UpdateMessage("0" + credits); }
+            else { pFontSprite.UpdateMessage("" + credits); }
         }
 
-        public void UpdateMessage(String pMessage)
+        public void UpdateMessage(string pMessage)
         {
             Debug.Assert(pMessage != null);
-            Debug.Assert(this.pFontSprite != null);
-            this.pFontSprite.UpdateMessage(pMessage);
+            Debug.Assert(pFontSprite != null);
+            pFontSprite.UpdateMessage(pMessage);
         }
 
-        public void Set(FontName name, String pMessage, Glyph.Name glyphName, float xStart, float yStart)
+        public void Set(FontName name, string pMessage, Glyph.Name glyphName, float xStart, float yStart)
         {
             Debug.Assert(pMessage != null);
 
@@ -56,14 +55,12 @@ namespace SpaceInvaders.FontSystem
 
         override public void dClean()
         {
-            this.name = FontName.Uninitialized;
-            this.pFontSprite.Set(FontName.NullObject, pNullString, Glyph.Name.NullObject, 0.0f, 0.0f);
+            name = FontName.Uninitialized;
+            pFontSprite.Set(FontName.NullObject, pNullString, Glyph.Name.NullObject, 0.0f, 0.0f);
         }
 
-        public void Render()
-        {
-            pFontSprite.Render();
-        }
+        public void Render() 
+            => pFontSprite.Render();
 
         public void Dump()
         {
@@ -75,6 +72,6 @@ namespace SpaceInvaders.FontSystem
         // ----------------------------------------------------------------
         public FontName name;
         public FontSprite pFontSprite;
-        static private String pNullString = "null";
+        static private string pNullString = "null";
     }
 }

@@ -5,7 +5,7 @@ using SpaceInvaders.Time;
 
 namespace SpaceInvaders.GameState
 {
-    class StateAttract : GameState
+    internal sealed class StateAttract : GameState
     {
         Font DefaultMessage;
         Font Score1Label, Score2Label, HighScoreLabel, Score1, Score2, HighScore;
@@ -53,9 +53,9 @@ namespace SpaceInvaders.GameState
             MultiPlayer = new Font();
 
             UFO = GameSpriteManager.Add(SpriteID.AttractUFO, ImageManager.Find(ImageID.UFO), ISS.getUFOAdjSize());
-            OCTO = GameSpriteManager.Add(SpriteID.AttractOCTO, ImageManager.Find(ImageID.OctoF1), ISS.getAlienAdjSize());
-            SQUID = GameSpriteManager.Add(SpriteID.AttractSQUID, ImageManager.Find(ImageID.SquidF1), ISS.getAlienAdjSize());
-            CRAB = GameSpriteManager.Add(SpriteID.AttractCRAB, ImageManager.Find(ImageID.CrabF1), ISS.getAlienAdjSize());
+            OCTO = GameSpriteManager.Add(SpriteID.AttractOCTO, ImageManager.Find(ImageID.OctoF1), ISS.GetAlienAdjSize());
+            SQUID = GameSpriteManager.Add(SpriteID.AttractSQUID, ImageManager.Find(ImageID.SquidF1), ISS.GetAlienAdjSize());
+            CRAB = GameSpriteManager.Add(SpriteID.AttractCRAB, ImageManager.Find(ImageID.CrabF1), ISS.GetAlienAdjSize());
             
             // DefaultMessage.Set(FontName.GameOverLabel, "Press Enter to Start", Glyph.Name.Consolas36pt, 200, 400);
             //DefaultMessage.Set(FontName.GameOverLabel, "Press Enter to Start", Glyph.Name.InvadersText, 150, 400);

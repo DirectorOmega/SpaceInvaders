@@ -6,7 +6,6 @@ namespace SpaceInvaders.GameObjects
     {
         public GhMan(int numStart, int deltaAdd): base(numStart,deltaAdd)
         {
-
         }
     }
 }

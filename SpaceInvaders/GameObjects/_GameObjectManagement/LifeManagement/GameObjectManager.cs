@@ -2,11 +2,10 @@
 using SpaceInvaders.Manager;
 using SpaceInvaders.PCS;
 using SpaceInvaders.GraphicalObjects;
-using System;
 
 namespace SpaceInvaders.GameObjects
 {
-    class GameObjectManager : GoMan
+    internal sealed class GameObjectManager : GoMan
     {
         private static GameObjectManager pInstance;
         private PCSTree pRoot;
@@ -16,8 +15,8 @@ namespace SpaceInvaders.GameObjects
         //private static GameObjectNode PlayerAHead;
         //private static GameObjectNode PlayerBHead;
 
-       private void replaceSprites()
-        {   
+        private static void replaceSprites()
+        {
             //todo: modify this to grab the sbmn for each node and then iterate down and place every sprite back on the managers.
             GameObjectManager pMan = GameObjectManager.getInstance();
 
@@ -29,26 +28,23 @@ namespace SpaceInvaders.GameObjects
                 pRoot = (GameObjectNode)pRoot.pNext;
                 pTmp.Update();
             }
-
         }
 
-       // probably the worst thing. I had this bug pop up right before the deadline
-       //so when the game is over one of the two players is not clean and the other points to the reserve list. which is bad.
+        // probably the worst thing. I had this bug pop up right before the deadline
+        //so when the game is over one of the two players is not clean and the other points to the reserve list. which is bad.
         public static void ClearStored()
         {
             GameObjectManager pMan = GameObjectManager.getInstance();
-
             GameObjectNode cur = (GameObjectNode)pMan.getActiveHead();
 
-                //this means things aren't getting cleaned up properly.
-                if(cur != null) { Debug.Assert(false); }
+            //this means things aren't getting cleaned up properly.
+            if (cur != null) { Debug.Assert(false); }
 
-
-            cur = (GameObjectNode) pMan.baseGetPAHead();
+            cur = (GameObjectNode)pMan.baseGetPAHead();
             //this check because singleplayer will clean itself properly, and not store it's state.
             if (cur != null)
             {
-                if (cur.getGameObject() == null)
+                if (cur.GetGameObject() == null)
                 {
                     pMan.baseSetPlayerB();
                     SpriteBatchManager.SetPlayerB();
@@ -63,32 +59,18 @@ namespace SpaceInvaders.GameObjects
             }
             pMan.nullHeads();
         }
-        public static void StorePlayerA()
-        {
-            GameObjectManager.getInstance().baseStorePlayerA();
-        }
+        public static void StorePlayerA() => GameObjectManager.getInstance().baseStorePlayerA();
+        public static void SetPlayerA() => GameObjectManager.getInstance().baseSetPlayerA();
 
-        public static void SetPlayerA()
-        {
-            GameObjectManager.getInstance().baseSetPlayerA();
-        }
-
-        public static void StorePlayerB()
-        {
-            GameObjectManager.getInstance().baseStorePlayerB();
-        }
-
-        public static void SetPlayerB()
-        {
-            GameObjectManager.getInstance().baseSetPlayerB();
-        }
+        public static void StorePlayerB() => GameObjectManager.getInstance().baseStorePlayerB();
+        public static void SetPlayerB() => GameObjectManager.getInstance().baseSetPlayerB();
 
         private GameObjectManager(int numStart = 5, int deltaAdd = 3)
             : base(numStart, deltaAdd)
         {
             pRoot = new PCSTree();
             poRefNode = new GameObjectNode();
-            poRefNode.Set(new Squid(SpriteID.NullSprite,0,0),null);
+            poRefNode.Set(new Squid(SpriteID.NullSprite, 0, 0), null);
         }
 
         public static void Create(int numStart = 5, int deltaAdd = 3)
@@ -98,9 +80,7 @@ namespace SpaceInvaders.GameObjects
             Debug.Assert(pInstance == null);
 
             if (pInstance == null)
-            {
                 pInstance = new GameObjectManager(numStart, deltaAdd);
-            }
         }
 
         protected override void dClearNode(DLink pLink)
@@ -119,11 +99,7 @@ namespace SpaceInvaders.GameObjects
             GameObjectNode right = (GameObjectNode)pLinkB;
 
             //currently GameObject Nodes can only be identical by reference.
-            if (left.getName() == right.getName())
-            {
-                return true;
-            }
-            return false;
+            return left.GetName() == right.GetName();
         }
 
         protected override DLink dCreateNode()
@@ -134,19 +110,18 @@ namespace SpaceInvaders.GameObjects
             return newNode;
         }
 
-         public static GameObjectNode Find(GameObjectTypeEnum sprite)
+        public static GameObjectNode Find(GameObjectType sprite)
         {
             GameObjectManager sMan = GameObjectManager.getInstance();
 
             GameObjectNode target = GameObjectManager.toFind(sprite);
             return (GameObjectNode)sMan.baseFind(target);
-
         }
 
         //for find
-        private static GameObjectNode toFind(GameObjectTypeEnum name)
+        private static GameObjectNode toFind(GameObjectType name)
         {
-            poRefNode.setName(name);
+            poRefNode.SetName(name);
             return poRefNode;
             // return new GameSprite(name);
         }
@@ -154,9 +129,7 @@ namespace SpaceInvaders.GameObjects
         public static GameObjectManager getInstance()
         {
             if (pInstance == null)
-            {
                 GameObjectManager.Create();
-            }
             return pInstance;
         }
 
@@ -168,7 +141,7 @@ namespace SpaceInvaders.GameObjects
             GameObjectNode pNode = (GameObjectNode)pTMan.baseAdd();
             Debug.Assert(pNode != null);
 
-            pNode.Set(pAlien,pTree);
+            pNode.Set(pAlien, pTree);
         }
         //TODO: remove the pRoot from this class, I want to have this pass a gameObject node for parent
         //so I can get the tree. Unless this breaks when I add columns.
@@ -183,6 +156,7 @@ namespace SpaceInvaders.GameObjects
             }
             else
             {
+                //TODO:: CAN IT THOUGH!?
                 // Can be null
                 Debug.Assert(pParent != null);
 
@@ -190,7 +164,6 @@ namespace SpaceInvaders.GameObjects
                 pMan.pRoot.Insert(pGameObj, pParent);
             }
         }
-
 
         internal static void Remove(GameObjectNode go)
         {
@@ -200,7 +173,7 @@ namespace SpaceInvaders.GameObjects
 
             pTMan.baseRemove(go);
             go.dClean();
-           // DLink k = (DLink)go;
+            // DLink k = (DLink)go;
             //pTMan.removeFromActive(ref k);
         }
 
@@ -232,7 +205,7 @@ namespace SpaceInvaders.GameObjects
 
             while (pTree != null)
             {
-                if (pTree.getGameObject() == pRoot)
+                if (pTree.GetGameObject() == pRoot)
                 {
                     // found it
                     break;
@@ -245,19 +218,19 @@ namespace SpaceInvaders.GameObjects
             //  Now remove it
 
             Debug.Assert(pTree != null);
-            Debug.Assert(pTree.getGameObject() != null);
+            Debug.Assert(pTree.GetGameObject() != null);
 
-            if(pTree.getGameObject() == pNode)
+            if (pTree.GetGameObject() == pNode)
             {
-                if (pTree.getTree() != null)
+                if (pTree.GetTree() != null)
                 {
-                    pTree.getTree().Remove(pNode);
+                    pTree.GetTree().Remove(pNode);
                 }
                 GameObjectManager.Remove(pTree);
-            } else 
-            if (pTree.getTree() != null)
+            }
+            else if (pTree.GetTree() != null)
             {
-                pTree.getTree().Remove(pNode);
+                pTree.GetTree().Remove(pNode);
             }
             else { GameObjectManager.Remove(pTree); }
 
@@ -277,25 +250,25 @@ namespace SpaceInvaders.GameObjects
                 pRoot = (GameObjectNode)pRoot.pNext;
                 pTmp.Update();
             }
-                // OK at this point, I have a Root tree,
-                // need to walk the tree completely before moving to next tree
-                //I really need to remove this new. and allow the iterator root to be switched.
-              //  PCSIterator pIterator = new PCSReverseIterator(pRoot.getGameObject());
-               // PCSIterator pIterator = new PCSTreeIterator(pRoot.getGameObject());
-                // Initialize
-               // GameObject pGameObj = (GameObject)pIterator.first();
+            // OK at this point, I have a Root tree,
+            // need to walk the tree completely before moving to next tree
+            //I really need to remove this new. and allow the iterator root to be switched.
+            //  PCSIterator pIterator = new PCSReverseIterator(pRoot.getGameObject());
+            // PCSIterator pIterator = new PCSTreeIterator(pRoot.getGameObject());
+            // Initialize
+            // GameObject pGameObj = (GameObject)pIterator.first();
 
-             //   while (!pIterator.isDone())
-               // {
-               //     pGameObj.Update();
+            //   while (!pIterator.isDone())
+            // {
+            //     pGameObj.Update();
 
-                    // Advance
-               //     pGameObj = (GameObject)pIterator.next();
-                //}
+            // Advance
+            //     pGameObj = (GameObject)pIterator.next();
+            //}
 
-                // Goto Next tree
-               // pRoot = (GameObjectNode)pRoot.pNext;
-           // }
+            // Goto Next tree
+            // pRoot = (GameObjectNode)pRoot.pNext;
+            // }
 
             //GameObjectManager pGMan = GameObjectManager.getInstance();
             //Debug.Assert(pGMan != null);
@@ -321,14 +294,14 @@ namespace SpaceInvaders.GameObjects
                 {
                     e = (GameObjectNode)e.pNext;
                     ePrev = (GameObjectNode)e.pPrev;
-                    toRemove = (GameObject)ePrev.getGameObject();
+                    toRemove = (GameObject)ePrev.GetGameObject();
 
                     //GameObjectManager.Remove(ePrev);
                     toRemove.Remove();
                 }
                 else
                 {
-                    toRemove = (GameObject)e.getGameObject();
+                    toRemove = (GameObject)e.GetGameObject();
 
                     // GameObjectManager.Remove(e);
                     toRemove.Remove();

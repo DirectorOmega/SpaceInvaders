@@ -21,7 +21,7 @@ namespace SpaceInvaders.GameObjects
             i = new PCSTreeIterator(this);
             //poB = new Bomb(SpriteID.Missile);
             dropCMD = new DropBombCMD(this);
-            this.getCollisionObject().getColSprite().setColor(0.0f, 0.0f, 255.0f);
+            this.            CollisionObject.GetColSprite().setColor(0.0f, 0.0f, 255.0f);
             setBombCmd();
         }
 
@@ -87,22 +87,22 @@ namespace SpaceInvaders.GameObjects
             GameObject r = (GameObject)this.getChild();
             if (null != r)
             {
-                CollisionRect ColTotal = this.getCollisionObject().getColRect();
-                ColTotal.Set(r.getCollisionObject().getColRect());
+                CollisionRect ColTotal = this.CollisionObject.GetColRect();
+                ColTotal.Set(r.CollisionObject.GetColRect());
 
                 r = (GameObject)r.getSibling();
 
                 while (null != r)
                 {
-                    ColTotal.Union(r.getCollisionObject().getColRect());
+                    ColTotal.Union(r.CollisionObject.GetColRect());
 
                     r = (GameObject)r.getSibling();
                 }
-                this.getCollisionObject().getColRect().Set(ColTotal);
+                this.                CollisionObject.GetColRect().Set(ColTotal);
             } //else { this.getCollisionObject().getColRect().Set(0f, 0f, 0f, 0f); }
             
-            this.x = this.poColObj.getColRect().x;
-            this.y = this.poColObj.getColRect().y;
+            this.x = this.poColObj.GetColRect().x;
+            this.y = this.poColObj.GetColRect().y;
         }
 
         //I might pull theese back out and use iterators
@@ -153,9 +153,9 @@ namespace SpaceInvaders.GameObjects
                 BombRoot br = GameStateManager.getActiveBombRoot();
                 GameObjectManager.Insert(B, br);
 
-                B.setCoords(pA.getX(), pA.getY());
+                B.setCoords(pA.GetX(), pA.getY());
 
-                br.getPSprite().getSBNode().getSBNM().Attach(B.getPSprite());
+                br.getPSprite().getSBNode().GetSBNM().Attach(B.getPSprite());
                 B.ActivateCollisionSprite();
                 //gonna def have to tweak this below, bombs drop way to much.
                 setBombCmd();

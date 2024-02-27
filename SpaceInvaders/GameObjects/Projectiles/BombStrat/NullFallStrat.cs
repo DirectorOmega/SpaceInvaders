@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace SpaceInvaders.GameObjects
+﻿namespace SpaceInvaders.GameObjects
 {
-    class NullFallStrat : BombStrat
+    internal sealed class NullFallStrat : BombStrat
     {
         public override void Fall(Bomb b)
         {

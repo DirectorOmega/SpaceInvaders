@@ -3,12 +3,12 @@ using SpaceInvaders.Manager;
 
 namespace SpaceInvaders.Time
 {
-    internal class TimeEvent : TLink
+    internal sealed class TimeEvent : TLink
     {
         private float deltaTime;
         private float triggerTime;
         private TimeEventID Name;
-        Command CMD;
+        private Command CMD;
 
         public TimeEvent()
         {
@@ -17,34 +17,28 @@ namespace SpaceInvaders.Time
             CMD = NullCMD.getInstance();
         }
 
-        public void process()
-        {
-            CMD.execute(deltaTime);
-        }
+        public void process() => CMD.execute(deltaTime);
+        public TimeEventID GetName() => Name;
+        public void SetName(TimeEventID name) => this.Name = name;
 
-        public TimeEventID getName()
-        {
-            return Name;
-        }
-
-        public void setName(TimeEventID name)
-        {
-            this.Name = name;
-        }
-
-        public void set(TimeEventID name, float TTime)
+        public void Set(TimeEventID name, float TTime)
         {
             Name = name;
             triggerTime = TTime;
         }
-        public void set(TimeEventID name,float DTime,float TTime)
+        public void Set(Command cmd)
+        {
+            CMD = cmd;
+        }
+
+        public void Set(TimeEventID name,float DTime,float TTime)
         {
             deltaTime = DTime;
             triggerTime = TTime;
             Name = name;
         }
 
-        public void set(TimeEventID name,float DTime, float TTime, Command cmd)
+        public void Set(TimeEventID name,float DTime, float TTime, Command cmd)
         {
             Name = name;
             deltaTime = DTime;
@@ -52,15 +46,7 @@ namespace SpaceInvaders.Time
             CMD = cmd;
         }
 
-        public void set(Command cmd)
-        {
-            CMD = cmd;
-        }
-
-        public float getTriggerTime()
-        {
-            return triggerTime;
-        }
+        public float GetTriggerTime() => triggerTime;
         //Bad smell Not sure how I like the greaterThan system, I think I want to do the pass up value for comparison.
         //I always want the earliest insertion so I am using greaterthan or equals to.
         public override bool greaterThan(DLink that)

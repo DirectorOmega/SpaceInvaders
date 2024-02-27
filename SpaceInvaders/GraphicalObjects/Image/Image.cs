@@ -23,7 +23,7 @@ namespace SpaceInvaders.GraphicalObjects
 
         public Azul.Texture getAzTex()
         {
-            return pTex.getTex();
+            return pTex.GetTex();
         }
 
         public Azul.Rect getAzRect()

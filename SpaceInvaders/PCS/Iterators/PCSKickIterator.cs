@@ -1,6 +1,6 @@
 ﻿namespace SpaceInvaders.PCS.Iterators
 {
-    class PCSKickIterator
+    internal sealed class PCSKickIterator
     {
     }
 }

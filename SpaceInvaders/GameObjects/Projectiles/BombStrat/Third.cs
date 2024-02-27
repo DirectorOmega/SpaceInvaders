@@ -1,10 +1,8 @@
-﻿
-using SpaceInvaders.GraphicalObjects;
-using SpaceInvaders.Manager;
+﻿using SpaceInvaders.GraphicalObjects;
 
 namespace SpaceInvaders.GameObjects
 {
-    class ThirdStrat : BombStrat
+    internal sealed class ThirdStrat : BombStrat
     {
 
         GameSprite f1, f2, f3, f4;

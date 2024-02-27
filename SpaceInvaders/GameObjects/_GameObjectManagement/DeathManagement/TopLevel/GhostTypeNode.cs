@@ -1,41 +1,25 @@
 ﻿namespace SpaceInvaders.GameObjects
 {
-    internal class GhostTypeNode : GTNLink
+    internal sealed class GhostTypeNode : GTNLink
     {
-        private GameObjectTypeEnum Name;
+        private GameObjectType Name;
         GhostTypeNodeManager poNodeMan;
 
         public GhostTypeNode()
         {
-            Name = GameObjectTypeEnum.Undef;
+            Name = GameObjectType.Undef;
             poNodeMan = new GhostTypeNodeManager();
         }
 
-        public void Set(GameObjectTypeEnum name)
+        public void Set(GameObjectType name)
         {
             Name = name;
             poNodeMan.Set(name);
         }
 
-        public GameObjectTypeEnum getName()
-        {
-            return Name;
-        }
-
-        public override void dClean()
-        {
-            Name = GameObjectTypeEnum.Undef;
-        }
-
-        internal void Attach(GameObject toAttach)
-        {
-            poNodeMan.Attach(toAttach);
-        }
-
-        internal GameObject detatch()
-        {
-            return poNodeMan.Detatch();
-        }
+        public GameObjectType GetName() => Name;
+        public override void dClean() => Name = GameObjectType.Undef;
+        internal void Attach(GameObject toAttach) => poNodeMan.Attach(toAttach);
+        internal GameObject Detatch() => poNodeMan.Detatch();
     }
-
 }

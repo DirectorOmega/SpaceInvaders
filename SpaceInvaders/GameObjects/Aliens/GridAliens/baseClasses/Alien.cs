@@ -1,5 +1,4 @@
-﻿
-using SpaceInvaders.GraphicalObjects;
+﻿using SpaceInvaders.GraphicalObjects;
 using System.Diagnostics;
 
 namespace SpaceInvaders.GameObjects
@@ -11,7 +10,6 @@ namespace SpaceInvaders.GameObjects
 
         public Alien(SpriteID alien, float posX, float posY) : base(alien, posX, posY)
         {
-
         }
 
         public override void cClean()

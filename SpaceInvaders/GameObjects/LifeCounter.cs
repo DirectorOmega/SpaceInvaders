@@ -1,5 +1,4 @@
-﻿using System;
-using SpaceInvaders.CollisionSystem;
+﻿using SpaceInvaders.CollisionSystem;
 using SpaceInvaders.GraphicalObjects;
 using System.Diagnostics;
 using SpaceInvaders.FontSystem;
@@ -8,7 +7,7 @@ using SpaceInvaders.GameState;
 
 namespace SpaceInvaders.GameObjects
 {
-    class LifeCounter : GameObject
+    internal sealed class LifeCounter : GameObject
     {
         //int numLives;
         int startx,starty,offsetx;
@@ -31,7 +30,7 @@ namespace SpaceInvaders.GameObjects
 
             NumeralCount = FontManager.Find(FontName.LifeCount);
             ShipSprite = GameSpriteManager.Find(SpriteID.Hero);
-            pGhostNode = GhostManager.Find(GameObjectTypeEnum.ExtraLife) ;
+            pGhostNode = GhostManager.Find(GameObjectType.ExtraLife) ;
 
             pTree = new PCSTree();
             //pTree.Insert(this, null);
@@ -61,11 +60,11 @@ namespace SpaceInvaders.GameObjects
 
             for (int i = 0; i < numLives-1; i++)
             {
-                p = pGhostNode.detatch();
+                p = pGhostNode.Detatch();
                 if (null == p)
                 {
                     p = new Ship(SpriteID.Hero);
-                    p.setName(GameObjectTypeEnum.ExtraLife);
+                    p.setName(GameObjectType.ExtraLife);
                 }
                 p.setCoords(startx + i * offsetx, starty);
                 p.ActivateCollisionSprite();
@@ -82,11 +81,11 @@ namespace SpaceInvaders.GameObjects
             NumeralCount.UpdateMessage("" + numLives);
             GameObject p;
 
-                p = pGhostNode.detatch();
+                p = pGhostNode.Detatch();
                 if (null == p)
                 {
                     p = new Ship(SpriteID.Hero);
-                    p.setName(GameObjectTypeEnum.ExtraLife);
+                    p.setName(GameObjectType.ExtraLife);
                 }
                 p.setCoords(startx + (numLives-2) * offsetx, starty);
                 p.ActivateCollisionSprite();

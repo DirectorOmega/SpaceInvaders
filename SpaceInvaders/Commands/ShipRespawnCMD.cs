@@ -2,11 +2,9 @@
 
 namespace SpaceInvaders.Commands
 {
-    class ShipRespawnCMD : Command
+    internal sealed class ShipRespawnCMD : Command
     {
-        public override void execute(float deltaTime)
-        {
-            ShipManager.ActivateShip();
-        }
+        public override void execute(float deltaTime) 
+            => ShipManager.ActivateShip();
     }
 }

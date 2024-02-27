@@ -1,6 +1,6 @@
 ﻿namespace SpaceInvaders.GraphicalObjects
 {
-    class Texture : TexLink
+    internal sealed class Texture : TexLink
     {
         private TextureID Name;
         private Azul.Texture poTex;
@@ -18,21 +18,10 @@
             poTex = null;
         }
 
-        public TextureID getName()
-        {
-            return Name;
-        }
+        public TextureID GetName() => Name;
+        public void SetName(TextureID name) => this.Name = name;
+        public Azul.Texture GetTex() => poTex;
 
-        public void setName(TextureID name)
-        {
-            this.Name = name;
-        }
-
-        public Azul.Texture getTex()
-        {
-            return poTex;
-        }    
-       
         public void Set(TextureID name, Azul.Texture Tex)
         {
             Name = name;

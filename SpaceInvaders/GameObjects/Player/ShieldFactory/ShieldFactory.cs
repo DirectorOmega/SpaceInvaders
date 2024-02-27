@@ -5,8 +5,7 @@ using System.Diagnostics;
 namespace SpaceInvaders.GameObjects
 {
     //TODO: Setup shield factory to pull shield pieces from the ghost manager.
-
-    class ShieldFactory
+    internal sealed class ShieldFactory
     {
         private SpriteBatch pBatch;
         private PCSTree pTree;
@@ -16,84 +15,77 @@ namespace SpaceInvaders.GameObjects
         {
             Debug.Assert(batch != null);
 
-            this.pBatch = batch;
-            this.pTree = tree;
+            pBatch = batch;
+            pTree = tree;
         }
 
         public void setShieldRoot(ShieldRoot pHead)
         {
             this.pHead = pHead;
-            GameObjectManager.AttachTree(pHead, this.pTree);
-            this.pBatch.Attach(pHead.getPSprite());
+            GameObjectManager.AttachTree(pHead, pTree);
+            pBatch.Attach(pHead.getPSprite());
             pHead.ActivateCollisionSprite();
-            pHead.setName(GameObjectTypeEnum.ShieldRoot);
+            pHead.setName(GameObjectType.ShieldRoot);
             //  Debug.Assert(this.pHead != null);
         }
         //TODO: Maybe?
         //TODO: tweak this and the game object manager so the reserve list is 2 dimensional like the batch manager, so objects can be recieved by the game object manager and reused or created only when necessary.
         public Shield Create(float posX = 0.0f, float posY = 0.0f)
         {
-            Shield pShield = null;
-
-            pShield = new Shield(SpriteID.NullSprite, posX, posY);
-            pShield.setName(GameObjectTypeEnum.Shield);
+            Shield pShield = new Shield(SpriteID.NullSprite, posX, posY);
+            pShield.setName(GameObjectType.Shield);
             //GameObjectManager.AttachTree(pShield, this.pTree);
 
-            this.pTree.Insert(pShield, this.pHead);
-
-            this.pBatch.Attach(pShield.getPSprite());
+            pTree.Insert(pShield, pHead);
+            pBatch.Attach(pShield.getPSprite());
             // this.setParent(pShield);
 
-
             BoxSprite brickBoxSprite = BoxSpriteManager.Find(SpriteID.ShieldBrick);
-            float xoffset = brickBoxSprite.getScreenRect().height;
-            float yoffset = brickBoxSprite.getScreenRect().width;
+            float xOffset = brickBoxSprite.getScreenRect().height;
+            float yOffset = brickBoxSprite.getScreenRect().width;
 
             ShieldColumn scr;
             ShieldColumn scl;
 
             ShieldBrick sb;
-
+            //TODO:: clean this up
             //for (int i = 4; i < 8; i++)
             for (int i = 0; i < 10; i++)
             {
-               
-
                 //if (i < 8)
                 if (i == 0)
                 {
-                    scr = new ShieldColumn(SpriteID.NullSprite, posX + i * xoffset, posY);
-                    scr.setName(GameObjectTypeEnum.ShieldColumn);
-                    this.pBatch.Attach(scr.getPSprite());
-                    this.pTree.Insert(scr, pShield);
+                    scr = new ShieldColumn(SpriteID.NullSprite, posX + i * xOffset, posY);
+                    scr.setName(GameObjectType.ShieldColumn);
+                    pBatch.Attach(scr.getPSprite());
+                    pTree.Insert(scr, pShield);
                     scr.ActivateCollisionSprite();
 
                     scr.UpdateColObj();
 
                     for (int k = 0; k < 9; k++)
                     {
-                        sb = new ShieldBrick(SpriteID.ShieldBrick, posX + i * xoffset, posY - (k + 6) * yoffset);
-                        this.pBatch.Attach(sb.getPSprite());
-                        this.pTree.Insert(sb, scr);
+                        sb = new ShieldBrick(SpriteID.ShieldBrick, posX + i * xOffset, posY - (k + 6) * yOffset);
+                        pBatch.Attach(sb.getPSprite());
+                        pTree.Insert(sb, scr);
 
-                        sb.setName(GameObjectTypeEnum.ShieldBrick);
+                        sb.setName(GameObjectType.ShieldBrick);
 
-                        sb.getCollisionObject().setColRect(brickBoxSprite);
+                        sb.CollisionObject.setColRect(brickBoxSprite);
                         sb.ActivateCollisionSprite();
                     }
                 }
                 else
                 {
-                    scr = new ShieldColumn(SpriteID.NullSprite, posX + i * xoffset, posY);
-                    scl = new ShieldColumn(SpriteID.NullSprite, posX + i * xoffset, posY);
-                    scr.setName(GameObjectTypeEnum.ShieldColumn);
-                    scl.setName(GameObjectTypeEnum.ShieldColumn);
-                    this.pBatch.Attach(scr.getPSprite());
-                    this.pBatch.Attach(scl.getPSprite());
+                    scr = new ShieldColumn(SpriteID.NullSprite, posX + i * xOffset, posY);
+                    scl = new ShieldColumn(SpriteID.NullSprite, posX + i * xOffset, posY);
+                    scr.setName(GameObjectType.ShieldColumn);
+                    scl.setName(GameObjectType.ShieldColumn);
+                    pBatch.Attach(scr.getPSprite());
+                    pBatch.Attach(scl.getPSprite());
 
-                    this.pTree.Insert(scr, pShield);
-                    this.pTree.Insert(scl, pShield);
-
+                    pTree.Insert(scr, pShield);
+                    pTree.Insert(scl, pShield);
 
                     scr.ActivateCollisionSprite();
 
@@ -106,39 +98,37 @@ namespace SpaceInvaders.GameObjects
                     {
                         for (int k = 0; k < 20 - i; k++)
                         {
-                            sb = new ShieldBrick(SpriteID.ShieldBrick, posX - i * xoffset, posY - (i + k) * yoffset);
-                            this.pBatch.Attach(sb.getPSprite());
-                            this.pTree.Insert(sb, scl);
-                            sb.setName(GameObjectTypeEnum.ShieldBrick);
-                            sb.getCollisionObject().setColRect(brickBoxSprite);
+                            sb = new ShieldBrick(SpriteID.ShieldBrick, posX - i * xOffset, posY - (i + k) * yOffset);
+                            pBatch.Attach(sb.getPSprite());
+                            pTree.Insert(sb, scl);
+                            sb.setName(GameObjectType.ShieldBrick);
+                            sb.CollisionObject.setColRect(brickBoxSprite);
                             sb.ActivateCollisionSprite();
 
-                            sb = new ShieldBrick(SpriteID.ShieldBrick, posX + i * xoffset, posY - (i + k) * yoffset);
-                            this.pBatch.Attach(sb.getPSprite());
-                            this.pTree.Insert(sb, scr);
-                            sb.setName(GameObjectTypeEnum.ShieldBrick);
-                            sb.getCollisionObject().setColRect(brickBoxSprite);
+                            sb = new ShieldBrick(SpriteID.ShieldBrick, posX + i * xOffset, posY - (i + k) * yOffset);
+                            pBatch.Attach(sb.getPSprite());
+                            pTree.Insert(sb, scr);
+                            sb.setName(GameObjectType.ShieldBrick);
+                            sb.CollisionObject.setColRect(brickBoxSprite);
                             sb.ActivateCollisionSprite();
-
                         }
                     }
-
                     else if (i > 2)
                     {
                         for (int k = 7; k > 0 - i; k--)
                         {
-                            sb = new ShieldBrick(SpriteID.ShieldBrick, posX + i * xoffset, posY - (k + i + 5) * yoffset);
-                            this.pBatch.Attach(sb.getPSprite());
-                            this.pTree.Insert(sb, scr);
-                            sb.setName(GameObjectTypeEnum.ShieldBrick);
-                            sb.getCollisionObject().setColRect(brickBoxSprite);
+                            sb = new ShieldBrick(SpriteID.ShieldBrick, posX + i * xOffset, posY - (k + i + 5) * yOffset);
+                            pBatch.Attach(sb.getPSprite());
+                            pTree.Insert(sb, scr);
+                            sb.setName(GameObjectType.ShieldBrick);
+                            sb.CollisionObject.setColRect(brickBoxSprite);
                             sb.ActivateCollisionSprite();
 
-                            sb = new ShieldBrick(SpriteID.ShieldBrick, posX - i * xoffset, posY - (k + i + 5) * yoffset);
-                            this.pBatch.Attach(sb.getPSprite());
-                            this.pTree.Insert(sb, scl);
-                            sb.setName(GameObjectTypeEnum.ShieldBrick);
-                            sb.getCollisionObject().setColRect(brickBoxSprite);
+                            sb = new ShieldBrick(SpriteID.ShieldBrick, posX - i * xOffset, posY - (k + i + 5) * yOffset);
+                            pBatch.Attach(sb.getPSprite());
+                            pTree.Insert(sb, scl);
+                            sb.setName(GameObjectType.ShieldBrick);
+                            sb.CollisionObject.setColRect(brickBoxSprite);
                             sb.ActivateCollisionSprite();
                         }
                     }
@@ -146,32 +136,29 @@ namespace SpaceInvaders.GameObjects
                     {
                         for (int k = 9; k > 0; k--)
                         {
-                            sb = new ShieldBrick(SpriteID.ShieldBrick, posX + i * xoffset, posY - (k + 5) * yoffset);
-                            this.pBatch.Attach(sb.getPSprite());
-                            this.pTree.Insert(sb, scr);
-                            sb.setName(GameObjectTypeEnum.ShieldBrick);
-                            sb.getCollisionObject().setColRect(brickBoxSprite);
+                            sb = new ShieldBrick(SpriteID.ShieldBrick, posX + i * xOffset, posY - (k + 5) * yOffset);
+                            pBatch.Attach(sb.getPSprite());
+                            pTree.Insert(sb, scr);
+                            sb.setName(GameObjectType.ShieldBrick);
+                            sb.CollisionObject.setColRect(brickBoxSprite);
                             sb.ActivateCollisionSprite();
 
-                            sb = new ShieldBrick(SpriteID.ShieldBrick, posX - i * xoffset, posY - (k + 5) * yoffset);
-                            this.pBatch.Attach(sb.getPSprite());
-                            this.pTree.Insert(sb, scl);
-                            sb.setName(GameObjectTypeEnum.ShieldBrick);
-                            sb.getCollisionObject().setColRect(brickBoxSprite);
+                            sb = new ShieldBrick(SpriteID.ShieldBrick, posX - i * xOffset, posY - (k + 5) * yOffset);
+                            pBatch.Attach(sb.getPSprite());
+                            pTree.Insert(sb, scl);
+                            sb.setName(GameObjectType.ShieldBrick);
+                            sb.CollisionObject.setColRect(brickBoxSprite);
                             sb.ActivateCollisionSprite();
                         }
                     }
-
                 }
             }
-            pShield.ActivateCollisionSprite();
-            //pShield.Update();
 
+            pShield.ActivateCollisionSprite();
             pShield.UpdateColObj();
 
             return pShield;
         }
-
     }
 }
 

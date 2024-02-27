@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace SpaceInvaders.CollisionSystem
 {
-    class ColSubject
+    internal sealed class ColSubject
     {
         private ColObserver pHead;
         private GameObject pGObjA;
@@ -11,27 +11,20 @@ namespace SpaceInvaders.CollisionSystem
 
         public ColSubject()
         {
-            this.pGObjA = null;
-            this.pGObjB = null;
-            this.pHead = null;
+            pGObjA = null;
+            pGObjB = null;
+            pHead = null;
         }
 
         public void Clean()
         {
-            this.pGObjA = null;
-            this.pGObjB = null;
-            this.pHead = null;
+            pGObjA = null;
+            pGObjB = null;
+            pHead = null;
         }
 
-        public GameObject getA()
-        {
-            return pGObjA;
-        }
-
-        public GameObject getB()
-        {
-            return pGObjB;
-        }
+        public GameObject GetA() => pGObjA;
+        public GameObject GetB() => pGObjB;
 
         public void setObjects(GameObject pA, GameObject pB)
         {
@@ -44,9 +37,9 @@ namespace SpaceInvaders.CollisionSystem
 
         ~ColSubject()
         {
-            this.pGObjA = null;
-            this.pGObjB = null;
-            this.pHead = null;
+            pGObjA = null;
+            pGObjB = null;
+            pHead = null;
 
             //DLink pHead
             
@@ -76,18 +69,16 @@ namespace SpaceInvaders.CollisionSystem
                 pHead.pPrev = observer;
                 pHead = observer;
             }
-
         }
 
         public void Notify()
         {
-            ColObserver pNode = this.pHead;
+            ColObserver pNode = pHead;
 
             while (pNode != null)
             {
                 // Fire off listener
                 pNode.Notify();
-
                 pNode = (ColObserver)pNode.pNext;
             }
         }
@@ -96,6 +87,5 @@ namespace SpaceInvaders.CollisionSystem
         {
             //TODO Implement
         }
-
     }
 }

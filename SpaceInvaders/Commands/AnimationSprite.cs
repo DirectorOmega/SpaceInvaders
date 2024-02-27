@@ -5,7 +5,7 @@ using SpaceInvaders.Time;
 
 namespace SpaceInvaders.Commands
 {
-    class AnimationSprite : Command
+    internal sealed class AnimationSprite : Command
     {
         GameSprite pSprite;
         ImageHolder pCurrImage;
@@ -18,10 +18,8 @@ namespace SpaceInvaders.Commands
              pFirstImage = null;
         }
 
-        public void Attach(GameSprite pSprite)
-        {
-            this.pSprite = pSprite;
-        }
+        public void Attach(GameSprite pSprite) 
+            => this.pSprite = pSprite;
 
         public void Attach(Image toAdd)
         {
@@ -29,9 +27,7 @@ namespace SpaceInvaders.Commands
             tA.setImage(toAdd);
 
             if (null == pCurrImage)
-            {
                 pCurrImage = tA;
-            }
             DLink.addToFront(ref pFirstImage, tA);
         }
 
@@ -40,12 +36,12 @@ namespace SpaceInvaders.Commands
             if (null == pCurrImage.pNext)
             {
                 pCurrImage = (ImageHolder)pFirstImage;
-
             }
             else
             {
                 pCurrImage = (ImageHolder)pFirstImage.pNext;
             }
+
             pSprite.swapImage(pCurrImage.getImage());
             if (!GameStateManager.GridEmpty())
             {

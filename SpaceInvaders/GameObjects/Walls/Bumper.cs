@@ -3,8 +3,7 @@ using SpaceInvaders.GraphicalObjects;
 
 namespace SpaceInvaders.GameObjects
 {
-
-    class Bumper : GameObject
+    internal sealed class Bumper : GameObject
     {
 
         public Bumper(SpriteID id, float posX = 0, float posY = 0) : base(id, posX, posY)

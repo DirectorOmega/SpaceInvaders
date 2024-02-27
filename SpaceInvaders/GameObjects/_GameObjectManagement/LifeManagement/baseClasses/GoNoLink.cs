@@ -2,7 +2,7 @@
 
 namespace SpaceInvaders.GameObjects
 {
-   abstract class GoNoLink : DLink
+    abstract class GoNoLink : DLink
     {
     }
 }

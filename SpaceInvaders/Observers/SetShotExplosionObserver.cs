@@ -25,9 +25,9 @@ namespace SpaceInvaders.Observers
             //Debug.WriteLine("ShotExplosionObserver: {0} {1}", this.pSubject.getA(), this.pSubject.getB());
 
             ProxySprite pSprite = ProxyManager.Add(expSprite);
-            pSprite.setCoords(pSubject.getA().getX(), pSubject.getA().getY());
+            pSprite.setCoords(pSubject.GetA().GetX(), pSubject.GetA().getY());
             pSprite.Update();
-            this.pSubject.getA().getPSprite().getSBNode().getSBNM().Attach(pSprite);
+            this.pSubject.GetA().getPSprite().getSBNode().GetSBNM().Attach(pSprite);
             TimerManager.Add(TimeEventID.exp, new ExpRemove(pSprite), 0.5f);
             
         }
@@ -53,9 +53,9 @@ namespace SpaceInvaders.Observers
             //Debug.WriteLine("ShotExplosionObserver: {0} {1}", this.pSubject.getA(), this.pSubject.getB());
 
             ProxySprite pSprite = ProxyManager.Add(expSprite);
-            pSprite.setCoords(pSubject.getB().getX(), pSubject.getB().getY());
+            pSprite.setCoords(pSubject.GetB().GetX(), pSubject.GetB().getY());
             pSprite.Update();
-            this.pSubject.getB().getPSprite().getSBNode().getSBNM().Attach(pSprite);
+            this.pSubject.GetB().getPSprite().getSBNode().GetSBNM().Attach(pSprite);
             TimerManager.Add(TimeEventID.exp, new ExpRemove(pSprite), 0.5f);
         }
     }

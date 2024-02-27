@@ -3,7 +3,7 @@ using SpaceInvaders.Manager;
 
 namespace SpaceInvaders.GraphicalObjects
 {
-    class TextureManager : TexMan
+    internal sealed class TextureManager : TexMan
     {
         private static TextureManager pInstance;
         private static Texture poRefTex = new Texture();
@@ -116,7 +116,7 @@ namespace SpaceInvaders.GraphicalObjects
 
         private static Texture toFind(TextureID invaders)
         {
-            poRefTex.setName(invaders);
+            poRefTex.SetName(invaders);
             return poRefTex;
         }
 
@@ -128,7 +128,7 @@ namespace SpaceInvaders.GraphicalObjects
             Texture left = (Texture)pLinkA;
             Texture right = (Texture)pLinkB;
 
-            if (left.getName() == right.getName())
+            if (left.GetName() == right.GetName())
             {
                 return true;
             }

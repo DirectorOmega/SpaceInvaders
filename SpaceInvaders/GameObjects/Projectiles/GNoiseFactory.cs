@@ -5,7 +5,7 @@ using SpaceInvaders.Observers;
 
 namespace SpaceInvaders.GameObjects.Projectiles
 {
-    class GNoiseRoot : GameObject
+    internal sealed class GNoiseRoot : GameObject
     {
         public GNoiseRoot(SpriteID id, float posX = 0, float posY = 0) : base(id, posX, posY)
         {
@@ -61,20 +61,21 @@ namespace SpaceInvaders.GameObjects.Projectiles
             GameObject r = (GameObject)this.getChild();
             if (r != null)
             {
-                CollisionRect ColTotal = this.getCollisionObject().getColRect();
-                ColTotal.Set(r.getCollisionObject().getColRect());
+                CollisionRect ColTotal = this.CollisionObject.GetColRect();
+                ColTotal.Set(r.CollisionObject.GetColRect());
 
                 while (null != r)
                 {
-                    ColTotal.Union(r.getCollisionObject().getColRect());
+                    ColTotal.Union(r.CollisionObject.GetColRect());
 
                     r = (GameObject)r.getSibling();
                 }
 
-                this.getCollisionObject().getColRect().Set(ColTotal);
+                this.
+                CollisionObject.GetColRect().Set(ColTotal);
             }
-            this.x = this.poColObj.getColRect().x;
-            this.y = this.poColObj.getColRect().y;
+            this.x = this.poColObj.GetColRect().x;
+            this.y = this.poColObj.GetColRect().y;
         }
 
 
@@ -110,9 +111,9 @@ namespace SpaceInvaders.GameObjects.Projectiles
             base.Update();
             if (3 == count)
             {
-                if (!this.getMarked())
+                if (!this.IsMarked())
                 {
-                    this.markForDeath();
+                    this.MarkForDeath();
 
                     RemoveObserver pObserver = new RemoveObserver(this);
                     DelayedObjectManager.Attach(pObserver);
@@ -131,7 +132,7 @@ namespace SpaceInvaders.GameObjects.Projectiles
 
         private GNoiseFactory()
         {
-           pNoiseGhost = GhostManager.Find(GameObjectTypeEnum.Noise);
+           pNoiseGhost = GhostManager.Find(GameObjectType.Noise);
            //pGNR = new GNoiseRoot(SpriteID.NullSprite);//make this alookup of the active root
            pBatch = SpriteBatchManager.Find(SpriteBatchID.CBox);
           //  GameObjectManager.AttachTree(pGNR, new PCS.PCSTree());
@@ -151,7 +152,7 @@ namespace SpaceInvaders.GameObjects.Projectiles
             GNoiseFactory bf = GNoiseFactory.getInstance();
 
             GNoisePoint toReturn;
-            toReturn = (GNoisePoint)bf.pNoiseGhost.detatch();
+            toReturn = (GNoisePoint)bf.pNoiseGhost.Detatch();
             if (toReturn != null)
             {
                 //Debug.Print("GhostManager Returned a point!\n");
@@ -160,7 +161,7 @@ namespace SpaceInvaders.GameObjects.Projectiles
             {
                 //toReturn = new GNoisePoint(SpriteID.Undef);
                 toReturn = new GNoisePoint(SpriteID.NullSprite);
-                toReturn.setName(GameObjectTypeEnum.Noise);
+                toReturn.setName(GameObjectType.Noise);
             }
             GameObjectManager.Insert(toReturn, (GameObject)GameStateManager.getActiveNoiseRoot());
             toReturn.ResetCounter();

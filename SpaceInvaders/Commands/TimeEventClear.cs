@@ -2,16 +2,13 @@
 
 namespace SpaceInvaders.Commands
 {
-    class TimeEventClearCMD : Command
+    internal sealed class TimeEventClearCMD : Command
     {
         public override void execute(float deltaTime)
         {
             TimerManager.Clear(TimeEventID.bombDrop);
-
             TimerManager.Clear(TimeEventID.GridMove);
-
             TimerManager.Clear(TimeEventID.GridMoveSFX);
-
         }
     }
 }

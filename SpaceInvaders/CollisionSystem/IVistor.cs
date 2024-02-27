@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using SpaceInvaders.GameObjects;
 using SpaceInvaders.GameObjects.Projectiles;
 using SpaceInvaders.PCS;
@@ -32,6 +31,7 @@ namespace SpaceInvaders.CollisionSystem
         //{
         //    throw new NotImplementedException();
         //}
+
         public virtual void VisitBombRoot(BombRoot br)
         {
             Debug.WriteLine("Vist by BombRoot not Implemented");
@@ -145,5 +145,10 @@ namespace SpaceInvaders.CollisionSystem
             Debug.Assert(false);
         }
 
+        public virtual void VisitPlayer(PlayerAvatar p)
+        {
+            Debug.WriteLine("Visit by Player not Implemented");
+            Debug.Assert(false);
+        }
     }
 }

@@ -1,11 +1,10 @@
-﻿using SpaceInvaders.GameObjects;
-using SpaceInvaders.GameState;
+﻿using SpaceInvaders.GameState;
 using SpaceInvaders.Time;
 using System.Diagnostics;
 
 namespace SpaceInvaders.Commands
 {
-    class MvSoundCMD : Command
+    internal sealed class MvSoundCMD : Command
     {
         int count;
         private IrrKlang.ISoundSource sndV1; 
@@ -18,10 +17,10 @@ namespace SpaceInvaders.Commands
          count = 0;
         // this.pGrid = _pGrid;
 
-         sndV1 =  SndEngine.getSoundSource("fastinvader1.wav");
-         sndV2 =  SndEngine.getSoundSource("fastinvader2.wav");
-         sndV3 =  SndEngine.getSoundSource("fastinvader3.wav");
-         sndV4 =  SndEngine.getSoundSource("fastinvader4.wav");
+         sndV1 =  SndEngine.GetSoundSource("fastinvader1.wav");
+         sndV2 =  SndEngine.GetSoundSource("fastinvader2.wav");
+         sndV3 =  SndEngine.GetSoundSource("fastinvader3.wav");
+         sndV4 =  SndEngine.GetSoundSource("fastinvader4.wav");
         }
 
         //todo get rid of the nasty switch statement.
@@ -48,13 +47,10 @@ namespace SpaceInvaders.Commands
             
             count++;
             if (count == 4)
-            {
                 count = 0;
-            }
+
             if (!GameStateManager.GridEmpty())
-            {
                 TimerManager.Add(TimeEventID.Anim, this, GameStateManager.getTimeDelta());
-            }
         }
     }
 }

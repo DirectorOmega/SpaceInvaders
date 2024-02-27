@@ -25,9 +25,9 @@ namespace SpaceInvaders.Observers
         {
             //this.pSubject.getB().Remove();
 
-            GameObject pGameObj = (GameObject)this.pSubject.getB();
+            GameObject pGameObj = (GameObject)this.pSubject.GetB();
             GNoisePoint gp;
-            float x = pGameObj.getX();
+            float x = pGameObj.GetX();
             float y = pGameObj.getY();
             int numNoise = GameStateManager.getRandomNumber(3, 11);
             for(int i = 0;i<numNoise;i++)
@@ -35,15 +35,15 @@ namespace SpaceInvaders.Observers
                 gp = GNoiseFactory.getGNPoint();
                 gp.setCoords(x + GameStateManager.getRandomNumber(-10, 10), y + (GameStateManager.getRandomNumber(-10, 10)));
                
-                pGameObj.getPSprite().getSBNode().getSBNM().Attach(gp.getPSprite());
+                pGameObj.getPSprite().getSBNode().GetSBNM().Attach(gp.getPSprite());
                 gp.ActivateCollisionSprite();
                 gp.Update();  
             }
 
 
-            if(!pGameObj.getMarked())
+            if(!pGameObj.IsMarked())
             {
-                pGameObj.markForDeath();
+                pGameObj.MarkForDeath();
 
                 RemoveObserver pObserver = new RemoveObserver(pGameObj);
                 DelayedObjectManager.Attach(pObserver);

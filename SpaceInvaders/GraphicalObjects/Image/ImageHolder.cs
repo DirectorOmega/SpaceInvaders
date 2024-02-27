@@ -1,6 +1,6 @@
 ﻿namespace SpaceInvaders.GraphicalObjects
 {
-    class ImageHolder : IHLink
+    internal sealed class ImageHolder : IHLink
     {
         private Image pImage;
 

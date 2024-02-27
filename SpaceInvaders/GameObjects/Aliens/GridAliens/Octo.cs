@@ -3,9 +3,8 @@ using SpaceInvaders.GraphicalObjects;
 
 namespace SpaceInvaders.GameObjects
 {
-    class Octo : Alien
+    internal sealed class Octo : Alien
     {
-
         public Octo(SpriteID octo, float posX, float posY)
             : base(octo, posX, posY)
         {

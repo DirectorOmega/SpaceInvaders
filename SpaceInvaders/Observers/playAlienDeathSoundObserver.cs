@@ -3,13 +3,13 @@ using SpaceInvaders.GameState;
 
 namespace SpaceInvaders.Observers
 {
-    class playAlienDeathSoundObserver : ColObserver
+    internal sealed class playAlienDeathSoundObserver : ColObserver
     {
         //private IrrKlang.ISoundEngine sndEngine;
         private IrrKlang.ISoundSource alienExpSFX;
         public playAlienDeathSoundObserver(SndEngine e)
         { 
-            alienExpSFX = SndEngine.getSoundSource("invaderKilled.wav");
+            alienExpSFX = SndEngine.GetSoundSource("invaderKilled.wav");
         }
 
         public override void dClean()

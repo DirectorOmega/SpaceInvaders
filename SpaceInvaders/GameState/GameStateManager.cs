@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using SpaceInvaders.GameObjects;
 using SpaceInvaders.FontSystem;
 using SpaceInvaders.GraphicalObjects;
@@ -10,9 +9,9 @@ using SpaceInvaders.Commands;
 
 namespace SpaceInvaders.GameState
 {
-    class GameStateManager
+    internal sealed class GameStateManager
     {
-        //todo reorganize theese variables.
+        //todo reorganize these variables.
         private static GameStateManager pInstance;
 
         StateIntro SI;
@@ -60,23 +59,23 @@ namespace SpaceInvaders.GameState
 
         private void loadAssets()
         {
-            Texture t = TextureManager.Add(TextureID.Invaders, ISS.getTexture());
+            Texture t = TextureManager.Add(TextureID.Invaders, ISS.GetTexture());
 
-            Azul.Rect aSize = ISS.getAlienAdjSize();
+            Azul.Rect aSize = ISS.GetAlienAdjSize();
 
-            Image Squid = ImageManager.Add(ImageID.SquidF1, ISS.getSquidF1(), t);
-            ImageManager.Add(ImageID.SquidF2, ISS.getSquidF2(), t);
+            Image Squid = ImageManager.Add(ImageID.SquidF1, ISS.GetSquidF1(), t);
+            ImageManager.Add(ImageID.SquidF2, ISS.GetSquidF2(), t);
 
-            Image Crab = ImageManager.Add(ImageID.CrabF1, ISS.getCrabF1(), t);
-            ImageManager.Add(ImageID.CrabF2, ISS.getCrabF2(), t);
+            Image Crab = ImageManager.Add(ImageID.CrabF1, ISS.GetCrabF1(), t);
+            ImageManager.Add(ImageID.CrabF2, ISS.GetCrabF2(), t);
 
-            Image Octo = ImageManager.Add(ImageID.OctoF1, ISS.getOctoF1(), t);
-            ImageManager.Add(ImageID.OctoF2, ISS.getOctoF2(), t);
+            Image Octo = ImageManager.Add(ImageID.OctoF1, ISS.GetOctoF1(), t);
+            ImageManager.Add(ImageID.OctoF2, ISS.GetOctoF2(), t);
 
-            Image UFO = ImageManager.Add(ImageID.UFO, ISS.getUFO(), t);
-            Image UFOExp = ImageManager.Add(ImageID.UFOExp, ISS.getUFOExp(), t);
+            Image UFO = ImageManager.Add(ImageID.UFO, ISS.GetUFO(), t);
+            Image UFOExp = ImageManager.Add(ImageID.UFOExp, ISS.GetUFOExp(), t);
 
-            Image AlienExp = ImageManager.Add(ImageID.AlienExp, ISS.getAlienExp(), t);
+            Image AlienExp = ImageManager.Add(ImageID.AlienExp, ISS.GetAlienExp(), t);
 
             Image Hero = ImageManager.Add(ImageID.Hero, ISS.getHero(), t);
             Image HeroShot = ImageManager.Add(ImageID.HeroShot, ISS.getHeroShot(), t);
@@ -104,7 +103,7 @@ namespace SpaceInvaders.GameState
             Image ThirdShotf3 = ImageManager.Add(ImageID.Shot3f3, ISS.getThirdShotF3(), t);
             Image ThirdShotf4 = ImageManager.Add(ImageID.Shot3f4, ISS.getThirdShotF4(), t);
 
-            Image ShieldBrick = ImageManager.Add(ImageID.ShieldBrick, ISS.getShieldBrick(), t);
+            Image ShieldBrick = ImageManager.Add(ImageID.ShieldBrick, ISS.GetShieldBrick(), t);
 
             GameSpriteManager.Add(SpriteID.Squid, Squid, aSize);
             GameSpriteManager.Add(SpriteID.Crab, Crab, aSize);
@@ -115,9 +114,9 @@ namespace SpaceInvaders.GameState
             GameSpriteManager.Add(SpriteID.Hero, Hero, ISS.getHeroAdjSize());
             GameSpriteManager.Add(SpriteID.Missile, HeroShot, ISS.getShotAdjSize());
             GameSpriteManager.Add(SpriteID.MissileExp, HeroShotExp, ISS.getMissileExpAdjSize());
-            GameSpriteManager.Add(SpriteID.AlienExp, AlienExp, ISS.getAlienExpAdjSize());
+            GameSpriteManager.Add(SpriteID.AlienExp, AlienExp, ISS.GetAlienExpAdjSize());
             GameSpriteManager.Add(SpriteID.AlienShotExp, AlienShotExp, ISS.getAlienShotExpAdjSize());
-            GameSpriteManager.Add(SpriteID.ShieldBrick, ShieldBrick, ISS.getShieldBrickAdjSize());
+            GameSpriteManager.Add(SpriteID.ShieldBrick, ShieldBrick, ISS.GetShieldBrickAdjSize());
 
             GameSpriteManager.Add(SpriteID.RollerF1, Rollerf1, ISS.getAlienShotAdjSize());
             GameSpriteManager.Add(SpriteID.RollerF2, Rollerf2, ISS.getAlienShotAdjSize());
@@ -379,7 +378,7 @@ namespace SpaceInvaders.GameState
         //gamestate held refrences to shit.
         internal static float getTimeDelta()
         {
-            return 0.01f + (.015f*GameStateManager.getInstance().pActiveGridNode.getTree().numNodes);
+            return 0.01f + (.015f*GameStateManager.getInstance().pActiveGridNode.GetTree().numNodes);
         }
 
         internal static float getWaveMult()
@@ -393,7 +392,7 @@ namespace SpaceInvaders.GameState
         internal static bool GridEmpty()
         {
             //if(GameStateManager.getInstance().pActiveGridNode.getTree().numNodes > 0)
-            if (GameStateManager.getInstance().pActiveGridNode.getTree() != null)
+            if (GameStateManager.getInstance().pActiveGridNode.GetTree() != null)
             {
                 return false;
             }
@@ -494,11 +493,11 @@ namespace SpaceInvaders.GameState
             pMan.currentState = pMan.SPA;
             pMan.currentState.Init();
 
-            pMan.pActiveGridNode = GameObjectManager.Find(GameObjectTypeEnum.Grid);
+            pMan.pActiveGridNode = GameObjectManager.Find(GameObjectType.Grid);
 
-            pMan.pActiveBombRootNode = GameObjectManager.Find(GameObjectTypeEnum.bombRoot);
+            pMan.pActiveBombRootNode = GameObjectManager.Find(GameObjectType.bombRoot);
 
-            pMan.pActiveNoiseRootNode = GameObjectManager.Find(GameObjectTypeEnum.NoiseRoot);   
+            pMan.pActiveNoiseRootNode = GameObjectManager.Find(GameObjectType.NoiseRoot);   
         }
 
         public static void setStatePB()
@@ -509,11 +508,11 @@ namespace SpaceInvaders.GameState
             pMan.currentState = pMan.SPB;
             pMan.currentState.Init();
 
-            pMan.pActiveGridNode = GameObjectManager.Find(GameObjectTypeEnum.Grid);
+            pMan.pActiveGridNode = GameObjectManager.Find(GameObjectType.Grid);
 
-            pMan.pActiveBombRootNode = GameObjectManager.Find(GameObjectTypeEnum.bombRoot);
+            pMan.pActiveBombRootNode = GameObjectManager.Find(GameObjectType.bombRoot);
 
-            pMan.pActiveNoiseRootNode = GameObjectManager.Find(GameObjectTypeEnum.NoiseRoot);
+            pMan.pActiveNoiseRootNode = GameObjectManager.Find(GameObjectType.NoiseRoot);
         }
 
 
@@ -524,12 +523,12 @@ namespace SpaceInvaders.GameState
         }
         internal static GNoiseRoot getActiveNoiseRoot()
         {
-            return (GNoiseRoot)GameStateManager.getInstance().pActiveNoiseRootNode.getGameObject();
+            return (GNoiseRoot)GameStateManager.getInstance().pActiveNoiseRootNode.GetGameObject();
         }
         internal static Grid getActiveGrid()
         {
             // return (Grid) GameObjectManager.Find(GameObjectTypeEnum.Grid).getGameObject();
-            return (Grid) GameStateManager.getInstance().pActiveGridNode.getGameObject();
+            return (Grid) GameStateManager.getInstance().pActiveGridNode.GetGameObject();
         }
 
         internal static void setActiveGrid(GameObjectNode gridnode)
@@ -539,7 +538,7 @@ namespace SpaceInvaders.GameState
 
         internal static BombRoot getActiveBombRoot()
         {
-            return (BombRoot)GameStateManager.getInstance().pActiveBombRootNode.getGameObject();
+            return (BombRoot)GameStateManager.getInstance().pActiveBombRootNode.GetGameObject();
         }
 
         internal static void setActiveBombRoot(GameObjectNode bombrootnode)

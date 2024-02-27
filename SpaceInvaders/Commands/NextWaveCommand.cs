@@ -8,10 +8,7 @@ namespace SpaceInvaders.Commands
 {
     class PlayerACommand : Command
     {
-        public PlayerACommand()
-        {
-         
-        }
+        public PlayerACommand() { }
 
         public override void execute(float deltaTime)
         {
@@ -42,13 +39,10 @@ namespace SpaceInvaders.Commands
         }
     }
 
-    class PlayerBCommand : Command
+    internal sealed class PlayerBCommand : Command
     {
 
-        public PlayerBCommand()
-        {
-
-        }
+        public PlayerBCommand() { }
 
         public override void execute(float deltaTime)
         {
@@ -84,10 +78,8 @@ namespace SpaceInvaders.Commands
     {
         private GameState.GameState currentState;
 
-        public NextWaveCommand(GameState.GameState currentState)
-        {
-            this.currentState = currentState;
-        }
+        public NextWaveCommand(GameState.GameState currentState) 
+            => this.currentState = currentState;
 
         public override void execute(float deltaTime)
         {

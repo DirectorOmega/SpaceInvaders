@@ -3,9 +3,8 @@ using SpaceInvaders.GraphicalObjects;
 
 namespace SpaceInvaders.GameObjects
 {
-    class Crab : Alien
+    internal sealed class Crab : Alien
     {
-
         public Crab(SpriteID crab, float posX, float posY)
             : base(crab, posX, posY)
         {
@@ -17,10 +16,7 @@ namespace SpaceInvaders.GameObjects
             other.VisitCrab(this);
         }
 
-        public override int getScore()
-        {
-            return 20;
-        }
+        public override int getScore() => 20;
 
         //public override void VisitShield(Shield s)
         //{

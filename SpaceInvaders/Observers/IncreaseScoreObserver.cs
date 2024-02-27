@@ -14,12 +14,12 @@ namespace SpaceInvaders.Observers
         public override void Notify()
         {
             //Debug.WriteLine("KillAlienObserver: {0} {1}", this.pSubject.getA(), this.pSubject.getB());
-            Alien a = (Alien)this.pSubject.getA();
+            Alien a = (Alien)this.pSubject.GetA();
             GameStateManager.incrementScore(a.getScore());
         }
     }
 
-    class IncreaseScoreUFOObserver : ColObserver
+    internal sealed class IncreaseScoreUFOObserver : ColObserver
     {
         public override void dClean()
         {
@@ -29,7 +29,7 @@ namespace SpaceInvaders.Observers
         public override void Notify()
         {
             //Debug.WriteLine("KillAlienObserver: {0} {1}", this.pSubject.getA(), this.pSubject.getB());
-            Alien a = (Alien)this.pSubject.getB();
+            Alien a = (Alien)this.pSubject.GetB();
             GameStateManager.incrementScore(a.getScore());
         }
     }

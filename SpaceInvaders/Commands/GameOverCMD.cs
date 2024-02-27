@@ -2,11 +2,9 @@
 
 namespace SpaceInvaders.Commands
 {
-    class GameOverCMD : Command
+    internal sealed class GameOverCMD : Command
     {
-        public override void execute(float deltaTime)
-        {
-            GameStateManager.setStateGameOver();
-        }
+        public override void execute(float deltaTime) 
+            => GameStateManager.setStateGameOver();
     }
 }

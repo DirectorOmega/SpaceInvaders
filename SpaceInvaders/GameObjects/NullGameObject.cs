@@ -3,7 +3,7 @@ using SpaceInvaders.CollisionSystem;
 
 namespace SpaceInvaders.GameObjects
 {
-    class NullGameObject : GameObject
+    internal sealed class NullGameObject : GameObject
     {
         public NullGameObject() : base(SpriteID.NullSprite, 0.0f, 0.0f)
         {

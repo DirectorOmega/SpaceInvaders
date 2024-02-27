@@ -1,12 +1,10 @@
-﻿
-using SpaceInvaders.GameObjects;
+﻿using SpaceInvaders.GameObjects;
 using System.Diagnostics;
 
 namespace SpaceInvaders.InputSystem
 {
-    class InputManager
+    internal sealed class InputManager
     {
-
         private static Ship pShip;
 
         // Data: ----------------------------------------------

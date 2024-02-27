@@ -2,8 +2,8 @@
 using System.Diagnostics;
 
 namespace SpaceInvaders.CollisionSystem
-{ 
-   class CollisionObject
+{
+    internal sealed class CollisionObject
     {
         private CollisionRect poColRect;
         //hint use a box sprite; I could force it but I don't want too just yet.
@@ -16,54 +16,43 @@ namespace SpaceInvaders.CollisionSystem
 
             Azul.Rect t = new Azul.Rect(pProxySprite.getX(), pProxySprite.getY(), pProxySprite.getScreenRect().width, pProxySprite.getScreenRect().height);
 
-            this.poColRect = new CollisionRect(t);
+            poColRect = new CollisionRect(t);
 
             //this.poColRect = new CollisionRect(pProxySprite.getScreenRect());
             //this.poColRect = new CollisionRect(pProxySprite.get)
-            Debug.Assert(this.poColRect != null);
+            Debug.Assert(poColRect != null);
 
             // Create the sprite
-            this.pColSprite = BoxSpriteManager.Add(SpriteID.Box, this.poColRect);
-            Debug.Assert(this.pColSprite != null);
-            this.pColSprite.setColor(255.0f, 0.0f, 0.0f);
-        }
-
-        public baseSprite getColSprite()
-        {
-            return pColSprite;
+            pColSprite = BoxSpriteManager.Add(SpriteID.Box, poColRect);
+            Debug.Assert(pColSprite != null);
+            pColSprite.setColor(255.0f, 0.0f, 0.0f);
         }
 
         public void setColRect(baseSprite t)
         {
-            this.pColSprite.setScreenRect(t.getScreenRect());
-            this.poColRect.Set(t.getScreenRect());
+            pColSprite.setScreenRect(t.getScreenRect());
+            poColRect.Set(t.getScreenRect());
         }
 
-        public CollisionRect getColRect()
-        {
-            return poColRect;
-        }
+        public baseSprite GetColSprite() => pColSprite;
+        public CollisionRect GetColRect() => poColRect;
 
-        //I need to chage how this is called so it will only be called on add or remove of a object.
+        //I need to change how this is called so it will only be called on add or remove of a object.
         public void Union(CollisionObject o)
         {
-            this.poColRect.Union(o.poColRect);
-
+            poColRect.Union(o.poColRect);
             pColSprite.setScreenRect(poColRect);
         }
-        
-        
+
         public void UpdatePos(float x, float y)
         {
-            this.poColRect.x = x;
-            this.poColRect.y = y;
+            poColRect.x = x;
+            poColRect.y = y;
 
-            this.pColSprite.setCoords(this.poColRect.x, this.poColRect.y);
-
-            this.pColSprite.setScreenRect(this.poColRect);
+            pColSprite.setCoords(poColRect.x, poColRect.y);
+            pColSprite.setScreenRect(poColRect);
             //will need to remove this when it's a proxy box sprite.
-            this.pColSprite.Update();
+            pColSprite.Update();
         }
-
     }
 }

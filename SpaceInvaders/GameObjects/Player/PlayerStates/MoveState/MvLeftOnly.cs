@@ -1,13 +1,8 @@
-﻿using System;
-
-namespace SpaceInvaders.GameObjects
+﻿namespace SpaceInvaders.GameObjects
 {
-    class MvLeftOnly : MvState
+    internal sealed class MvLeftOnly : MvState
     {
-        public override void Handle(Ship pShip)
-        {
-            
-        }
+        public override void Handle(Ship pShip) { }
 
         public override void moveLeft(Ship pShip)
         {
@@ -15,9 +10,6 @@ namespace SpaceInvaders.GameObjects
             pShip.SetMvState(ShipManager.eMvState.Either);
         }
 
-        public override void moveRight(Ship pShip)
-        {
-            //pShip.incrementX(pShip.getSpeed());
-        }
+        public override void moveRight(Ship pShip) { }
     }
 }

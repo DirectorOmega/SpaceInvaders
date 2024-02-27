@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace SpaceInvaders.Observers
 {
-    class BombRemoveObserver : ColObserver
+    internal sealed class BombRemoveObserver : ColObserver
     {
         Bomb toRemove;
 
@@ -26,12 +26,12 @@ namespace SpaceInvaders.Observers
         {
             //Debug.WriteLine("ShipRemoveMissileObserver: {0} {1}", this.pSubject.getA(), this.pSubject.getB());
 
-            Bomb B = (Bomb)this.pSubject.getA();
-            Debug.Assert(this.pSubject.getA() != null && this.pSubject.getB() != null);
+            Bomb B = (Bomb)this.pSubject.GetA();
+            Debug.Assert(this.pSubject.GetA() != null && this.pSubject.GetB() != null);
            
-            if (!B.getMarked())
+            if (!B.IsMarked())
             {
-                B.markForDeath();
+                B.MarkForDeath();
                 //   Delay
                 //TODO: clean up this new
                 BombRemoveObserver pObserver = new BombRemoveObserver(B);
@@ -42,7 +42,7 @@ namespace SpaceInvaders.Observers
         public override void Execute()
         {
             toRemove.Remove();
-            toRemove.clearMark();
+            toRemove.ClearMark();
         }
     }
 }

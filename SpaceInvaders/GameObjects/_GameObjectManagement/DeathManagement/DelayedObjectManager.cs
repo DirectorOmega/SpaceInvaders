@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace SpaceInvaders.GameObjects
 {
-    class DelayedObjectManager
+    internal sealed class DelayedObjectManager
     {
         static public void Attach(ColObserver observer)
         {
@@ -27,7 +27,8 @@ namespace SpaceInvaders.GameObjects
                 pDelayMan.head = observer;
             }
         }
-        private void privDetach(ColObserver node, ref ColObserver head)
+
+        private static void PrivDetach(ColObserver node, ref ColObserver head)
         {
             // protection
             Debug.Assert(node != null);
@@ -46,6 +47,7 @@ namespace SpaceInvaders.GameObjects
                 node.pNext.pPrev = node.pPrev;
             }
         }
+
         static public void Process()
         {
             DelayedObjectManager pDelayMan = DelayedObjectManager.privGetInstance();
@@ -56,10 +58,8 @@ namespace SpaceInvaders.GameObjects
             {
                 // Fire off listener
                 pNode.Execute();
-
                 pNode = (ColObserver)pNode.pNext;
             }
-
 
             // remove
             pNode = pDelayMan.head;
@@ -71,7 +71,7 @@ namespace SpaceInvaders.GameObjects
                 pNode = (ColObserver)pNode.pNext;
 
                 // remove
-                pDelayMan.privDetach(pTmp, ref pDelayMan.head);
+                PrivDetach(pTmp, ref pDelayMan.head);
             }
         }
 
@@ -88,31 +88,24 @@ namespace SpaceInvaders.GameObjects
                 pNode = (ColObserver)pNode.pNext;
 
                 // remove
-                t.privDetach(pTmp, ref t.head);
+                PrivDetach(pTmp, ref t.head);
             }
         }
 
-        private DelayedObjectManager()
-        {
-            this.head = null;
-        }
+        private DelayedObjectManager() => this.head = null;
         private static DelayedObjectManager privGetInstance()
         {
             // Do the initialization
             if (instance == null)
-            {
                 instance = new DelayedObjectManager();
-            }
 
             // Safety - this forces users to call create first
             Debug.Assert(instance != null);
-
             return instance;
         }
 
         // Data: ------------------------
         private ColObserver head;
         private static DelayedObjectManager instance = null;
-
     }
 }

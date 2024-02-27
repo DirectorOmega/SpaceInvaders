@@ -1,12 +1,11 @@
-﻿
-using SpaceInvaders.CollisionSystem;
+﻿using SpaceInvaders.CollisionSystem;
 using SpaceInvaders.GraphicalObjects;
 
 namespace SpaceInvaders.GameObjects
 {
-    class Player : GameObject
+    internal sealed class PlayerAvatar : GameObject
     {
-        public Player(SpriteID id, float posX = 0, float posY = 0) : base(id, posX, posY)
+        public PlayerAvatar(SpriteID id, float posX = 0, float posY = 0) : base(id, posX, posY)
         {
         }
 
@@ -17,7 +16,6 @@ namespace SpaceInvaders.GameObjects
 
         public override void cClean()
         {
-
         }
     }
 }

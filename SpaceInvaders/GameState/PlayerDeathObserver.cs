@@ -1,5 +1,4 @@
-﻿using System;
-using SpaceInvaders.CollisionSystem;
+﻿using SpaceInvaders.CollisionSystem;
 
 namespace SpaceInvaders.GameState
 {
@@ -16,7 +15,7 @@ namespace SpaceInvaders.GameState
         }
     }
 
-    class PlayerLoseLifeObserver : ColObserver
+    internal sealed class PlayerLoseLifeObserver : ColObserver
     {
         public override void dClean()
         {

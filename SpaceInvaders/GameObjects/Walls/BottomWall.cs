@@ -1,10 +1,9 @@
-﻿using System;
-using SpaceInvaders.CollisionSystem;
+﻿using SpaceInvaders.CollisionSystem;
 using SpaceInvaders.GraphicalObjects;
 
 namespace SpaceInvaders.GameObjects
 {
-    class BottomWall : GameObject
+    internal sealed class BottomWall : GameObject
     {
         public BottomWall(SpriteID id, float posX = 0, float posY = 0) : base(id, posX, posY)
         {

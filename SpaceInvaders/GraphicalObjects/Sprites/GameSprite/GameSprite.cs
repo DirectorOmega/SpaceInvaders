@@ -1,6 +1,6 @@
 ﻿namespace SpaceInvaders.GraphicalObjects
 {
-    class GameSprite : baseSprite
+    internal sealed class GameSprite : baseSprite
     {
         private SpriteID Name;
         private float sx, sy;

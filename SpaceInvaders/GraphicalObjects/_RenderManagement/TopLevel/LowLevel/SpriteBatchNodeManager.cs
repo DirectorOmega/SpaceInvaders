@@ -3,10 +3,10 @@ using SpaceInvaders.Manager;
 
 namespace SpaceInvaders.GraphicalObjects
 {
-   class SpriteBatchNodeManager : SBNMan
+    internal sealed class SpriteBatchNodeManager : SBNMan
     {
         SpriteBatchID Name;
-        bool Active,universal;
+        bool Active, universal;
         private SpriteBatch pParent;
         private SpriteBatchNode poSpriteBatchRef = new SpriteBatchNode();
 
@@ -53,7 +53,7 @@ namespace SpaceInvaders.GraphicalObjects
 
         public void ClearStored()
         {
-            if(!universal)
+            if (!universal)
             {
                 nullHeads();
             }
@@ -101,7 +101,7 @@ namespace SpaceInvaders.GraphicalObjects
             return false;
         }
 
-        internal void Set(SpriteBatchID id,SpriteBatch parent)
+        internal void Set(SpriteBatchID id, SpriteBatch parent)
         {
             Name = id;
             pParent = parent;

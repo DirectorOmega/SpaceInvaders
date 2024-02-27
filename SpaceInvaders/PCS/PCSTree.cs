@@ -1,5 +1,4 @@
-﻿using SpaceInvaders.PCS;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace SpaceInvaders.PCS
 {
@@ -8,7 +7,7 @@ namespace SpaceInvaders.PCS
         public enum Name
         {
             Root,
-            Not_Initialized
+            NotInitialized
         }
 
         // constructor
@@ -246,7 +245,7 @@ namespace SpaceInvaders.PCS
         }
 
 
-        class PCSRootNode : PCSNode
+        internal sealed class PCSRootNode : PCSNode
         {
             public PCSRootNode(PCSTree.Name treeName)
                 : base()
@@ -268,7 +267,6 @@ namespace SpaceInvaders.PCS
         private PCSNode root;
         public int numNodes;
         public int maxNodeCount;
-
     }
 }
 
