@@ -2,7 +2,7 @@
 
 namespace SpaceInvaders
 {
-    class Simulation
+    internal sealed class Simulation
     {
         public enum State
         {

@@ -4,8 +4,7 @@ using SpaceInvaders.Commands;
 
 namespace SpaceInvaders.Time
 {
-
-    class TimerManager : TMan
+    internal sealed class TimerManager : TMan
     {
         private static float currTime =0;
         private static TimerManager pInstance;
@@ -28,7 +27,7 @@ namespace SpaceInvaders.Time
             while(e != null)
             {
 
-                if (currTime >= e.getTriggerTime())
+                if (currTime >= e.GetTriggerTime())
                 {
                     e.process();
                     if (e.pNext != null)
@@ -86,14 +85,14 @@ namespace SpaceInvaders.Time
                 {
                     e = (TimeEvent)e.pNext;
                     ePrev = (TimeEvent)e.pPrev;
-                    if (ePrev.getName() == eID)
+                    if (ePrev.GetName() == eID)
                     {
                         t.baseRemove(e.pPrev);
                     }
                 }
                 else
                 {
-                    if (e.getName() == eID)
+                    if (e.GetName() == eID)
                     {
                         t.baseRemove(e);
                     }
@@ -124,7 +123,7 @@ namespace SpaceInvaders.Time
             TimeEvent pNode = (TimeEvent)pTMan.getFromReserve();
             Debug.Assert(pNode != null);
 
-            pNode.set(Name, DTime, currTime + DTime, cmd);    
+            pNode.Set(Name, DTime, currTime + DTime, cmd);    
             //InsertionSort
             pTMan.InSort(pNode);
             
@@ -165,7 +164,7 @@ namespace SpaceInvaders.Time
             TimeEvent left = (TimeEvent)pLinkA;
             TimeEvent right = (TimeEvent)pLinkB;
 
-            if (left.getName() == right.getName())
+            if (left.GetName() == right.GetName())
             {
                 return true;
             }
@@ -191,7 +190,7 @@ namespace SpaceInvaders.Time
         //for find
         private TimeEvent toFind(TimeEventID id)
         {
-            poRefTE.setName(id);
+            poRefTE.SetName(id);
             return poRefTE;
         }
     }

@@ -3,7 +3,7 @@ using SpaceInvaders.PCS;
 
 namespace SpaceInvaders.GameObjects
 {
-    class GameObjectNode : GoNoLink
+    internal sealed class GameObjectNode : GoNoLink
     {
         private GameObject pGameObj;
         private PCSTree pTree;
@@ -14,10 +14,8 @@ namespace SpaceInvaders.GameObjects
             pGameObj = null;
         }
 
-        public GameObjectTypeEnum getName()
-        {
-            return (GameObjectTypeEnum)pGameObj.getName();
-        }
+        public GameObjectType GetName() 
+            => (GameObjectType)pGameObj.getName();
 
         public override void dClean()
         {
@@ -28,39 +26,18 @@ namespace SpaceInvaders.GameObjects
             sbnm = null;
         }
 
-        internal SpriteBatchNodeManager getSBNM()
-        {
-            return sbnm;
-        }
+        internal SpriteBatchNodeManager GetSBNM() => sbnm;
 
-        internal PCSNode getGameObject()
-        {
-            return pGameObj;
-        }
+        internal PCSNode GetGameObject() => pGameObj;
 
         internal void Set(GameObject gO, PCSTree pTree)
         {
             pGameObj = gO;
             this.pTree = pTree;
-           
-            //pGameObj.setParentNode(this);
         }
 
-
-
-        internal PCSTree getTree()
-        {
-            return pTree;
-        }
-
-        internal void Update()
-        {
-            pGameObj.Update();
-        }
-
-        internal void setName(GameObjectTypeEnum name)
-        {
-            this.pGameObj.setName(name);
-        }
+        internal PCSTree GetTree() => pTree;
+        internal void Update() => pGameObj.Update();
+        internal void SetName(GameObjectType name) => this.pGameObj.setName(name);
     }
 }

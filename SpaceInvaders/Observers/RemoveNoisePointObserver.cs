@@ -1,14 +1,11 @@
 ﻿using SpaceInvaders.CollisionSystem;
 using SpaceInvaders.GameObjects;
 using System.Diagnostics;
-using System;
 
 namespace SpaceInvaders.Observers
 {
     class RemoveBObserver : ColObserver
     {
-
-
         public RemoveBObserver()
         {
 
@@ -21,10 +18,10 @@ namespace SpaceInvaders.Observers
 
         public override void Notify()
         {
-            GameObject two = this.pSubject.getB();
-            if (!two.getMarked())
+            GameObject two = this.pSubject.GetB();
+            if (!two.IsMarked())
             {
-                two.markForDeath();
+                two.MarkForDeath();
 
                 RemoveObserver pObserver = new RemoveObserver(two);
                 DelayedObjectManager.Attach(pObserver);
@@ -45,7 +42,7 @@ namespace SpaceInvaders.Observers
         {
             toRemove = null;
         }
-        //stange I know but this is basically a friend to the class below, so I can cooridnate some extra stuff.
+        //strange I know but this is basically a friend to the class below, so I can coordinate some extra stuff.
         public override void Notify()
         {
             throw new NotImplementedException();
@@ -55,7 +52,7 @@ namespace SpaceInvaders.Observers
         {
 
             toRemove.Remove();
-            toRemove.clearMark();
+            toRemove.ClearMark();
 
         }
     }
@@ -76,27 +73,25 @@ namespace SpaceInvaders.Observers
         {
             //Debug.WriteLine("ShipRemoveMissileObserver: {0} {1}", this.pSubject.getA(), this.pSubject.getB());
 
-            GameObject one = this.pSubject.getA();
-            GameObject two = this.pSubject.getB();
-            Debug.Assert(this.pSubject.getA() != null && this.pSubject.getB() != null);
+            GameObject one = this.pSubject.GetA();
+            GameObject two = this.pSubject.GetB();
+            Debug.Assert(this.pSubject.GetA() != null && this.pSubject.GetB() != null);
 
-            if (!one.getMarked())
+            if (!one.IsMarked())
             {
-                one.markForDeath();
+                one.MarkForDeath();
     
                 //TODO: clean up this new
                 RemoveObserver pObserver = new RemoveObserver(one);
                 DelayedObjectManager.Attach(pObserver);
             }
-            if(!two.getMarked())
+            if(!two.IsMarked())
             {
-                two.markForDeath();
+                two.MarkForDeath();
 
                 RemoveObserver pObserver = new RemoveObserver(two);
                 DelayedObjectManager.Attach(pObserver);
             }
         }
-
- 
     }
 }

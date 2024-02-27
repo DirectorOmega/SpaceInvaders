@@ -1,10 +1,8 @@
 ﻿using SpaceInvaders.GraphicalObjects;
-using SpaceInvaders.Manager;
-using SpaceInvaders.Time;
 
 namespace SpaceInvaders.GameObjects
 {
-    class ZigZag : BombStrat
+    internal sealed class ZigZag : BombStrat
     {
 
         GameSprite f1, f2, f3, f4;

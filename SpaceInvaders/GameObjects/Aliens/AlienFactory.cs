@@ -26,57 +26,57 @@ namespace SpaceInvaders.GameObjects
 
         //TODO: Maybe?
         //TODO: tweak this and the game object manager so the reserve list is 2 dimensional like the batch manager, so objects can be recieved by the game object manager and reused or created only when necessary.
-        public Alien Create(GameObjectTypeEnum type, float posX = 0.0f, float posY = 0.0f)
+        public Alien Create(GameObjectType type, float posX = 0.0f, float posY = 0.0f)
         {
             Alien pAlien = null;
 
             switch (type)
             {
-                case GameObjectTypeEnum.Crab:
-                    pAlien = (Crab) GhostManager.Find(GameObjectTypeEnum.Crab).detatch();
+                case GameObjectType.Crab:
+                    pAlien = (Crab) GhostManager.Find(GameObjectType.Crab).Detatch();
                     if (pAlien == null)
                     {
                         pAlien = new Crab(SpriteID.Crab, posX, posY);
-                        pAlien.setName(GameObjectTypeEnum.Crab);
+                        pAlien.setName(GameObjectType.Crab);
                     }
                     this.pTree.Insert(pAlien, this.pHead);
                     break;
 
-                case GameObjectTypeEnum.Squid:
-                    pAlien = (Squid)GhostManager.Find(GameObjectTypeEnum.Squid).detatch();
+                case GameObjectType.Squid:
+                    pAlien = (Squid)GhostManager.Find(GameObjectType.Squid).Detatch();
                     if (pAlien == null)
                     {
                         pAlien = new Squid(SpriteID.Squid, posX, posY);
-                        pAlien.setName(GameObjectTypeEnum.Squid);
+                        pAlien.setName(GameObjectType.Squid);
                        
                     }
                     this.pTree.Insert(pAlien, this.pHead);
                     break;
 
-                case GameObjectTypeEnum.Octo:
-                    pAlien = (Octo)GhostManager.Find(GameObjectTypeEnum.Octo).detatch();
+                case GameObjectType.Octo:
+                    pAlien = (Octo)GhostManager.Find(GameObjectType.Octo).Detatch();
                     if (pAlien == null)
                     {
                         pAlien = new Octo(SpriteID.Octo, posX, posY);
-                        pAlien.setName(GameObjectTypeEnum.Octo);
+                        pAlien.setName(GameObjectType.Octo);
                        
                     }
                     this.pTree.Insert(pAlien, this.pHead);
                     break;
 
-                case GameObjectTypeEnum.Column:
+                case GameObjectType.Column:
                     //pAlien = (Column)GhostManager.Find(GameObjectTypeEnum.Column).detatch();
                     //if (pAlien == null)
                    // {
                         pAlien = new Column(SpriteID.NullSprite, posX, posY);
-                        pAlien.setName(GameObjectTypeEnum.Column);
+                        pAlien.setName(GameObjectType.Column);
                    // }
                     this.pTree.Insert(pAlien, this.pHead);
                     break;
 
-                case GameObjectTypeEnum.Grid:
+                case GameObjectType.Grid:
                     pAlien = new Grid(SpriteID.NullSprite, posX, posY);
-                    pAlien.setName(GameObjectTypeEnum.Grid);
+                    pAlien.setName(GameObjectType.Grid);
                     GameObjectManager.AttachTree(pAlien,this.pTree);
                     this.pTree.SetRoot(pAlien);
                     break;
@@ -87,12 +87,11 @@ namespace SpaceInvaders.GameObjects
             }
 
             //this.pTree.Insert(pAlien, this.pHead);
-            pAlien.clearMark();
+            pAlien.ClearMark();
             pAlien.setCoords(posX, posY);
             this.pBatch.Attach(pAlien.getPSprite());
             pAlien.ActivateCollisionSprite();
             return pAlien;
         }
-
     }
 }

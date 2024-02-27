@@ -2,7 +2,7 @@
 
 namespace SpaceInvaders.GameObjects
 {
-    class ShipStateReady : MissileState
+    internal sealed class ShipStateReady : MissileState
     {
         public override void Handle(Ship pShip)
         {
@@ -13,7 +13,7 @@ namespace SpaceInvaders.GameObjects
         {
             Missile pMissle = ShipManager.ActivateMissile();
             Debug.Assert(null != pMissle);
-            pMissle.setCoords(pShip.getX(), pShip.getY() + 20);
+            pMissle.setCoords(pShip.GetX(), pShip.getY() + 20);
             this.Handle(pShip);
         }
     }

@@ -1,11 +1,10 @@
 ﻿using SpaceInvaders.CollisionSystem;
-using SpaceInvaders.GameState;
 using SpaceInvaders.GraphicalObjects;
 using SpaceInvaders.PCS;
 
 namespace SpaceInvaders.GameObjects
 {
-    class Grid : Alien
+    internal sealed class Grid : Alien
     {
         
         float delta = 15;
@@ -25,7 +24,7 @@ namespace SpaceInvaders.GameObjects
 
         public Grid(SpriteID nullSprite, float posX, float posY) : base(nullSprite, posX, posY)
         {
-            this.getCollisionObject().getColSprite().setColor(0.0f, 255.0f, 0.0f);
+            this.            CollisionObject.GetColSprite().setColor(0.0f, 255.0f, 0.0f);
             iterator = new PCSTreeIterator(this);
         }
 
@@ -153,20 +152,21 @@ namespace SpaceInvaders.GameObjects
             GameObject r = (GameObject)this.getChild();
             if (r != null)
             {
-                CollisionRect ColTotal = this.getCollisionObject().getColRect();
-                ColTotal.Set(r.getCollisionObject().getColRect());
+                CollisionRect ColTotal = this.CollisionObject.GetColRect();
+                ColTotal.Set(r.CollisionObject.GetColRect());
 
                 while (null != r)
                 {
-                    ColTotal.Union(r.getCollisionObject().getColRect());
+                    ColTotal.Union(r.CollisionObject.GetColRect());
 
                     r = (GameObject)r.getSibling();
                 }
 
-                this.getCollisionObject().getColRect().Set(ColTotal);
+                this.
+                CollisionObject.GetColRect().Set(ColTotal);
             }
-            this.x = this.poColObj.getColRect().x;
-            this.y = this.poColObj.getColRect().y;
+            this.x = this.poColObj.GetColRect().x;
+            this.y = this.poColObj.GetColRect().y;
 
         }
       

@@ -3,7 +3,7 @@ using SpaceInvaders.Manager;
 
 namespace SpaceInvaders.GraphicalObjects
 {
-    class ImageManager : IMan
+    internal sealed class ImageManager : IMan
     {
 
        private static ImageManager pInstance;

@@ -1,13 +1,11 @@
-﻿
-using System;
-using SpaceInvaders.CollisionSystem;
+﻿using SpaceInvaders.CollisionSystem;
 using SpaceInvaders.GraphicalObjects;
 using SpaceInvaders.GameObjects.Player.PlayerStates;
 using SpaceInvaders.GameObjects.Player.PlayerStates.MoveState;
 
 namespace SpaceInvaders.GameObjects
 {
-    class Ship : GameObject
+    internal sealed class Ship : GameObject
     {
       //  ShipManager.State curState;
         float speed;

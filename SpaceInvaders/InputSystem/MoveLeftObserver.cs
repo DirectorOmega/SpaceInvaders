@@ -2,7 +2,7 @@
 
 namespace SpaceInvaders.InputSystem
 {
-    class MoveLeftObserver : InputObserver
+    internal sealed class MoveLeftObserver : InputObserver
     {
         //bad smell probably want to push this up into Input observer.
         public override void dClean()

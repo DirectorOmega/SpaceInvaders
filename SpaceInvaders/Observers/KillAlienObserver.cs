@@ -1,11 +1,9 @@
-﻿using System;
-using SpaceInvaders.CollisionSystem;
-using System.Diagnostics;
+﻿using SpaceInvaders.CollisionSystem;
 using SpaceInvaders.GameObjects;
 
 namespace SpaceInvaders.Observers
 {
-    class KillAlienObserver : ColObserver
+    internal sealed class KillAlienObserver : ColObserver
     {
         private Alien toRemove;
 
@@ -31,13 +29,13 @@ namespace SpaceInvaders.Observers
             //Debug.WriteLine("KillAlienObserver: {0} {1}", this.pSubject.getA(), this.pSubject.getB());
 
             // OK do some magic
-            Alien a = (Alien)this.pSubject.getA();
+            Alien a = (Alien)this.pSubject.GetA();
             //this.pSubject.getA().Remove();
 
 
-            if (!a.getMarked())
+            if (!a.IsMarked())
             {
-                a.markForDeath();
+                a.MarkForDeath();
                 //   Delay
                 //TODO: clean up this new
                 KillAlienObserver pObserver = new KillAlienObserver(a);
@@ -53,7 +51,7 @@ namespace SpaceInvaders.Observers
             //toRemove.Update();
 
             toRemove.Remove();
-            toRemove.clearMark();
+            toRemove.ClearMark();
 
         }
         //decrease time between jumps

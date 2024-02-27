@@ -5,11 +5,11 @@ using System.Diagnostics;
 
 namespace SpaceInvaders.GameObjects
 {
-    class BombRoot : GameObject
+    internal sealed class BombRoot : GameObject
     {
         public BombRoot(SpriteID id, float posX = 0, float posY = 0) : base(id, posX, posY)
         {
-            this.getCollisionObject().getColSprite().setColor(0.0f, 255.0f, 0.0f);
+            this.            CollisionObject.GetColSprite().setColor(0.0f, 255.0f, 0.0f);
         }
 
         public override void Remove()
@@ -42,9 +42,9 @@ namespace SpaceInvaders.GameObjects
             RemoveObserver r;
             while (cur != null)
             {
-                if (!cur.getMarked())
+                if (!cur.IsMarked())
                 {
-                    cur.markForDeath();
+                    cur.MarkForDeath();
 
                     //TODO: clean up this new
                     r = new RemoveObserver(cur);
@@ -88,20 +88,21 @@ namespace SpaceInvaders.GameObjects
             GameObject r = (GameObject)this.getChild();
             if (r != null)
             {
-                CollisionRect ColTotal = this.getCollisionObject().getColRect();
-                ColTotal.Set(r.getCollisionObject().getColRect());
+                CollisionRect ColTotal = this.CollisionObject.GetColRect();
+                ColTotal.Set(r.CollisionObject.GetColRect());
 
                 while (null != r)
                 {
-                    ColTotal.Union(r.getCollisionObject().getColRect());
+                    ColTotal.Union(r.CollisionObject.GetColRect());
 
                     r = (GameObject)r.getSibling();
                 }
 
-                this.getCollisionObject().getColRect().Set(ColTotal);
+                this.
+                CollisionObject.GetColRect().Set(ColTotal);
             }
-            this.x = this.poColObj.getColRect().x;
-            this.y = this.poColObj.getColRect().y;
+            this.x = this.poColObj.GetColRect().x;
+            this.y = this.poColObj.GetColRect().y;
 
         }
 

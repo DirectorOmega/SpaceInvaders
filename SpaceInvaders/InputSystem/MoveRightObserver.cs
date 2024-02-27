@@ -2,7 +2,7 @@
 
 namespace SpaceInvaders.InputSystem
 {
-    class MoveRightObserver : InputObserver
+    internal sealed class MoveRightObserver : InputObserver
     {
 
         public override void dClean()

@@ -1,12 +1,9 @@
-﻿
-using SpaceInvaders.GraphicalObjects;
-using SpaceInvaders.Manager;
+﻿using SpaceInvaders.GraphicalObjects;
 
 namespace SpaceInvaders.GameObjects
 {
-    class Roller : BombStrat
-    {
-       
+    internal sealed class Roller : BombStrat
+    {  
         GameSprite f1, f2, f3, f4;
         
         public Roller()

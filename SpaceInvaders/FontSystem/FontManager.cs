@@ -1,5 +1,4 @@
-﻿using System;
-using SpaceInvaders.Manager;
+﻿using SpaceInvaders.Manager;
 using System.Diagnostics;
 using SpaceInvaders.GraphicalObjects;
 
@@ -13,14 +12,14 @@ namespace SpaceInvaders.FontSystem
         private FontManager(int reserveNum = 3, int reserveGrow = 1)
             : base(reserveNum, reserveGrow)
         {
-            this.pRefNode = (Font)this.dCreateNode();
+            pRefNode = (Font)dCreateNode();
         }
         ~FontManager()
         {
 #if(TRACK_DESTRUCTOR)
             Debug.WriteLine("~FontMan():{0}", this.GetHashCode());
 #endif
-            this.pRefNode = null;
+            pRefNode = null;
             FontManager.pInstance = null;
         }
 
@@ -71,10 +70,8 @@ namespace SpaceInvaders.FontSystem
             return pNode;
         }
 
-        public static void AddXml(Glyph.Name glyphName, String assetName, TextureID textName)
-        {
-            GlyphManager.AddXml(glyphName, assetName, textName);
-        }
+        public static void AddXml(Glyph.Name glyphName, String assetName, TextureID textName) 
+            => GlyphManager.AddXml(glyphName, assetName, textName);
 
         public static void Remove(Glyph pNode)
         {
@@ -82,6 +79,7 @@ namespace SpaceInvaders.FontSystem
             FontManager pMan = FontManager.privGetInstance();
             pMan.baseRemove(pNode);
         }
+
         public static Font Find(FontName name)
         {
             FontManager pMan = FontManager.privGetInstance();
@@ -115,21 +113,16 @@ namespace SpaceInvaders.FontSystem
             Font pDataA = (Font)pLinkA;
             Font pDataB = (Font)pLinkB;
 
-            Boolean status = false;
-
-            if (pDataA.name == pDataB.name)
-            {
-                status = true;
-            }
-
-            return status;
+            return pDataA.name == pDataB.name;
         }
+
         override protected DLink dCreateNode()
         {
             DLink pNode = new Font();
             Debug.Assert(pNode != null);
             return pNode;
         }
+
         override protected void dClearNode(DLink pLink)
         {
             Debug.Assert(pLink != null);
@@ -153,7 +146,6 @@ namespace SpaceInvaders.FontSystem
         {
             // Safety - this forces users to call Create() first before using class
             Debug.Assert(pInstance != null);
-
             return pInstance;
         }
 
@@ -163,5 +155,4 @@ namespace SpaceInvaders.FontSystem
         private static FontManager pInstance = null;
         private Font pRefNode;
     }
-    
 }

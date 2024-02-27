@@ -2,7 +2,7 @@
 
 namespace SpaceInvaders.InputSystem
 {
-    class Num1KeyObserver : InputObserver
+    internal sealed class Num1KeyObserver : InputObserver
     {
         public override void dClean()
         {

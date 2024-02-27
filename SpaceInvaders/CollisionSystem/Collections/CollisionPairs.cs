@@ -3,11 +3,14 @@ using System.Diagnostics;
 
 namespace SpaceInvaders.CollisionSystem
 {
-
     enum CollisionPairName
     {
         reserveList,
-        undef,GridvsMissile,UFOvsMissile,GridvsLeftWall,GridvsRightWall,
+        undef,
+        GridvsMissile,
+        UFOvsMissile,
+        GridvsLeftWall,
+        GridvsRightWall,
         MissilevsTopWall,
         PlayervsLBumper,
         PlayervsRBumper,
@@ -20,8 +23,8 @@ namespace SpaceInvaders.CollisionSystem
         UFOvsLeftWall,
         GridvsShield
     }
-   
-    class CollisionPair : ColLink
+
+    internal sealed class CollisionPair : ColLink
     {
         private CollisionPairName name;
         private GameObject A;
@@ -33,10 +36,6 @@ namespace SpaceInvaders.CollisionSystem
             A = null;
             B = null;
             poSubject = new ColSubject();
-        }
-
-        ~CollisionPair()
-        {
         }
 
         public override void dClean()
@@ -57,20 +56,14 @@ namespace SpaceInvaders.CollisionSystem
             B = treeRootB;
         }
 
-        public void setName(CollisionPairName name)
-        {
-            this.name = name;
-        }
+        public void SetName(CollisionPairName name) => this.name = name;
 
-        public void Process()
-        {
-            Collide(this.A, this.B);
-        }
+        public void Process() => Collide(A, B);
 
         static public void Collide(GameObject pSafeTreeA,GameObject pSafeTreeB)
         {
             GameObject pNodeA = pSafeTreeA;
-            GameObject pNodeB = pSafeTreeB;
+            GameObject pNodeB;
 
             //  Debug.WriteLine("\nColPair: start {0}, {1}", pNodeA.getName(), pNodeB.getName());
             while (pNodeA != null)
@@ -84,8 +77,8 @@ namespace SpaceInvaders.CollisionSystem
                     //Debug.WriteLine("ColPair: collide:  {0}, {1}", pNodeA.getName(), pNodeB.getName());
 
                     // Get rectangles
-                    CollisionRect rectA = pNodeA.getCollisionObject().getColRect();
-                    CollisionRect rectB = pNodeB.getCollisionObject().getColRect();
+                    CollisionRect rectA = pNodeA.CollisionObject.GetColRect();
+                    CollisionRect rectB = pNodeB.CollisionObject.GetColRect();
 
                     // test them
                     if (CollisionRect.Intersect(rectA, rectB))
@@ -113,17 +106,10 @@ namespace SpaceInvaders.CollisionSystem
             Debug.Assert(pObjA != null);
             Debug.Assert(pObjB != null);
             this.poSubject.setObjects(pObjA, pObjB);
-            
         }
 
-        public void NotifyListeners()
-        {
-            this.poSubject.Notify();
-        }
+        public void NotifyListeners() => poSubject.Notify();
 
-        public CollisionPairName getName()
-        {
-            return name;
-        }
+        public CollisionPairName GetName() => name;
     }
 }

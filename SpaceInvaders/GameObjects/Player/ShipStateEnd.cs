@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace SpaceInvaders.GameObjects
+﻿namespace SpaceInvaders.GameObjects
 {
-    class ShipStateEnd : MissileState
+    internal sealed class ShipStateEnd : MissileState
     {
         public override void Handle(Ship pShip)
         {

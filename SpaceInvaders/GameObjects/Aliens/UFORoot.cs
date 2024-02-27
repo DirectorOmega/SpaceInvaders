@@ -1,5 +1,4 @@
-﻿
-using SpaceInvaders.CollisionSystem;
+﻿using SpaceInvaders.CollisionSystem;
 using SpaceInvaders.Commands;
 using SpaceInvaders.GameObjects.Projectiles;
 using SpaceInvaders.GameState;
@@ -8,7 +7,7 @@ using SpaceInvaders.Time;
 
 namespace SpaceInvaders.GameObjects
 {
-    class UFORoot : GameObject
+    internal sealed class UFORoot : GameObject
     {
 
         //IrrKlang.ISound ufoDeath;
@@ -20,18 +19,13 @@ namespace SpaceInvaders.GameObjects
         {
             // ufoDeath = SndEngine.getSoundSource("")
             dropCMD = new UFODropBombCMD(this);
-            setBombCmd();
+            SetBombCmd();
         }
 
-        public override void Accept(ColVistor other)
-        {
-            other.VisitUFORoot(this);
-        }
+        public override void Accept(ColVistor other) => other.VisitUFORoot(this);
 
-        public void setBombCmd()
-        {
-            TimerManager.Add(TimeEventID.bombDrop, dropCMD, GameStateManager.getRandomNumber(3, 5));
-        }
+        public void SetBombCmd() 
+            => TimerManager.Add(TimeEventID.bombDrop, dropCMD, GameStateManager.getRandomNumber(3, 5));
 
         private void pBombDrop()
         {
@@ -44,29 +38,24 @@ namespace SpaceInvaders.GameObjects
                 BombRoot br = GameStateManager.getActiveBombRoot();
                 GameObjectManager.Insert(B, br);
 
-                B.setCoords(pA.getX(), pA.getY());
+                B.setCoords(pA.GetX(), pA.getY());
 
-                br.getPSprite().getSBNode().getSBNM().Attach(B.getPSprite());
+                br.getPSprite().getSBNode().GetSBNM().Attach(B.getPSprite());
                 B.ActivateCollisionSprite();
              
-                setBombCmd();
-
+                SetBombCmd();
             }
-
         }
 
-        internal void DropBomb()
-        {
-            drop = true;
-        }
-
+        internal void DropBomb() 
+            => drop = true;
 
         public override void Update()
         {
-            if (null == this.getChild())
+            if (null == getChild())
             {
-                this.getCollisionObject().getColRect().Set(-280.0f, -80.0f, 0.0f, 0.0f);
-                this.setCoords(-280, -80);
+                CollisionObject.GetColRect().Set(-280.0f, -80.0f, 0.0f, 0.0f);
+                setCoords(-280, -80);
             }
             else
             {
@@ -82,7 +71,7 @@ namespace SpaceInvaders.GameObjects
 
         public override void Remove()
         {
-            GameObject e = (GameObject)this.getChild();
+            GameObject e = (GameObject) getChild();
             GameObject ePrev;
             while (e != null)
             {
@@ -91,14 +80,12 @@ namespace SpaceInvaders.GameObjects
                     ePrev = (GameObject)e;
                     e = (GameObject)e.getSibling();
                     ePrev.Remove();
-
                 }
                 else
                 {
 
                     e.Remove();
                     e = null;
-
                 }
             }
             base.Remove();
@@ -107,7 +94,7 @@ namespace SpaceInvaders.GameObjects
         private void UpdateChildren()
         {
             //GameObject cur = (GameObject)iterator.first();
-            GameObject cur = (GameObject)this.getChild();
+            GameObject cur = (GameObject)getChild();
             while (null != cur)
             {
                 cur.Update();
@@ -116,34 +103,31 @@ namespace SpaceInvaders.GameObjects
             UpdateColObj();
         }
 
-
-
         public void UpdateColObj()
         {
-            GameObject r = (GameObject)this.getChild();
+            GameObject r = (GameObject)getChild();
             if (null != r)
             {
-                CollisionRect ColTotal = this.getCollisionObject().getColRect();
-                ColTotal.Set(r.getCollisionObject().getColRect());
+                CollisionRect ColTotal = this.CollisionObject.GetColRect();
+                ColTotal.Set(r.CollisionObject.GetColRect());
 
                 r = (GameObject)r.getSibling();
 
                 while (null != r)
                 {
-                    ColTotal.Union(r.getCollisionObject().getColRect());
+                    ColTotal.Union(r.CollisionObject.GetColRect());
 
                     r = (GameObject)r.getSibling();
                 }
-                this.getCollisionObject().getColRect().Set(ColTotal);
+                CollisionObject.GetColRect().Set(ColTotal);
             } //else { this.getCollisionObject().getColRect().Set(0f, 0f, 0f, 0f); }
 
-            this.x = this.poColObj.getColRect().x;
-            this.y = this.poColObj.getColRect().y;
+            x = poColObj.GetColRect().x;
+            y = poColObj.GetColRect().y;
         }
 
         public override void cClean()
         {
-          
         }
     }
 }

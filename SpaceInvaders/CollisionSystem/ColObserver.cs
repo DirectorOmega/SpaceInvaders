@@ -1,7 +1,4 @@
-﻿
-using System;
-
-namespace SpaceInvaders.CollisionSystem
+﻿namespace SpaceInvaders.CollisionSystem
 {
     abstract class ColObserver : CoObLink
     {

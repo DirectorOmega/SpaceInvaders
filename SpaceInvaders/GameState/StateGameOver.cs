@@ -7,7 +7,7 @@ using SpaceInvaders.Time;
 
 namespace SpaceInvaders.GameState
 {
-    class StateGameOver : GameState
+    internal sealed class StateGameOver : GameState
     {
         Font DefaultMessage;
         Font Score1Label, Score2Label, HighScoreLabel, Score1, Score2, HighScore;

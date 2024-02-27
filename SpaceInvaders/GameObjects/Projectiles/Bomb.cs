@@ -1,10 +1,9 @@
-﻿using System;
-using SpaceInvaders.CollisionSystem;
+﻿using SpaceInvaders.CollisionSystem;
 using SpaceInvaders.GraphicalObjects;
 
 namespace SpaceInvaders.GameObjects
 {
-    class Bomb : GameObject
+    internal sealed class Bomb : GameObject
     {
 
         BombStrat fallStrat;

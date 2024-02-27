@@ -3,7 +3,7 @@ using SpaceInvaders.Manager;
 
 namespace SpaceInvaders.GraphicalObjects
 {
-    class SpriteBatchManager : SBMan
+    internal sealed class SpriteBatchManager : SBMan
     {
         private static SpriteBatchManager pInstance;
         private static SpriteBatch poSpriteBatchRef = new SpriteBatch();

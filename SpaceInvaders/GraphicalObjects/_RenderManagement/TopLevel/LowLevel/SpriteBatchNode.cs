@@ -1,16 +1,12 @@
-﻿
-namespace SpaceInvaders.GraphicalObjects
+﻿namespace SpaceInvaders.GraphicalObjects
 {
-    class SpriteBatchNode : SBNLink
+    internal sealed class SpriteBatchNode : SBNLink
     {
         private baseSprite pSprite;
         private SpriteBatchNodeManager pSBNM;
         // private SpriteBatchID name;
-        
-        public SpriteBatchNodeManager getSBNM()
-        {
-            return pSBNM;
-        }
+
+        public SpriteBatchNodeManager GetSBNM() => pSBNM;
 
         public SpriteBatchNode()
         { 
@@ -25,19 +21,8 @@ namespace SpaceInvaders.GraphicalObjects
             pSBNM = parent;
         }
 
-        public override void dClean()
-        {
-            pSprite = null;
-        }
-
-        public void Render()
-        {
-            pSprite.Render();
-        }
-
-        internal void RemoveSelf()
-        {
-            pSBNM.baseRemove(this);
-        }
+        public override void dClean() => pSprite = null;
+        public void Render() => pSprite.Render();
+        internal void RemoveSelf() => pSBNM.baseRemove(this);
     }
 }

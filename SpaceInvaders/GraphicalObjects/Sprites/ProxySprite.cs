@@ -2,7 +2,7 @@
 
 namespace SpaceInvaders.GraphicalObjects
 {
-    class ProxySprite : baseSprite
+    internal sealed class ProxySprite : baseSprite
     {
         private GameSprite pSprite;
         //I could add a color here, to override the base sprite color.
@@ -54,7 +54,7 @@ namespace SpaceInvaders.GraphicalObjects
             return pSprite.getAngle();
         }
 
-       override public Azul.Rect getScreenRect()
+        public override Azul.Rect getScreenRect()
         {
             return pSprite.getScreenRect();
         }

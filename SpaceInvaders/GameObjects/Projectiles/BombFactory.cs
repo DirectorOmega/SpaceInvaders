@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace SpaceInvaders.GameObjects.Projectiles
 {
-    class BombFactory
+    internal sealed class BombFactory
     {
         private static BombFactory pInstance;
         private Roller pRollerStrat;
@@ -33,7 +33,7 @@ namespace SpaceInvaders.GameObjects.Projectiles
             BombFactory bf = BombFactory.getInstance();
 
             Bomb toReturn;
-            toReturn = (Bomb)GhostManager.Find(GameObjectTypeEnum.Bomb).detatch();
+            toReturn = (Bomb)GhostManager.Find(GameObjectType.Bomb).Detatch();
             if(toReturn != null)
             {
                 //Debug.Print("GhostManager Returned a Bomb!\n");
@@ -41,7 +41,7 @@ namespace SpaceInvaders.GameObjects.Projectiles
             if (toReturn == null)
             {
                 toReturn = new Bomb(SpriteID.Missile);
-                toReturn.setName(GameObjectTypeEnum.Bomb);
+                toReturn.setName(GameObjectType.Bomb);
                 int stratnum = GameStateManager.getRandomNumber(1, 4);
                 switch (stratnum)
                 {
@@ -61,7 +61,7 @@ namespace SpaceInvaders.GameObjects.Projectiles
                 }
             }
             toReturn.ResetCount();
-            toReturn.clearMark();
+            toReturn.ClearMark();
             return toReturn;
         }
     }

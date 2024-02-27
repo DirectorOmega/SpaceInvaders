@@ -1,10 +1,9 @@
 ﻿using SpaceInvaders.CollisionSystem;
 using SpaceInvaders.GameObjects;
-using System.Diagnostics;
 
 namespace SpaceInvaders.Observers
 {
-    class BumperObserver : ColObserver
+    internal sealed class BumperObserver : ColObserver
     {
         public override void dClean()
         {
@@ -16,10 +15,10 @@ namespace SpaceInvaders.Observers
             //Debug.WriteLine("BumperObserver: {0} {1}", this.pSubject.getA(), this.pSubject.getB());
 
             //this.pSubject.getA();
-            Bumper pB = (Bumper)this.pSubject.getA();
-            Ship pS = (Ship)this.pSubject.getB();
+            Bumper pB = (Bumper)this.pSubject.GetA();
+            Ship pS = (Ship)this.pSubject.GetB();
 
-            if((GameObjectTypeEnum) pB.getName() == GameObjectTypeEnum.LeftBumper)
+            if((GameObjectType) pB.getName() == GameObjectType.LeftBumper)
             {
                 pS.incrementX(pS.getSpeed());
                 pS.SetMvState(ShipManager.eMvState.RightOnly);

@@ -3,7 +3,7 @@ using SpaceInvaders.Manager;
 
 namespace SpaceInvaders.GraphicalObjects
 {
-    class GameSpriteManager : GSMan
+    internal sealed class GameSpriteManager : GSMan
     {
         private static GameSpriteManager pInstance;
         private static GameSprite poRefSprite = new GameSprite();

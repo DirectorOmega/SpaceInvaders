@@ -3,7 +3,7 @@ using SpaceInvaders.GraphicalObjects;
 
 namespace SpaceInvaders.GameObjects
 {
-    class Topwall : GameObject
+    internal sealed class Topwall : GameObject
     {
         public Topwall(SpriteID id, float posX = 0, float posY = 0) : base(id, posX, posY)
         {

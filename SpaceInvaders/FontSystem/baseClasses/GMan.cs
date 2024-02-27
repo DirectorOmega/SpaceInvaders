@@ -12,7 +12,6 @@ namespace SpaceInvaders.FontSystem
 
         public GMan(int numStart, int deltaAdd): base(numStart,deltaAdd)
         {
-
         }
     }
 }

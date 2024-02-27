@@ -1,18 +1,8 @@
-﻿using System;
-
-
-namespace SpaceInvaders.GameObjects.Player.PlayerStates
+﻿namespace SpaceInvaders.GameObjects.Player.PlayerStates
 {
-    class NullMiState : MissileState
+    internal sealed class NullMiState : MissileState
     {
-        public override void Handle(Ship pShip)
-        {
-            
-        }
-
-        public override void ShootMissile(Ship pShip)
-        {
-
-        }
+        public override void Handle(Ship pShip) { }
+        public override void ShootMissile(Ship pShip) { }
     }
 }

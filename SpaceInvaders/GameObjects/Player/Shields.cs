@@ -5,11 +5,11 @@ using System.Diagnostics;
 
 namespace SpaceInvaders.GameObjects
 {
-    class ShieldRoot : GameObject
+    internal sealed class ShieldRoot : GameObject
     {
         public ShieldRoot(SpriteID nullSprite, float posX, float posY) : base(nullSprite, posX, posY)
         {
-            this.getCollisionObject().getColSprite().setColor(255.0f, 255.0f, 0.0f);
+            this.            CollisionObject.GetColSprite().setColor(255.0f, 255.0f, 0.0f);
         }
 
         public override void Update()
@@ -56,7 +56,7 @@ namespace SpaceInvaders.GameObjects
             else
             {
                 this.setCoords(-41, -41);
-                this.getCollisionObject().getColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);
+                this.                CollisionObject.GetColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);
             }
             UpdateColObj();
         }
@@ -66,20 +66,21 @@ namespace SpaceInvaders.GameObjects
             GameObject r = (GameObject)this.getChild();
             if (r != null)
             {
-                CollisionRect ColTotal = this.getCollisionObject().getColRect();
-                ColTotal.Set(r.getCollisionObject().getColRect());
+                CollisionRect ColTotal = this.CollisionObject.GetColRect();
+                ColTotal.Set(r.CollisionObject.GetColRect());
 
                 while (null != r)
                 {
-                    ColTotal.Union(r.getCollisionObject().getColRect());
+                    ColTotal.Union(r.CollisionObject.GetColRect());
 
                     r = (GameObject)r.getSibling();
                 }
 
-                this.getCollisionObject().getColRect().Set(ColTotal);
+                this.
+                CollisionObject.GetColRect().Set(ColTotal);
             }
-            this.x = this.poColObj.getColRect().x;
-            this.y = this.poColObj.getColRect().y;
+            this.x = this.poColObj.GetColRect().x;
+            this.y = this.poColObj.GetColRect().y;
         }
 
         public override void Accept(ColVistor other)
@@ -122,7 +123,7 @@ namespace SpaceInvaders.GameObjects
     {
         public Shield(SpriteID nullSprite, float posX, float posY) : base(nullSprite, posX, posY)
         {
-            this.getCollisionObject().getColSprite().setColor(0.0f, 255.0f, 0.0f);
+            this.            CollisionObject.GetColSprite().setColor(0.0f, 255.0f, 0.0f);
         }
 
         public override void Update()
@@ -176,20 +177,21 @@ namespace SpaceInvaders.GameObjects
             GameObject r = (GameObject)this.getChild();
             if (r != null)
             {
-                CollisionRect ColTotal = this.getCollisionObject().getColRect();
-                ColTotal.Set(r.getCollisionObject().getColRect());
+                CollisionRect ColTotal = this.CollisionObject.GetColRect();
+                ColTotal.Set(r.CollisionObject.GetColRect());
 
                 while (null != r)
                 {
-                    ColTotal.Union(r.getCollisionObject().getColRect());
+                    ColTotal.Union(r.CollisionObject.GetColRect());
 
                     r = (GameObject)r.getSibling();
                 }
 
-                this.getCollisionObject().getColRect().Set(ColTotal);
+                this.
+                CollisionObject.GetColRect().Set(ColTotal);
             } 
-            this.x = this.poColObj.getColRect().x;
-            this.y = this.poColObj.getColRect().y;
+            this.x = this.poColObj.GetColRect().x;
+            this.y = this.poColObj.GetColRect().y;
             //Debug.Print("Shield Rect x{0},y{1},w{2},h{3}", this.poColObj.getColRect().x, this.poColObj.getColRect().y, this.poColObj.getColRect().width, this.poColObj.getColRect().height);
 
         }
@@ -243,7 +245,7 @@ namespace SpaceInvaders.GameObjects
     {
         public ShieldColumn(SpriteID id, float posX = 0, float posY = 0) : base(id, posX, posY)
         {
-            this.getCollisionObject().getColSprite().setColor(0.0f, 0.0f, 255.0f);
+            this.            CollisionObject.GetColSprite().setColor(0.0f, 0.0f, 255.0f);
         }
 
         public override void Remove()
@@ -328,22 +330,22 @@ namespace SpaceInvaders.GameObjects
             GameObject r = (GameObject)this.getChild();
             if (null != r)
             {
-                CollisionRect ColTotal = this.getCollisionObject().getColRect();
-                ColTotal.Set(r.getCollisionObject().getColRect());
+                CollisionRect ColTotal = this.CollisionObject.GetColRect();
+                ColTotal.Set(r.CollisionObject.GetColRect());
 
                 r = (GameObject)r.getSibling();
 
                 while (null != r)
                 {
-                    ColTotal.Union(r.getCollisionObject().getColRect());
+                    ColTotal.Union(r.CollisionObject.GetColRect());
 
                     r = (GameObject)r.getSibling();
                 }
-                this.getCollisionObject().getColRect().Set(ColTotal);
+                this.                CollisionObject.GetColRect().Set(ColTotal);
             } 
 
-            this.x = this.poColObj.getColRect().x;
-            this.y = this.poColObj.getColRect().y;
+            this.x = this.poColObj.GetColRect().x;
+            this.y = this.poColObj.GetColRect().y;
 
           //  Debug.Print("Column Rect x{0},y{1},w{2},h{3}",this.poColObj.getColRect().x,this.poColObj.getColRect().y,this.poColObj.getColRect().width,this.poColObj.getColRect().height);
         }

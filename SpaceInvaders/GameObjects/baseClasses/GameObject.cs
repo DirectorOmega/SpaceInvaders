@@ -6,58 +6,32 @@ namespace SpaceInvaders.GameObjects
 {
     abstract class GameObject : ColVistor
     {
-        private GameObjectTypeEnum name;
+        private GameObjectType name;
         protected float x, y;
         protected CollisionObject poColObj;
         //private baseSprite pSprite;
         private ProxySprite pSprite;
-        private bool MarkedforDeath;
+        private bool MarkedForDeath;
 
         public void ActivateCollisionSprite()
         {
             Debug.Assert(this.poColObj != null);
             Debug.Assert(this.pSprite != null);
-            SpriteBatchManager.Find(SpriteBatchID.CBox).Attach(poColObj.getColSprite());
+            SpriteBatchManager.Find(SpriteBatchID.CBox).Attach(poColObj.GetColSprite());
             //pSprite.getSBNode().getSBNM().Attach(poColObj.getColSprite());
-            this.getCollisionObject().getColRect().x = this.x;
-            this.getCollisionObject().getColRect().y = this.y;
-
+            //pSprite.getSBNode().getSBNM().Attach(poColObj.getColSprite());
+            CollisionObject.GetColRect().x = x;
+            CollisionObject.GetColRect().y = y;
         }
 
-        public void markForDeath()
-        {
-            MarkedforDeath = true;
-        }
+        public void MarkForDeath() => MarkedForDeath = true;
+        public void ClearMark() => MarkedForDeath = false;
+        public bool IsMarked() => MarkedForDeath;
+        public CollisionObject CollisionObject => poColObj;
+        override public System.Enum getName() => name;
 
-        public void clearMark()
-        {
-            MarkedforDeath = false;
-        }
-
-        public bool getMarked()
-        {
-            return MarkedforDeath;
-        }
-
-        public CollisionObject getCollisionObject()
-        {
-            return poColObj;
-        }
-
-        override public System.Enum getName()
-        {
-            return name;
-        }
-
-        public float getX()
-        {
-            return x;
-        }
-
-        public float getY()
-        {
-            return y;
-        }
+        public float GetX() => x;
+        public float getY() => y;
 
         public GameObject(SpriteID id, float posX = 0.0f, float posY = 0.0f)
         {
@@ -70,11 +44,10 @@ namespace SpaceInvaders.GameObjects
             pSprite = ProxyManager.Add(GameSpriteManager.Find(id));
             Debug.Assert(pSprite != null);
             poColObj = new CollisionObject(pSprite);
-            MarkedforDeath = false;
-
+            MarkedForDeath = false;
         }
 
-        public void setName(GameObjectTypeEnum n)
+        public void setName(GameObjectType n)
         { name = n; }
 
         //public void setParentNode(GameObjectNode pPNode)
@@ -92,27 +65,25 @@ namespace SpaceInvaders.GameObjects
         //    return pSprite;
         //}
 
-        public baseSprite getPSprite()
-        {
-            return pSprite;
-        }
+        public baseSprite getPSprite() => pSprite;
 
         public virtual void Update()
         {
-            Debug.Assert(this.pSprite != null);
+            Debug.Assert(pSprite != null);
             pSprite.setCoords(x, y);
-            Debug.Assert(this.poColObj != null);
-            this.poColObj.UpdatePos(this.x, this.y);
+            Debug.Assert(poColObj != null);
+            poColObj.UpdatePos(x, y);
             // this.poColObj.pColSprite.Update();
         }
 
         public void dClean()
         {
-            name = GameObjectTypeEnum.Undef;
+            name = GameObjectType.Undef;
             x = 0f;
             y = 0f;
             cClean();
         }
+
         //bad smell
         public virtual void incrementX(float deltaX)
         {
@@ -146,15 +117,14 @@ namespace SpaceInvaders.GameObjects
         public virtual void Remove()
         {
             //Remove from SpriteBatch
-            Debug.Assert(this.pSprite != null);
-            Debug.Assert(this.pSprite.getSBNode() != null);
+            Debug.Assert(pSprite != null);
+            Debug.Assert(pSprite.getSBNode() != null);
 
             pSprite.getSBNode().RemoveSelf();
-            poColObj.getColSprite().getSBNode().RemoveSelf();
+            poColObj.GetColSprite().getSBNode().RemoveSelf();
 
             GameObjectManager.Remove(this);
             GhostManager.Attach(this);
         }
-
     }
 }

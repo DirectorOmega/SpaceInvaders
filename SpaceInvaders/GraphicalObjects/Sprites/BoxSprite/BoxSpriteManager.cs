@@ -3,7 +3,7 @@ using SpaceInvaders.Manager;
 
 namespace SpaceInvaders.GraphicalObjects
 {
-    class BoxSpriteManager : BSMan
+    internal sealed class BoxSpriteManager : BSMan
     {
         private static BoxSpriteManager pInstance;
         private static BoxSprite poRef = new BoxSprite();

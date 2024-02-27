@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics;
 
-
 namespace SpaceInvaders.InputSystem
 {
-    class InputSubject
+    internal sealed class InputSubject
     {
         public void Attach(InputObserver observer)
         {

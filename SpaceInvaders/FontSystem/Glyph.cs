@@ -8,7 +8,6 @@ namespace SpaceInvaders.FontSystem
         public enum Name
         {
             Consolas36pt,
-
             NullObject,
             Uninitialized,
             InvadersText
@@ -17,10 +16,10 @@ namespace SpaceInvaders.FontSystem
         public Glyph()
             : base()
         {
-            this.name = Name.Uninitialized;
-            this.pTexture = null;
-            this.pSubRect = new Azul.Rect();
-            this.key = 0;
+            name = Name.Uninitialized;
+            pTexture = null;
+            pSubRect = new Azul.Rect();
+            key = 0;
         }
 
         ~Glyph()
@@ -42,9 +41,7 @@ namespace SpaceInvaders.FontSystem
             Debug.Assert(this.pTexture != null);
 
             this.pSubRect.Set(x, y, width, height);
-
             this.key = key;
-
         }
 
         override public void dClean()
@@ -61,13 +58,9 @@ namespace SpaceInvaders.FontSystem
             Debug.WriteLine("\t\tname: {0} ({1})", this.name, this.GetHashCode());
             Debug.WriteLine("\t\t\tkey: {0}", this.key);
             if (this.pTexture != null)
-            {
-                Debug.WriteLine("\t\t   pTexture: {0}", this.pTexture.getName());
-            }
+                Debug.WriteLine("\t\t   pTexture: {0}", this.pTexture.GetName());
             else
-            {
                 Debug.WriteLine("\t\t   pTexture: null");
-            }
             Debug.WriteLine("\t\t      pRect: {0}, {1}, {2}, {3}", this.pSubRect.x, this.pSubRect.y, this.pSubRect.width, this.pSubRect.height);
         }
 
@@ -80,7 +73,7 @@ namespace SpaceInvaders.FontSystem
         public Azul.Texture GetAzulTexture()
         {
             Debug.Assert(this.pTexture != null);
-            return this.pTexture.getTex();
+            return this.pTexture.GetTex();
             //return this.pTexture.getAzulTexture();
         }
 

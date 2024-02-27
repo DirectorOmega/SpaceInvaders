@@ -4,7 +4,7 @@ using SpaceInvaders.GameObjects;
 
 namespace SpaceInvaders.CollisionSystem
 {
-    class CollisionPairManager : CPMan
+    internal sealed class CollisionPairManager : CPMan
     {
         private static CollisionPairManager pInstance;
         private static CollisionPair poRef;
@@ -13,15 +13,14 @@ namespace SpaceInvaders.CollisionSystem
         public static void ClearStored()
         {
             CollisionPairManager pMan = CollisionPairManager.getInstance();
-            CollisionPair cur;
-            cur = (CollisionPair)pMan.baseGetPAHead();
-            //this check because singleplayer doesn't store it's state.
+            CollisionPair cur = (CollisionPair)pMan.baseGetPAHead();
+
+            //this check because single player doesn't store it's state.
             if (cur != null)
             {
-                if (cur.getName() == CollisionPairName.reserveList)
+                if (cur.GetName() == CollisionPairName.reserveList)
                 {
                     pMan.baseSetPlayerB();
-
                     CollisionPairManager.Clear();
                 }
                 else
@@ -33,26 +32,11 @@ namespace SpaceInvaders.CollisionSystem
             pMan.nullHeads();
         }
 
-        public static void StorePlayerA()
-        {
-            CollisionPairManager.getInstance().baseStorePlayerA();
-        }
+        public static void StorePlayerA() => CollisionPairManager.getInstance().baseStorePlayerA();
+        public static void SetPlayerA() => CollisionPairManager.getInstance().baseSetPlayerA();
 
-
-        public static void SetPlayerA()
-        {
-            CollisionPairManager.getInstance().baseSetPlayerA();
-        }
-
-        public static void StorePlayerB()
-        {
-            CollisionPairManager.getInstance().baseStorePlayerB();
-        }
-
-        public static void SetPlayerB()
-        {
-            CollisionPairManager.getInstance().baseSetPlayerB();
-        }
+        public static void StorePlayerB() => CollisionPairManager.getInstance().baseStorePlayerB();
+        public static void SetPlayerB() => CollisionPairManager.getInstance().baseSetPlayerB();
 
         private CollisionPairManager(int numStart = 5, int deltaAdd = 3)
             : base(numStart, deltaAdd)
@@ -60,13 +44,10 @@ namespace SpaceInvaders.CollisionSystem
             poRef = new CollisionPair();
         }
 
-
         public static CollisionPairManager getInstance()
         {
             if (pInstance == null)
-            {
                 CollisionPairManager.Create();
-            }
             return pInstance;
         }
 
@@ -101,7 +82,6 @@ namespace SpaceInvaders.CollisionSystem
 
                 // advance to next
                 pColPair = (CollisionPair)pColPair.pNext;
-
             }
         }
 
@@ -156,13 +136,11 @@ namespace SpaceInvaders.CollisionSystem
 
             return pNode;
         }
-
-
 #else
         public static CollisionPair Add(CollisionPairName Name, GameObject treeRootA, GameObject treeRootB)
         {
             CollisionPair pNode = (CollisionPair) CollisionPairManager.getInstance().baseAdd();
-            pNode.Set(Name, treerootA,TreeRootB);
+            pNode.Set(Name, treeRootA, treeRootB);
             return pNode;
         }
 
@@ -200,7 +178,7 @@ namespace SpaceInvaders.CollisionSystem
 
         private static CollisionPair toFind(CollisionPairName name)
         {
-            poRef.setName(name);
+            poRef.SetName(name);
             return poRef;
         }
 
@@ -212,11 +190,7 @@ namespace SpaceInvaders.CollisionSystem
             CollisionPair left = (CollisionPair)pLinkA;
             CollisionPair right = (CollisionPair)pLinkB;
 
-            if (left.getName() == right.getName())
-            {
-                return true;
-            }
-            return false;
+            return left.GetName() == right.GetName();
         }
 
         protected override void dClearNode(DLink pLink)

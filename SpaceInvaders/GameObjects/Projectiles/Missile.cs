@@ -4,17 +4,12 @@ using SpaceInvaders.GraphicalObjects;
 namespace SpaceInvaders.GameObjects
 {
 
-    class Missile : GameObject
+    internal sealed class Missile : GameObject
     {
         float speed;
         public Missile(SpriteID id, float posX = 0, float posY = 0) : base(id, posX, posY)
         {
             speed = 12.0f;
-        }
-
-        ~Missile()
-        {
-
         }
 
         //public override void Remove()

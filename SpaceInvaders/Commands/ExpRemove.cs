@@ -1,23 +1,14 @@
 ﻿using SpaceInvaders.GraphicalObjects;
 
-
 namespace SpaceInvaders.Commands
 {
-    class ExpRemove : Command
+    internal sealed class ExpRemove : Command
     {
         ProxySprite toRemove;
-        private ExpRemove()
-        {
-            
-        }
+        private ExpRemove() { }
 
-        public ExpRemove(ProxySprite p)
-        {
-            toRemove = p;
-        }
-        public override void execute(float deltaTime)
-        {
-            toRemove.getSBNode().RemoveSelf();
-        }
+        public ExpRemove(ProxySprite p) => toRemove = p;
+        public override void execute(float deltaTime) 
+            => toRemove.getSBNode().RemoveSelf();
     }
 }

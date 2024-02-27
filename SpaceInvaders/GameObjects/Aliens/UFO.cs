@@ -4,54 +4,36 @@ using SpaceInvaders.GraphicalObjects;
 
 namespace SpaceInvaders.GameObjects
 {
-    class UFO : Alien
+    internal sealed class UFO : Alien
     {
         IrrKlang.ISoundSource life;
         IrrKlang.ISound lifeHandle;
 
-        public UFO(SpriteID id, float posX = 0, float posY = 0) : base(id, posX, posY)
-        {
-           // startSound();
-        }
-
+        public UFO(SpriteID id, float posX = 0, float posY = 0)
+            : base(id, posX, posY) { }
 
         public void startSound()
         {
-            life = SndEngine.getSoundSource("ufo_highpitch.wav");
+            life = SndEngine.GetSoundSource("ufo_highpitch.wav");
             lifeHandle = SndEngine.Play2D(life);
             lifeHandle.Looped = true;
         }
 
-        public void stopSound()
-        {
-            lifeHandle.Stop();
-        }
+        public void StopSound() => lifeHandle.Stop();
 
         public override void Update()
         {
             incrementX(-2.0f);
             base.Update();
-           
         }
 
-        public override void Accept(ColVistor other)
-        {
-            other.VisitUFO(this);
-        }
-
-        public override void VisitMissile(Missile m)
-        {
-            Reactions.Reaction(m, this);
-        }
-
-        public override void VisitSidewall(Sidewall s)
-        {
-            Reactions.Reaction(s, this);
-        }
+        public override void Accept(ColVistor other) => other.VisitUFO(this);
+        public override void VisitMissile(Missile m) => Reactions.Reaction(m, this);
+        public override void VisitSidewall(Sidewall s) => Reactions.Reaction(s, this);
 
         public override void Remove()
         {
-            stopSound();
+            StopSound();
             base.Remove();
         }
 
@@ -63,6 +45,5 @@ namespace SpaceInvaders.GameObjects
         {
             return 100;
         }
-
     }
 }

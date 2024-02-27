@@ -1,12 +1,11 @@
-﻿using System;
-using SpaceInvaders.Manager;
+﻿using SpaceInvaders.Manager;
 using System.Diagnostics;
 using SpaceInvaders.GraphicalObjects;
 using System.Xml;
 
 namespace SpaceInvaders.FontSystem
 {
-    class GlyphManager : GMan
+    internal sealed class GlyphManager : GMan
     {
         //----------------------------------------------------------------------
         // Constructor
@@ -66,7 +65,7 @@ namespace SpaceInvaders.FontSystem
 
         public static void AddXml(Glyph.Name glyphName, String assetName, TextureID textName)
         {
-            System.Xml.XmlTextReader reader = new XmlTextReader(assetName);
+            XmlTextReader reader = new XmlTextReader(assetName);
 
             int key = -1;
             int x = -1;
@@ -182,14 +181,7 @@ namespace SpaceInvaders.FontSystem
             Glyph pDataA = (Glyph)pLinkA;
             Glyph pDataB = (Glyph)pLinkB;
 
-            Boolean status = false;
-
-            if (pDataA.name == pDataB.name && pDataA.key == pDataB.key)
-            {
-                status = true;
-            }
-
-            return status;
+            return pDataA.name == pDataB.name && pDataA.key == pDataB.key;
         }
 
         override protected DLink dCreateNode()
@@ -222,7 +214,6 @@ namespace SpaceInvaders.FontSystem
         {
             // Safety - this forces users to call Create() first before using class
             Debug.Assert(pInstance != null);
-
             return pInstance;
         }
 

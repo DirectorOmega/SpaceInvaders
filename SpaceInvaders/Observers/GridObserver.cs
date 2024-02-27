@@ -1,12 +1,10 @@
 ﻿using SpaceInvaders.CollisionSystem;
 using SpaceInvaders.GameObjects;
-using System.Diagnostics;
 
 namespace SpaceInvaders.Observers
 {
-    class GridObserver : ColObserver
+    internal sealed class GridObserver : ColObserver
     {
-
         public GridObserver()
         {
 
@@ -22,7 +20,7 @@ namespace SpaceInvaders.Observers
             //Debug.WriteLine("GridObserver: {0} {1}", this.pSubject.getA(), this.pSubject.getB());
 
             // OK do some magic
-            Grid pGrid = (Grid)this.pSubject.getA();
+            Grid pGrid = (Grid)this.pSubject.GetA();
 
             pGrid.reverse();
             pGrid.MoveGrid();

@@ -2,17 +2,10 @@
 
 namespace SpaceInvaders.InputSystem
 {
-    class ShootObserver : InputObserver
+    internal sealed class ShootObserver : InputObserver
     {
         //bad smell probably want to push up into inputObserver
-        public override void dClean()
-        {
-            
-        }
-
-        public override void Notify()
-        {
-            ShipManager.GetShip().ShootMissile();
-        }
+        public override void dClean() { }
+        public override void Notify() => ShipManager.GetShip().ShootMissile();
     }
 }

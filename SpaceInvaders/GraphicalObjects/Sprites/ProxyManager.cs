@@ -3,7 +3,7 @@ using SpaceInvaders.Manager;
 
 namespace SpaceInvaders.GraphicalObjects
 {
-    class ProxyManager : PMan
+    internal sealed class ProxyManager : PMan
     {
         private static ProxyManager pInstance;
         private static ProxySprite poRefSprite = new ProxySprite();

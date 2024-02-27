@@ -1,19 +1,10 @@
-﻿
-using System;
-
-namespace SpaceInvaders.GameObjects
+﻿namespace SpaceInvaders.GameObjects
 {
-    class MvRightOnly : MvState
+    internal sealed class MvRightOnly : MvState
     {
-        public override void Handle(Ship pShip)
-        {
-            throw new NotImplementedException();
-        }
+        public override void Handle(Ship pShip) { }
 
-        public override void moveLeft(Ship pShip)
-        {
-           // pShip.incrementX(-pShip.getSpeed());
-        }
+        public override void moveLeft(Ship pShip) {}
 
         public override void moveRight(Ship pShip)
         {

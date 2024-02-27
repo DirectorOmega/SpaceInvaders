@@ -2,10 +2,8 @@
 {
     public enum FontName
     {
-     
         GameOverLabel,
         Test,
-
         NullObject,
         Uninitialized,
         TopBar,
@@ -28,6 +26,5 @@
         CrabLine,
         SquidLine,
         AttractPush
-    };
+    }
 }
-

@@ -1,27 +1,21 @@
 ﻿using SpaceInvaders.GameObjects;
 
-
 namespace SpaceInvaders.Commands
 {
-
-    class UFODropBombCMD: Command
+    internal sealed class UFODropBombCMD : Command
     {
         UFORoot dropper;
 
-        public UFODropBombCMD(UFORoot u)
-        {
-            dropper = u;
-        }
+        public UFODropBombCMD(UFORoot u) => dropper = u;
 
         public override void execute(float deltaTime)
         {
             if (null != dropper)
-            {
                 dropper.DropBomb();
-            }
         }
     }
-    class DropBombCMD : Command
+    
+    internal sealed class DropBombCMD : Command
     {
         //Alien dropper;
         //BombRoot br;
@@ -30,15 +24,13 @@ namespace SpaceInvaders.Commands
         public DropBombCMD(Column c)
         {
             dropper = c;
-           // this.br = br;
+            // this.br = br;
         }
 
         public override void execute(float deltaTime)
         {
-            if(null != dropper)
-            {
+            if (null != dropper)
                 dropper.DropBomb();
-            }
         }
     }
 }

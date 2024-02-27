@@ -1,6 +1,6 @@
 ﻿namespace SpaceInvaders.GameState
 {
-    class SndEngine
+    internal sealed class SndEngine
     {
         private static SndEngine pInstance;
         private IrrKlang.ISoundEngine sndEngine;
@@ -14,9 +14,7 @@
         public static SndEngine getInstance()
         {
             if(pInstance == null)
-            {
                 pInstance = new SndEngine();
-            }
             return pInstance;
         }
 
@@ -26,20 +24,8 @@
             return pE.sndEngine;
         }
 
-        public static IrrKlang.ISoundSource getSoundSource(string filepath)
-        {
-           return  SndEngine.getIKEngine().GetSoundSource(filepath,true);
-        }
-
-        public static IrrKlang.ISound Play2D(IrrKlang.ISoundSource source)
-        {
-            return getIKEngine().Play2D(source, false, false, false);
-        }
-
-        public static void Update()
-        {
-            getIKEngine().Update();
-        }
-
+        public static IrrKlang.ISoundSource GetSoundSource(string filepath) => SndEngine.getIKEngine().GetSoundSource(filepath, true);
+        public static IrrKlang.ISound Play2D(IrrKlang.ISoundSource source) => getIKEngine().Play2D(source, false, false, false);
+        public static void Update() => getIKEngine().Update();
     }
 }

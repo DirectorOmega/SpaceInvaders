@@ -1,11 +1,9 @@
-﻿
-using SpaceInvaders.FontSystem;
-using System;
+﻿using SpaceInvaders.FontSystem;
 using System.Diagnostics;
 
 namespace SpaceInvaders.GraphicalObjects
 {
-    class FontSprite : baseSprite
+    internal sealed class FontSprite : baseSprite
     {
         public Glyph.Name GetGlyphName()
         {
@@ -44,6 +42,7 @@ namespace SpaceInvaders.GraphicalObjects
             this.pColor = null;
             this.pMessage = null;
         }
+
         public void Set(FontName name, String pMessage, Glyph.Name glyphName, float xStart, float yStart)
         {
             Debug.Assert(pMessage != null);

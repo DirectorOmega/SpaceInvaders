@@ -211,7 +211,7 @@ namespace SpaceInvaders.Manager
         }
 
 
-        // theese are just here to allow you to ensure that the length of the list is what is reported by the number.
+        // these are just here to allow you to ensure that the length of the list is what is reported by the number.
         //mainly because I wanna automate test cases so I don't want to have to look to make sure the list is properly linked.
         //THESE ARE NEVER FOR CALLING IN RELEASE 
 

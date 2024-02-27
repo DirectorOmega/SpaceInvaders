@@ -1,12 +1,10 @@
-﻿using SpaceInvaders.InputSystem;
-using SpaceInvaders.FontSystem;
+﻿using SpaceInvaders.FontSystem;
 using SpaceInvaders.Time;
 using SpaceInvaders.Commands;
-using SpaceInvaders.GraphicalObjects;
 
 namespace SpaceInvaders.GameState
 {
-    class StateIntro : GameState
+    internal sealed class StateIntro : GameState
     {
 
         Font Line1, Line2, Line3, Line4;

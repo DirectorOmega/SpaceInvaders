@@ -3,37 +3,30 @@ using System.Diagnostics;
 
 namespace SpaceInvaders.GameObjects
 {
-    class GhostTypeNodeManager : GTNMan
+    internal sealed class GhostTypeNodeManager : GTNMan
     {
-        private GameObjectTypeEnum Name;
+        private GameObjectType Name;
         private GhostNode poSpriteBatchRef = new GhostNode();
 
-        public GhostTypeNodeManager()
-        {
-            Name = GameObjectTypeEnum.Undef;
-        }
-        public GhostTypeNodeManager(GameObjectTypeEnum name)
-        {
-            Name = name;
-        }
+        public GhostTypeNodeManager() => Name = GameObjectType.Undef;
+        public GhostTypeNodeManager(GameObjectType name) => Name = name;
 
         public void Attach(GameObject toAttach)
         {
             GhostNode pNode = (GhostNode)this.baseAdd();
             pNode.Set(toAttach);
         }
-        //badsmell multiple return
+
         public GameObject Detatch()
         {
             GhostNode toReturn = (GhostNode)getActiveHead();
             if (toReturn != null)
             {
                 baseRemove(toReturn);
-                return toReturn.getGameObject();
+                return toReturn.GetGameObject();
             }
 
             return null;
-        
         }
 
         //bad smell, doesn't do anything currently.
@@ -49,26 +42,16 @@ namespace SpaceInvaders.GameObjects
             GhostNode left = (GhostNode)pLinkA;
             GhostNode right = (GhostNode)pLinkB;
 
-            if (left.getName() == right.getName())
-            {
-                return true;
-            }
-            return false;
+           return left.GetName() == right.GetName();
         }
 
-        internal void Set(GameObjectTypeEnum id)
-        {
-            Name = id;   
-        }
+        internal void Set(GameObjectType id) => Name = id;
 
         protected override DLink dCreateNode()
         {
             DLink newNode = new GhostNode();
             Debug.Assert(newNode != null);
-
             return newNode;
         }
-
     }
-
 }

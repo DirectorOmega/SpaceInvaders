@@ -18,10 +18,7 @@ namespace SpaceInvaders.CollisionSystem
             pColPair.NotifyListeners();
         }
 
-        internal static void Reaction(Sidewall s, UFORoot ur)
-        {
-            CollisionPair.Collide(s, (GameObject) ur.getChild());
-        }
+        internal static void Reaction(Sidewall s, UFORoot ur) => CollisionPair.Collide(s, (GameObject)ur.getChild());
 
         internal static void Reaction(Sidewall s, UFO u)
         {
@@ -52,12 +49,11 @@ namespace SpaceInvaders.CollisionSystem
             if (null == gNoiseRoot.getChild())
             {
                 gNoiseRoot.setCoords(-42, -42);
-                gNoiseRoot.getCollisionObject().getColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);
+                gNoiseRoot.                CollisionObject.GetColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);
             }
             if (null == shieldRoot.getChild())
             {
-                
-                shieldRoot.getCollisionObject().getColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);
+                shieldRoot.                CollisionObject.GetColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);
                 shieldRoot.setCoords(-41, -41);
             }
         }
@@ -81,14 +77,9 @@ namespace SpaceInvaders.CollisionSystem
             //{
             //    shield.Remove();
             //}
-
         }
 
-        internal static void Reaction(GNoisePoint gnp, Shield shield)
-        {
-            CollisionPair.Collide(gnp, (GameObject)shield.getChild());
-
-        }
+        internal static void Reaction(GNoisePoint gnp, Shield shield) => CollisionPair.Collide(gnp, (GameObject)shield.getChild());
 
         internal static void Reaction(GNoisePoint gnp, ShieldColumn shieldColumn)
         {
@@ -107,7 +98,6 @@ namespace SpaceInvaders.CollisionSystem
             pColPair.NotifyListeners();
         }
 
-
         internal static void Reaction(BombRoot br, BottomWall bw)
         {
             CollisionPair.Collide((GameObject)br.getChild(), bw);
@@ -115,7 +105,7 @@ namespace SpaceInvaders.CollisionSystem
             if (null == br.getChild())
             {
                 br.setCoords(-30, -30);
-                br.getCollisionObject().getColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);
+                br.                CollisionObject.GetColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);
              
             }
         }
@@ -126,7 +116,7 @@ namespace SpaceInvaders.CollisionSystem
             if(null == br.getChild())
             {
                 br.setCoords(-30, -30);
-                br.getCollisionObject().getColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);  
+                br.                CollisionObject.GetColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);  
             }
         }
 
@@ -147,10 +137,8 @@ namespace SpaceInvaders.CollisionSystem
             Debug.Assert(pColPair != null);
             pColPair.SetCollision(b, bWall);
             pColPair.NotifyListeners();
-
         }
 
-      
         internal static void Reaction(BombRoot br, Ship ship)
         {
             CollisionPair.Collide((GameObject)br.getChild(), ship);
@@ -159,25 +147,19 @@ namespace SpaceInvaders.CollisionSystem
             {
                 //br.Remove();
                 br.setCoords(-30, -30);
-                br.getCollisionObject().getColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);
+                br.                CollisionObject.GetColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);
                 // br.setCoords(-30, -30);
             }
         }
 
-        internal static void Reaction(Bomb b, ShieldRoot shieldRoot)
-        {
-            CollisionPair.Collide(b, (GameObject)shieldRoot.getChild());
-        }
+        internal static void Reaction(Bomb b, ShieldRoot shieldRoot) 
+            => CollisionPair.Collide(b, (GameObject)shieldRoot.getChild());
 
-        internal static void Reaction(Grid g , ShieldRoot sr)
-        {
-            CollisionPair.Collide((GameObject)sr.getChild(), g);
-        }
+        internal static void Reaction(Grid g, ShieldRoot sr) 
+            => CollisionPair.Collide((GameObject)sr.getChild(), g);
 
-        internal static void Reaction( Grid g , Shield s)
-        {
-            CollisionPair.Collide((GameObject)g.getChild(), s);
-        }
+        internal static void Reaction(Grid g, Shield s) 
+            => CollisionPair.Collide((GameObject)g.getChild(), s);
 
         //colliding with columns because the bottom of hte column is what will erase a shield anyway
         internal static void Reaction(Column c, Shield s)
@@ -191,10 +173,8 @@ namespace SpaceInvaders.CollisionSystem
         //    CollisionPair.Collide(a, (GameObject)s.getChild());
         //}
 
-        internal static void Reaction(Column c,ShieldColumn sc)
-        {
-            CollisionPair.Collide(c,(GameObject) sc.getChild());
-        }
+        internal static void Reaction(Column c, ShieldColumn sc) 
+            => CollisionPair.Collide(c, (GameObject)sc.getChild());
 
         internal static void Reaction(Column c, ShieldBrick b)
         {
@@ -211,17 +191,15 @@ namespace SpaceInvaders.CollisionSystem
             {
                 //br.Remove();
                 br.setCoords(-30, -30);
-                br.getCollisionObject().getColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);
+                br.                CollisionObject.GetColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);
             }
             if(null == shieldRoot.getChild())
             {
                 // shieldRoot.Remove();
                 shieldRoot.setCoords(-41, -41);
-                shieldRoot.getCollisionObject().getColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);
+                shieldRoot.                CollisionObject.GetColRect().Set(0.0f, 0.0f, 0.0f, 0.0f);
             }
         }
-
- 
 
         internal static void Reaction(Bomb b, ShieldColumn shieldColumn)
         {
@@ -240,7 +218,6 @@ namespace SpaceInvaders.CollisionSystem
             pColPair.NotifyListeners();
         }
 
-  
         internal static void Reaction(Bomb b, Ship ship)
         {
             CollisionPair pColPair = CollisionPairManager.getActiveColPair();
@@ -294,7 +271,6 @@ namespace SpaceInvaders.CollisionSystem
             pCP.NotifyListeners();
         }
 
-
         internal static void Reaction(Bumper b, Ship s)
         {
             Debug.Assert(b != null);
@@ -305,8 +281,6 @@ namespace SpaceInvaders.CollisionSystem
             pColPair.SetCollision(b, s);
             pColPair.NotifyListeners();
         }
-
-
 
         //TODO: setup a observer for when the grid disappears so I can end the level.
         public static void Reaction(Grid g, Missile m)
@@ -326,7 +300,7 @@ namespace SpaceInvaders.CollisionSystem
             //    c.Remove();
             //}
         }
-        //todo fix ordering on theese I fucked it up.
+        //todo fix ordering on these I fucked it up.
         internal static void Reaction(Missile missile, Octo o)
         {
             CollisionPair pCP = CollisionPairManager.getActiveColPair();
@@ -348,7 +322,6 @@ namespace SpaceInvaders.CollisionSystem
             pCP.NotifyListeners();
         }
 
-
         public static void Reaction(Missile m , Topwall t)
         {
             CollisionPair pColPair = CollisionPairManager.getActiveColPair();
@@ -356,7 +329,5 @@ namespace SpaceInvaders.CollisionSystem
             pColPair.NotifyListeners();
            
         }
-
- 
     }
 }

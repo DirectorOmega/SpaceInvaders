@@ -1,45 +1,45 @@
 ﻿namespace SpaceInvaders.GraphicalObjects
 {
 
-    //TODO: refiine rectangles down to be closer to the sprites
+    //TODO: refine rectangles down to be closer to the sprites
     public static class ISS
     {
         //this is just so I don't have to figure out all the god damn rectangles on the sprite sheet again
         private static Azul.Texture pInvadersTex = new Azul.Texture("Aliens14x14.tga");
 
-            //The texture sheet.
-        public static Azul.Texture getTexture() { return pInvadersTex; }
+        //The texture sheet.
+        public static Azul.Texture GetTexture() => pInvadersTex;
 
         //baddie textures
-        public static Azul.Rect getShieldBrick() { return new Azul.Rect(266.0f, 154.0f, 14.0f, 14.0f); }
+        public static Azul.Rect GetShieldBrick() => new Azul.Rect(266.0f, 154.0f, 14.0f, 14.0f);
 
-        public static Azul.Rect getShieldBrickAdjSize() { return new Azul.Rect(0.0f, 0.0f, 6.0f, 6.0f); }
+        public static Azul.Rect GetShieldBrickAdjSize() => new Azul.Rect(0.0f, 0.0f, 6.0f, 6.0f);
 
-        public static Azul.Rect getSquidF1() { return new Azul.Rect(56f, 28.0f, 168f, 114f); }
+        public static Azul.Rect GetSquidF1() => new Azul.Rect(56f, 28.0f, 168f, 114f);
 
-        public static Azul.Rect getSquidF2() { return new Azul.Rect(56f, 180.0f, 168f, 114f); }
+        public static Azul.Rect GetSquidF2() => new Azul.Rect(56f, 180.0f, 168f, 114f);
 
-        public static Azul.Rect getCrabF1() { return new Azul.Rect(322f, 28.0f, 168f, 114f); }
+        public static Azul.Rect GetCrabF1() => new Azul.Rect(322f, 28.0f, 168f, 114f);
 
-        public static Azul.Rect getCrabF2() { return new Azul.Rect(322f, 180f, 168f, 114f); }
+        public static Azul.Rect GetCrabF2() => new Azul.Rect(322f, 180f, 168f, 114f);
 
-        public static Azul.Rect getOctoF1() { return new Azul.Rect(590f, 28.0f, 168.0f, 114.0f); }
+        public static Azul.Rect GetOctoF1() => new Azul.Rect(590f, 28.0f, 168.0f, 114.0f);
 
-        public static Azul.Rect getOctoF2() { return new Azul.Rect(590f, 180f, 168f, 114f); }
+        public static Azul.Rect GetOctoF2() => new Azul.Rect(590f, 180f, 168f, 114f);
 
-        public static Azul.Rect getAlienTextureSize() { return new Azul.Rect(0f, 0f, 168f, 114f); }
+        public static Azul.Rect GetAlienTextureSize() => new Azul.Rect(0f, 0f, 168f, 114f);
 
-        public static Azul.Rect getAlienAdjSize() { return new Azul.Rect(0f, 100f, 42f, 28.5f); }
-       
-        public static Azul.Rect getAlienExp() { return new Azul.Rect(573f, 489f, 184f, 114f);}
+        public static Azul.Rect GetAlienAdjSize() => new Azul.Rect(0f, 100f, 42f, 28.5f);
 
-        public static Azul.Rect getAlienExpTexSize() { return new Azul.Rect(0.0f, 0.0f, 184.0f, 114.0f);}
-         
-        public static Azul.Rect getAlienExpAdjSize() { return new Azul.Rect(0.0f, 0.0f, 62.0f, 38.0f);}
+        public static Azul.Rect GetAlienExp() => new Azul.Rect(573f, 489f, 184f, 114f);
 
-        public static Azul.Rect getUFO() { return new Azul.Rect(84f, 505f, 224f, 100f);}
+        public static Azul.Rect GetAlienExpTexSize() => new Azul.Rect(0.0f, 0.0f, 184.0f, 114.0f);
 
-        public static Azul.Rect getUFOExp() { return new Azul.Rect(44f, 645f, 293f, 113f);}
+        public static Azul.Rect GetAlienExpAdjSize() => new Azul.Rect(0.0f, 0.0f, 62.0f, 38.0f);
+
+        public static Azul.Rect GetUFO() => new Azul.Rect(84f, 505f, 224f, 100f);
+
+        public static Azul.Rect GetUFOExp() => new Azul.Rect(44f, 645f, 293f, 113f);
 
         public static Azul.Rect getUFOSize() { return new Azul.Rect(0f, 0f, 224f, 100f);}
 

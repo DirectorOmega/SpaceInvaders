@@ -4,14 +4,9 @@ using SpaceInvaders.GameObjects;
 
 namespace SpaceInvaders.Observers
 {
-    class ShipRemoveMissileObserver : ColObserver
+    internal sealed class ShipRemoveMissileObserver : ColObserver
     {
-
-        
-        public override void dClean()
-        {
-          
-        }
+        public override void dClean() { }
 
         public override void Notify()
         {
@@ -21,9 +16,9 @@ namespace SpaceInvaders.Observers
             Missile pMissile = ShipManager.GetMissile();
             //Debug.WriteLine("MissileRemoveObserver: --> delete missile {0}", pMissile);
 
-            if (!pMissile.getMarked())
+            if (!pMissile.IsMarked())
             {
-                pMissile.markForDeath();
+                pMissile.MarkForDeath();
                 //   Delay
                 //TODO: clean up this new
                 ShipRemoveMissileObserver pObserver = new ShipRemoveMissileObserver();
@@ -37,8 +32,7 @@ namespace SpaceInvaders.Observers
             pMissile.setCoords(-50f, -50f);
             pMissile.Update();
             pMissile.Remove();
-            pMissile.clearMark();
-
+            pMissile.ClearMark();
         }
     }
 }

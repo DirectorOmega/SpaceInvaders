@@ -1,6 +1,6 @@
 ﻿namespace SpaceInvaders.GameObjects
 {
-    public enum GameObjectTypeEnum
+    public enum GameObjectType
     {
         Undef, Crab, Octo, Squid, Hero,
         Grid, Column, Missile, Bomb,
