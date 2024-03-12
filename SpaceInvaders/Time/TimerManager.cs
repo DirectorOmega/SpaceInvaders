@@ -23,7 +23,7 @@ namespace SpaceInvaders.Time
             TimerManager t = TimerManager.getInstance();
 
             currTime += gameTime;
-            TimeEvent e = (TimeEvent) t.getActiveHead();
+            TimeEvent e = (TimeEvent) t.GetActiveHead();
             while(e != null)
             {
 
@@ -53,7 +53,7 @@ namespace SpaceInvaders.Time
         internal static void Clear()
         {
             TimerManager t = TimerManager.getInstance();
-            TimeEvent e = (TimeEvent)t.getActiveHead();
+            TimeEvent e = (TimeEvent)t.GetActiveHead();
             TimeEvent ePrev;
             while (e != null)
             {
@@ -77,7 +77,7 @@ namespace SpaceInvaders.Time
         internal static void Clear(TimeEventID eID)
         {
             TimerManager t = TimerManager.getInstance();
-            TimeEvent e = (TimeEvent) t.getActiveHead();
+            TimeEvent e = (TimeEvent) t.GetActiveHead();
             TimeEvent ePrev;
             while (e != null)
             {
@@ -132,7 +132,7 @@ namespace SpaceInvaders.Time
 
         public TimeEvent InSort(TimeEvent te)
         {
-            baseAddSort(te);
+            BaseAddSort(te);
             return te;
         }
 
@@ -184,7 +184,7 @@ namespace SpaceInvaders.Time
             TimerManager mrT = TimerManager.getInstance();
             Debug.Assert(mrT != null);
             TimeEvent target = mrT.toFind(eventID);
-            return (TimeEvent)mrT.baseFind(target);
+            return (TimeEvent)mrT.BaseFind(target);
         }
 
         //for find

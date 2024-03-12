@@ -29,7 +29,7 @@ namespace SpaceInvaders.CollisionSystem
         private CollisionPairName name;
         private GameObject A;
         private GameObject B;
-        private ColSubject poSubject;
+        private readonly ColSubject poSubject;
 
        public CollisionPair()
         {
@@ -98,14 +98,14 @@ namespace SpaceInvaders.CollisionSystem
         public void Attach(ColObserver ob)
         {
             Debug.Assert(null != ob);
-            this.poSubject.Attach(ob);
+            poSubject.Attach(ob);
         }
 
         public void SetCollision(GameObject pObjA, GameObject pObjB)
         {
             Debug.Assert(pObjA != null);
             Debug.Assert(pObjB != null);
-            this.poSubject.setObjects(pObjA, pObjB);
+            poSubject.setObjects(pObjA, pObjB);
         }
 
         public void NotifyListeners() => poSubject.Notify();

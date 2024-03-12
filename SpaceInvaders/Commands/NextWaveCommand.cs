@@ -76,7 +76,7 @@ namespace SpaceInvaders.Commands
 
     class NextWaveCommand : Command
     {
-        private GameState.GameState currentState;
+        private readonly GameState.GameState currentState;
 
         public NextWaveCommand(GameState.GameState currentState) 
             => this.currentState = currentState;

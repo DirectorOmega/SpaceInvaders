@@ -13,14 +13,14 @@ namespace SpaceInvaders.FontSystem
         private GlyphManager(int reserveNum = 3, int reserveGrow = 1)
             : base(reserveNum, reserveGrow)
         {
-            this.pRefNode = (Glyph)this.dCreateNode();
+            pRefNode = (Glyph)dCreateNode();
         }
         ~GlyphManager()
         {
 #if(TRACK_DESTRUCTOR)
             Debug.WriteLine("~GlyphManager():{0}", this.GetHashCode());
 #endif
-            this.pRefNode = null;
+            pRefNode = null;
             GlyphManager.pInstance = null;
         }
 
@@ -56,14 +56,14 @@ namespace SpaceInvaders.FontSystem
         {
             GlyphManager pMan = GlyphManager.privGetInstance();
 
-            Glyph pNode = (Glyph)pMan.baseAdd();
+            Glyph pNode = (Glyph)pMan.BaseAdd();
             Debug.Assert(pNode != null);
 
             pNode.Set(name, key, textName, x, y, width, height);
             return pNode;
         }
 
-        public static void AddXml(Glyph.Name glyphName, String assetName, TextureID textName)
+        public static void AddXml(Glyph.Name glyphName, string assetName, TextureID textName)
         {
             XmlTextReader reader = new XmlTextReader(assetName);
 
@@ -157,7 +157,7 @@ namespace SpaceInvaders.FontSystem
             pMan.pRefNode.name = name;
             pMan.pRefNode.key = key;
 
-            Glyph pData = (Glyph)pMan.baseFind(pMan.pRefNode);
+            Glyph pData = (Glyph)pMan.BaseFind(pMan.pRefNode);
             return pData;
         }
 
@@ -220,7 +220,7 @@ namespace SpaceInvaders.FontSystem
         //----------------------------------------------------------------------
         // Data
         //----------------------------------------------------------------------
-        private static GlyphManager pInstance = null;
+        private static GlyphManager pInstance;
         private Glyph pRefNode;
     }
 }

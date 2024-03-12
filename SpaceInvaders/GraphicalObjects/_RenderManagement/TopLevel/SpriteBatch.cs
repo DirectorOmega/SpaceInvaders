@@ -13,7 +13,7 @@ namespace SpaceInvaders.GraphicalObjects
             poNodeMan = new SpriteBatchNodeManager();
         }
 
-        //horribble I know
+        //horrible I know
         public void setUniversal(bool  flag)
         {
             poNodeMan.setUniversal(flag);
@@ -23,7 +23,6 @@ namespace SpaceInvaders.GraphicalObjects
         {
             poNodeMan.StorePlayerA();
         }
-
 
         public void SetPlayerA()
         {

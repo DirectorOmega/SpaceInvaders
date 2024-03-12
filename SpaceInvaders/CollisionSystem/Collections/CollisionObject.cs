@@ -5,21 +5,17 @@ namespace SpaceInvaders.CollisionSystem
 {
     internal sealed class CollisionObject
     {
-        private CollisionRect poColRect;
+        private readonly CollisionRect poColRect;
         //hint use a box sprite; I could force it but I don't want too just yet.
-        baseSprite pColSprite;
+        public BoxSprite pColSprite { get; private set; }
 
         public CollisionObject(baseSprite pProxySprite)
         {
             Debug.Assert(pProxySprite != null);
             // Origin is in the UPPER RIGHT 
-
             Azul.Rect t = new Azul.Rect(pProxySprite.getX(), pProxySprite.getY(), pProxySprite.getScreenRect().width, pProxySprite.getScreenRect().height);
 
             poColRect = new CollisionRect(t);
-
-            //this.poColRect = new CollisionRect(pProxySprite.getScreenRect());
-            //this.poColRect = new CollisionRect(pProxySprite.get)
             Debug.Assert(poColRect != null);
 
             // Create the sprite

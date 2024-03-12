@@ -27,9 +27,9 @@ namespace SpaceInvaders.FontSystem
 #if (TRACK_DESTRUCTOR)
             Debug.WriteLine("~Glyph():{0} ", this.GetHashCode());
 #endif
-            this.name = Name.Uninitialized;
-            this.pSubRect = null;
-            this.pTexture = null;
+            name = Name.Uninitialized;
+            pSubRect = null;
+            pTexture = null;
         }
 
         public void Set(Glyph.Name name, int key, TextureID textName, float x, float y, float width, float height)
@@ -37,43 +37,43 @@ namespace SpaceInvaders.FontSystem
             Debug.Assert(this.pSubRect != null);
             this.name = name;
 
-            this.pTexture = TextureManager.Find(textName);
+            pTexture = TextureManager.Find(textName);
             Debug.Assert(this.pTexture != null);
 
-            this.pSubRect.Set(x, y, width, height);
+            pSubRect.Set(x, y, width, height);
             this.key = key;
         }
 
         override public void dClean()
         {
-            this.name = Name.Uninitialized;
-            this.pTexture = null;
-            this.pSubRect.Set(0, 0, 1, 1);
-            this.key = 0;
+            name = Name.Uninitialized;
+            pTexture = null;
+            pSubRect.Set(0, 0, 1, 1);
+            key = 0;
         }
 
         public void Dump()
         {
             // Data:
-            Debug.WriteLine("\t\tname: {0} ({1})", this.name, this.GetHashCode());
-            Debug.WriteLine("\t\t\tkey: {0}", this.key);
-            if (this.pTexture != null)
-                Debug.WriteLine("\t\t   pTexture: {0}", this.pTexture.GetName());
+            Debug.WriteLine("\t\tname: {0} ({1})", name, GetHashCode());
+            Debug.WriteLine("\t\t\tkey: {0}", key);
+            if (pTexture != null)
+                Debug.WriteLine("\t\t   pTexture: {0}", pTexture.GetName());
             else
                 Debug.WriteLine("\t\t   pTexture: null");
-            Debug.WriteLine("\t\t      pRect: {0}, {1}, {2}, {3}", this.pSubRect.x, this.pSubRect.y, this.pSubRect.width, this.pSubRect.height);
+            Debug.WriteLine("\t\t      pRect: {0}, {1}, {2}, {3}", pSubRect.x, pSubRect.y, pSubRect.width, pSubRect.height);
         }
 
         public Azul.Rect GetAzulSubRect()
         {
-            Debug.Assert(this.pSubRect != null);
-            return this.pSubRect;
+            Debug.Assert(pSubRect != null);
+            return pSubRect;
         }
 
         public Azul.Texture GetAzulTexture()
         {
-            Debug.Assert(this.pTexture != null);
-            return this.pTexture.GetTex();
+            Debug.Assert(pTexture != null);
+            return pTexture.GetTex();
             //return this.pTexture.getAzulTexture();
         }
 

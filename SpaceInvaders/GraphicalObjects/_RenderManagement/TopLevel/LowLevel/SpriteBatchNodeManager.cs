@@ -70,7 +70,7 @@ namespace SpaceInvaders.GraphicalObjects
 
         public void Attach(baseSprite toAttach)
         {
-            SpriteBatchNode pNode = (SpriteBatchNode)this.baseAdd();
+            SpriteBatchNode pNode = (SpriteBatchNode)this.BaseAdd();
             //pNode.pSprite = toAttach;
             pNode.Set(toAttach, this);
         }
@@ -120,8 +120,8 @@ namespace SpaceInvaders.GraphicalObjects
         {
             if (Active)
             {
-                SpriteBatchNode cur = (SpriteBatchNode)getActiveHead();
-                //no assert beacuse a batchCAN be empty
+                SpriteBatchNode cur = (SpriteBatchNode)GetActiveHead();
+                //no assert because a batchCAN be empty
                 while (cur != null)
                 {
                     //cur.pSprite.Render();

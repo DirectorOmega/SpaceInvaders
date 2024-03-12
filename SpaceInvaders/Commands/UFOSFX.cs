@@ -1,4 +1,0 @@
-﻿namespace SpaceInvaders.Commands.baseClasses
-{
-    
-}

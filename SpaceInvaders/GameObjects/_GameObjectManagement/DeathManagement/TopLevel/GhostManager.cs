@@ -14,7 +14,7 @@ namespace SpaceInvaders.GameObjects
             poRefNode = new GhostTypeNode();
         }
 
-        private void addDefaults()
+        private static void AddDefaults()
         {
             //others will be added automatically
             Add(GameObjectType.Crab);
@@ -27,10 +27,10 @@ namespace SpaceInvaders.GameObjects
 
         public static GhostTypeNode Add(GameObjectType id)
         {
-            GhostManager psbMan = GhostManager.getInstance();
+            GhostManager psbMan = GhostManager.GetInstance();
             Debug.Assert(psbMan != null);
 
-            GhostTypeNode pNode = (GhostTypeNode)psbMan.baseAdd();
+            GhostTypeNode pNode = (GhostTypeNode)psbMan.BaseAdd();
             Debug.Assert(pNode != null);
 
             pNode.Set(id);
@@ -48,7 +48,7 @@ namespace SpaceInvaders.GameObjects
             if (pInstance == null)
             {
                 pInstance = new GhostManager(numStart, deltaAdd);
-                pInstance.addDefaults();
+                AddDefaults();
             }
         }
 
@@ -81,10 +81,10 @@ namespace SpaceInvaders.GameObjects
 
         public static GameObject Rez(GameObjectType typeID)
         {
-            GhostManager sMan = GhostManager.getInstance();
+            GhostManager sMan = GhostManager.GetInstance();
 
-            GhostTypeNode targetref = GhostManager.toFind(typeID);
-            GhostTypeNode target = (GhostTypeNode) sMan.baseFind(targetref);
+            GhostTypeNode targetref = GhostManager.ToFind(typeID);
+            GhostTypeNode target = (GhostTypeNode) sMan.BaseFind(targetref);
 
             return target.Detatch();
         }
@@ -92,11 +92,11 @@ namespace SpaceInvaders.GameObjects
         //TOOD: remove the find universally so I can get rid of names or at the very least from everything above game sprite.
         public static GhostTypeNode Find(GameObjectType typeID)
         {
-            GhostManager sMan = GhostManager.getInstance();
+            GhostManager sMan = GhostManager.GetInstance();
 
-            GhostTypeNode target = GhostManager.toFind(typeID);
+            GhostTypeNode target = GhostManager.ToFind(typeID);
 
-            GhostTypeNode found = (GhostTypeNode)sMan.baseFind(target);
+            GhostTypeNode found = (GhostTypeNode)sMan.BaseFind(target);
 
             if(null == found)
                 found = Add(typeID);
@@ -105,22 +105,22 @@ namespace SpaceInvaders.GameObjects
         }
 
         //for find
-        private static GhostTypeNode toFind(GameObjectType typeID)
+        private static GhostTypeNode ToFind(GameObjectType typeID)
         {
             poRefNode.Set(typeID);
             return poRefNode;
         }
 
-        public static GhostManager getInstance()
+        public static GhostManager GetInstance()
         {
             if (pInstance == null)
-                GhostManager.Create();
+                Create();
             return pInstance;
         }
 
         internal static void Attach(GameObject pObject)
         {
-            GhostManager pTMan = GhostManager.getInstance();
+            GhostManager pTMan = GhostManager.GetInstance();
             Debug.Assert(pTMan != null);
 
             GhostTypeNode pNode = Find((GameObjectType)pObject.getName());

@@ -1,6 +1,5 @@
 ﻿using SpaceInvaders.CollisionSystem;
 using SpaceInvaders.GraphicalObjects;
-using SpaceInvaders.PCS;
 using SpaceInvaders.GameState;
 using SpaceInvaders.Time;
 using SpaceInvaders.Commands;
@@ -10,25 +9,20 @@ namespace SpaceInvaders.GameObjects
 {
     class Column : Alien
     {
-        PCSIterator i;
-
         //Bomb poB;
         DropBombCMD dropCMD;
         bool drop;
 
         public Column(SpriteID alien, float posX, float posY) : base(alien, posX, posY)
         {
-            i = new PCSTreeIterator(this);
             //poB = new Bomb(SpriteID.Missile);
             dropCMD = new DropBombCMD(this);
-            this.            CollisionObject.GetColSprite().setColor(0.0f, 0.0f, 255.0f);
-            setBombCmd();
+            CollisionObject.GetColSprite().setColor(0.0f, 0.0f, 255.0f);
+            SetBombCmd();
         }
 
-        public void setBombCmd()
-        {
-            TimerManager.Add(TimeEventID.bombDrop, dropCMD, (GameStateManager.getRandomNumber(10, 20) - 2*GameStateManager.getWaveMult())); //- 2 * GameStateManager.getTimeDelta())/GameStateManager.getWaveMult());
-        }
+        public void SetBombCmd() 
+            => TimerManager.Add(TimeEventID.bombDrop, dropCMD, (GameStateManager.getRandomNumber(10, 20) - 2 * GameStateManager.GetWaveMult()));
 
         internal void DropBomb()
         {
@@ -158,7 +152,7 @@ namespace SpaceInvaders.GameObjects
                 br.getPSprite().getSBNode().GetSBNM().Attach(B.getPSprite());
                 B.ActivateCollisionSprite();
                 //gonna def have to tweak this below, bombs drop way to much.
-                setBombCmd();
+                SetBombCmd();
                 //Debug.Print("bomb dropping from x:{0}", this.getX());
 
             }

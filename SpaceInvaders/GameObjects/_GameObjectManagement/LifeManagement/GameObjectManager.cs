@@ -20,7 +20,7 @@ namespace SpaceInvaders.GameObjects
             //todo: modify this to grab the sbmn for each node and then iterate down and place every sprite back on the managers.
             GameObjectManager pMan = GameObjectManager.getInstance();
 
-            GameObjectNode pRoot = (GameObjectNode)pMan.getActiveHead();
+            GameObjectNode pRoot = (GameObjectNode)pMan.GetActiveHead();
             GameObjectNode pTmp;
             while (pRoot != null)
             {
@@ -35,12 +35,12 @@ namespace SpaceInvaders.GameObjects
         public static void ClearStored()
         {
             GameObjectManager pMan = GameObjectManager.getInstance();
-            GameObjectNode cur = (GameObjectNode)pMan.getActiveHead();
+            GameObjectNode cur = (GameObjectNode)pMan.GetActiveHead();
 
             //this means things aren't getting cleaned up properly.
             if (cur != null) { Debug.Assert(false); }
 
-            cur = (GameObjectNode)pMan.baseGetPAHead();
+            cur = (GameObjectNode)pMan.BaseGetPAHead();
             //this check because singleplayer will clean itself properly, and not store it's state.
             if (cur != null)
             {
@@ -115,7 +115,7 @@ namespace SpaceInvaders.GameObjects
             GameObjectManager sMan = GameObjectManager.getInstance();
 
             GameObjectNode target = GameObjectManager.toFind(sprite);
-            return (GameObjectNode)sMan.baseFind(target);
+            return (GameObjectNode)sMan.BaseFind(target);
         }
 
         //for find
@@ -138,7 +138,7 @@ namespace SpaceInvaders.GameObjects
             GameObjectManager pTMan = GameObjectManager.getInstance();
             Debug.Assert(pTMan != null);
 
-            GameObjectNode pNode = (GameObjectNode)pTMan.baseAdd();
+            GameObjectNode pNode = (GameObjectNode)pTMan.BaseAdd();
             Debug.Assert(pNode != null);
 
             pNode.Set(pAlien, pTree);
@@ -201,7 +201,7 @@ namespace SpaceInvaders.GameObjects
             // 2) pRoot is the tree we are looking for
             // now walk the active list looking for pRoot
 
-            GameObjectNode pTree = (GameObjectNode)pMan.getActiveHead();
+            GameObjectNode pTree = (GameObjectNode)pMan.GetActiveHead();
 
             while (pTree != null)
             {
@@ -242,7 +242,7 @@ namespace SpaceInvaders.GameObjects
             //TODO: fix the iteartor to do what I need.
             GameObjectManager pMan = GameObjectManager.getInstance();
 
-            GameObjectNode pRoot = (GameObjectNode)pMan.getActiveHead();
+            GameObjectNode pRoot = (GameObjectNode)pMan.GetActiveHead();
             GameObjectNode pTmp;
             while (pRoot != null)
             {
@@ -285,7 +285,7 @@ namespace SpaceInvaders.GameObjects
         {
 
             GameObjectManager g = GameObjectManager.getInstance();
-            GameObjectNode e = (GameObjectNode)g.getActiveHead();
+            GameObjectNode e = (GameObjectNode)g.GetActiveHead();
             GameObjectNode ePrev;
             GameObject toRemove;
             while (e != null)

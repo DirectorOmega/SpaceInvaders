@@ -14,12 +14,12 @@ namespace SpaceInvaders.GameState
         //todo reorganize these variables.
         private static GameStateManager pInstance;
 
-        StateIntro SI;
-        StateAttract SA;
-        StatePlayerA SPA;
-        StatePlayerB SPB;
-        StateGameOver GO;
-        Azul.Game pgame;
+        readonly StateIntro SI;
+        readonly StateAttract SA;
+        readonly StatePlayerA SPA;
+        readonly StatePlayerB SPB;
+        readonly StateGameOver GO;
+        readonly Azul.Game pgame;
   
         private static Random random;
 
@@ -30,10 +30,10 @@ namespace SpaceInvaders.GameState
 
         int Score1, Score2, HighScore;
         bool nextwavepending;
-        Font S1, S2, HS;
+        readonly Font S1, S2, HS;
 
         //common for all states
-        private void ManagerSetup()
+        private static void ManagerSetup()
         {
         
             TextureManager.Create(3, 2);
@@ -46,7 +46,7 @@ namespace SpaceInvaders.GameState
         }
 
         //need to do for each player.
-        private void addSpriteBatches()
+        private static void addSpriteBatches()
         {
             SpriteBatchManager.Add(SpriteBatchID.Shield);
             SpriteBatchManager.Add(SpriteBatchID.Shots);
@@ -134,10 +134,10 @@ namespace SpaceInvaders.GameState
             GameSpriteManager.Add(SpriteID.ThirdShotF4, ThirdShotf4, ISS.getAlienShotAdjSize());
 
             //this is a color test
-            baseSprite SquidSprite = GameSpriteManager.Add(SpriteID.Squid, Squid, aSize);
-            baseSprite CrabSprite = GameSpriteManager.Add(SpriteID.Crab, Crab, aSize);
-            baseSprite OctoSprite = GameSpriteManager.Add(SpriteID.Octo, Octo, aSize);
-            baseSprite HeroSprite = GameSpriteManager.Add(SpriteID.Hero, Hero, ISS.getHeroAdjSize());
+            GameSprite SquidSprite = GameSpriteManager.Add(SpriteID.Squid, Squid, aSize);
+            GameSprite CrabSprite = GameSpriteManager.Add(SpriteID.Crab, Crab, aSize);
+            GameSprite OctoSprite = GameSpriteManager.Add(SpriteID.Octo, Octo, aSize);
+            GameSprite HeroSprite = GameSpriteManager.Add(SpriteID.Hero, Hero, ISS.getHeroAdjSize());
 
             SquidSprite.setColor(255.0f, 0.0f, 0.0f);
             CrabSprite.setColor(0.0f, 255.0f, 0.0f);
@@ -167,7 +167,7 @@ namespace SpaceInvaders.GameState
          //TODO: implement unload content.
         }
 
-        private void setupInput()
+        private static void setupInput()
         {
             InputSubject pInputSubject;
             pInputSubject = InputManager.GetArrowRightSubject();
@@ -191,7 +191,7 @@ namespace SpaceInvaders.GameState
 
         //TODO: Add more null objects, anywhere null is a default
         //I want a null object to prevent null from being an issue.
-        Font creditCountFont;
+        readonly Font creditCountFont;
         private GameStateManager(Azul.Game game)
         {
             pgame = game;
@@ -332,13 +332,11 @@ namespace SpaceInvaders.GameState
         }
 
         public static void Create(Azul.Game g)
-        {
-            
+        {            
             Debug.Assert(pInstance == null);
-
             if (pInstance == null)
             {
-                pInstance = new GameStateManager(g);                
+                pInstance ??= new GameStateManager(g);                
             }
         }
 
@@ -369,10 +367,7 @@ namespace SpaceInvaders.GameState
             pMan.creditCountFont.updateCredit(pMan.creditCount);
         }
 
-        public static int getCredits()
-        {
-            return GameStateManager.getInstance().creditCount;
-        }
+        public static int GetCredits() => getInstance().creditCount;
 
         //TODO: change to ask the state for the time. I need to get rid of theese stupid
         //gamestate held refrences to shit.
@@ -381,11 +376,9 @@ namespace SpaceInvaders.GameState
             return 0.01f + (.015f*GameStateManager.getInstance().pActiveGridNode.GetTree().numNodes);
         }
 
-        internal static float getWaveMult()
-        {
-            return GameStateManager.getInstance().currentState.getWaveMult();
-        }
-        
+        internal static float GetWaveMult()
+            => getInstance().currentState.getWaveMult();
+
         //expand on this later.
         //also optimize if time permits.
         //this is where I want to add the cmd for the end of the level.
@@ -412,10 +405,8 @@ namespace SpaceInvaders.GameState
 
         public static void setStateGameOver()
         {
-            GameStateManager.updateHighScore();
-
-
-            GameStateManager pMan = GameStateManager.getInstance();
+            updateHighScore();
+            GameStateManager pMan = getInstance();
             pMan.Score1 = 0;
             pMan.Score2 = 0;
             pMan.S1.updateScore(0);
@@ -435,30 +426,17 @@ namespace SpaceInvaders.GameState
 
         internal static void LoseLife()
         {
-            GameStateManager pMan = GameStateManager.getInstance();
+            GameStateManager pMan = getInstance();
             pMan.currentState.loseLife();
 
 
-            if (pMan.currentState == pMan.SPA)
-            {
-                if (pMan.SPB.getLifeCount() > 0)
-                {
-                    TimerManager.Add(TimeEventID.NextPlayer, new PlayerBCommand(), 1.5f);
-                }
-            }
-            if (pMan.currentState == pMan.SPB)
-            {
-                if (pMan.SPA.getLifeCount() > 0)
-                {
-                    TimerManager.Add(TimeEventID.NextPlayer, new PlayerACommand(), 1.5f);
-                }
-            }
+            if (pMan.currentState == pMan.SPA && pMan.SPB.getLifeCount() > 0)
+                TimerManager.Add(TimeEventID.NextPlayer, new PlayerBCommand(), 1.5f);
+            if (pMan.currentState == pMan.SPB && pMan.SPA.getLifeCount() > 0)
+                TimerManager.Add(TimeEventID.NextPlayer, new PlayerACommand(), 1.5f);
 
             if (pMan.SPA.getLifeCount() == 0 && pMan.SPB.getLifeCount() == 0)
-            {
-                // GameStateManager.setStateGameOver();
                 TimerManager.Add(TimeEventID.GameOver, new GameOverCMD(),.2f);
-            }
 
 
 
@@ -488,7 +466,7 @@ namespace SpaceInvaders.GameState
         public static void setStatePA()
         {
             //add the multi level and swapping player logic.
-            GameStateManager pMan = GameStateManager.getInstance();
+            GameStateManager pMan = getInstance();
             Debug.Assert(pMan != null);
             pMan.currentState = pMan.SPA;
             pMan.currentState.Init();
@@ -503,7 +481,7 @@ namespace SpaceInvaders.GameState
         public static void setStatePB()
         {
             //add the multi level and swapping player logic.
-            GameStateManager pMan = GameStateManager.getInstance();
+            GameStateManager pMan = getInstance();
             Debug.Assert(pMan != null);
             pMan.currentState = pMan.SPB;
             pMan.currentState.Init();
@@ -519,16 +497,16 @@ namespace SpaceInvaders.GameState
 
         internal static void setActiveNoiseRoot(GameObjectNode gnr)
         {
-            GameStateManager.getInstance().pActiveNoiseRootNode = gnr; 
+            getInstance().pActiveNoiseRootNode = gnr; 
         }
         internal static GNoiseRoot getActiveNoiseRoot()
         {
-            return (GNoiseRoot)GameStateManager.getInstance().pActiveNoiseRootNode.GetGameObject();
+            return (GNoiseRoot)getInstance().pActiveNoiseRootNode.GetGameObject();
         }
         internal static Grid getActiveGrid()
         {
             // return (Grid) GameObjectManager.Find(GameObjectTypeEnum.Grid).getGameObject();
-            return (Grid) GameStateManager.getInstance().pActiveGridNode.GetGameObject();
+            return (Grid) getInstance().pActiveGridNode.GetGameObject();
         }
 
         internal static void setActiveGrid(GameObjectNode gridnode)

@@ -7,24 +7,24 @@
         private float angle;
         private bool hidden;
         private Azul.Color poColor;
-        private Azul.SpriteBox pobox;
+        private Azul.SpriteBox poBox;
         private Azul.Rect poScreenRect;  
     
         public BoxSprite()
         {
             Name = SpriteID.Undef;
             hidden = false;
-            pobox = new Azul.SpriteBox();
+            poBox = new Azul.SpriteBox();
             sx = 1.0f;
             sy = 1.0f;
             poColor = new Azul.Color(255.0f, 0.0f, 0.0f);
             poScreenRect = new Azul.Rect();
-            pobox.SwapColor(poColor);
+            poBox.SwapColor(poColor);
         }
         
         ~BoxSprite()
         {
-            pobox = null;
+            poBox = null;
             poScreenRect = null;
             poColor = null;
         }   
@@ -33,7 +33,7 @@
         {
             Name = name;
             this.poScreenRect.Set(screenRect);
-            pobox.Swap(screenRect,poColor);
+            poBox.Swap(screenRect,poColor);
         }
 
         public void Set(SpriteID name,Azul.Color color,Azul.Rect screenRect)
@@ -41,8 +41,8 @@
             Name = name;
             poColor = color;
             this.poScreenRect.Set(screenRect);
-            pobox.SwapScreenRect(poScreenRect);
-            pobox.SwapColor(color);
+            poBox.SwapScreenRect(poScreenRect);
+            poBox.SwapColor(color);
         }
 
         public void hide()
@@ -68,15 +68,15 @@
         {
             if (!hidden)
             {
-                this.pobox.Render();
+                this.poBox.Render();
             }
         }
 
         public override void Update()
         { 
-            pobox.x = this.getX();
-            pobox.y = this.getY();
-            pobox.Update();
+            poBox.x = this.getX();
+            poBox.y = this.getY();
+            poBox.Update();
         }
         public override SpriteID getName()
         {
@@ -105,15 +105,15 @@
         public override void setAngle(float angle)
         {
             this.angle = angle;
-            pobox.angle = this.angle;
+            poBox.angle = this.angle;
         }
 
         public override void setScale(float sx, float sy)
         {
             this.sx = sx;
             this.sy = sy;
-            pobox.sx = this.sx;
-            pobox.sy = this.sy;
+            poBox.sx = this.sx;
+            poBox.sy = this.sy;
         }
 
         public override Azul.Rect getScreenRect()
@@ -124,14 +124,14 @@
         public override void setScreenRect(Azul.Rect screenRect)
         {
             poScreenRect.Set(screenRect);
-            pobox.SwapScreenRect(screenRect);
+            poBox.SwapScreenRect(screenRect);
         }
 
 
         public override void setColor(float red, float green, float blue, float alpha = 1)
         {
             poColor.Set(red, green, blue, alpha);
-            pobox.SwapColor(poColor);
+            poBox.SwapColor(poColor);
         }
 
       

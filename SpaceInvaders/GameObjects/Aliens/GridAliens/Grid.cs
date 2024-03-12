@@ -141,7 +141,7 @@ namespace SpaceInvaders.GameObjects
             while (cur != null)
             {
 
-                cur.setBombCmd();
+                cur.SetBombCmd();
                 cur = (Column)cur.getSibling();
             }
 

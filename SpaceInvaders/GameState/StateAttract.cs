@@ -21,7 +21,7 @@ namespace SpaceInvaders.GameState
         public override void Handle()
         {
 
-            int creds = GameStateManager.getCredits();
+            int creds = GameStateManager.GetCredits();
             if (creds>0)
             {
                 if(creds > 1)
@@ -94,7 +94,7 @@ namespace SpaceInvaders.GameState
         {
             SpriteBatchManager.Draw();
 
-            if (GameStateManager.getCredits() == 0)
+            if (GameStateManager.GetCredits() == 0)
             {
               //  DefaultMessage.Render();
                 Play.Render();
@@ -117,7 +117,7 @@ namespace SpaceInvaders.GameState
             else
             {
                 Push.Render();
-                if(GameStateManager.getCredits() == 1)
+                if(GameStateManager.GetCredits() == 1)
                 {
                     SinglePlayer.Render();
                 }

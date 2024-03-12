@@ -19,7 +19,7 @@ namespace SpaceInvaders.GraphicalObjects
             GameSpriteManager pTMan = GameSpriteManager.getInstance();
             Debug.Assert(pTMan != null);
 
-            GameSprite pNode = (GameSprite)pTMan.baseAdd();
+            GameSprite pNode = (GameSprite)pTMan.BaseAdd();
             Debug.Assert(pNode != null);
 
             pNode.Set(Name,image,screenRect);
@@ -32,7 +32,7 @@ namespace SpaceInvaders.GraphicalObjects
             GameSpriteManager pTMan = GameSpriteManager.getInstance();
             Debug.Assert(pTMan != null);
 
-            GameSprite pNode = (GameSprite)pTMan.baseAdd();
+            GameSprite pNode = (GameSprite)pTMan.BaseAdd();
             Debug.Assert(pNode != null);
 
             pNode.Set(Name, image, screenRect, color);
@@ -98,7 +98,7 @@ namespace SpaceInvaders.GraphicalObjects
             //}
 
             GameSprite target = GameSpriteManager.toFind(sprite);
-            return (GameSprite)sMan.baseFind(target);
+            return (GameSprite)sMan.BaseFind(target);
 
         }
 

@@ -21,7 +21,7 @@ namespace SpaceInvaders.GraphicalObjects
             ProxyManager pTMan = ProxyManager.getInstance();
             Debug.Assert(pTMan != null);
 
-            ProxySprite pNode = (ProxySprite)pTMan.baseAdd();
+            ProxySprite pNode = (ProxySprite)pTMan.BaseAdd();
             Debug.Assert(pNode != null);
 
 

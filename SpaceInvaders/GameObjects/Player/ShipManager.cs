@@ -56,7 +56,7 @@ namespace SpaceInvaders.GameObjects
             if (instance == null)
             {
                 instance = new ShipManager();
-                instance.pMissleSFX = new MissileSFXCMD();
+                instance.pMissileSFX = new MissileSFXCMD();
              
             }
 
@@ -75,7 +75,7 @@ namespace SpaceInvaders.GameObjects
 
         internal static void DeathAnim(float v)
         {
-            ShipManager pShipMan = ShipManager.privInstance();
+            ShipManager pShipMan = privInstance();
 
           //  pShipMan.pDeathAnim.setAnim(pShipMan.pShip.getX(),pShipMan.pShip.getY(),2.5f, SpriteBatchManager.Find(SpriteBatchID.Ship));
             //TimerManager.Add(TimeEventID.Anim, pShipMan.pDeathAnim, 0.0f);
@@ -83,7 +83,7 @@ namespace SpaceInvaders.GameObjects
 
         public static Ship GetShip()
         {
-            ShipManager pShipMan = ShipManager.privInstance();
+            ShipManager pShipMan = privInstance();
 
             Debug.Assert(pShipMan != null);
             Debug.Assert(pShipMan.pShip != null);
@@ -121,7 +121,7 @@ namespace SpaceInvaders.GameObjects
 
         public static MvState GetMvState(eMvState state)
         {
-            ShipManager pShipMan = ShipManager.privInstance();
+            ShipManager pShipMan = privInstance();
             Debug.Assert(pShipMan != null);
 
             MvState pShipState = null;
@@ -154,7 +154,7 @@ namespace SpaceInvaders.GameObjects
 
         public static Missile GetMissile()
         {
-            ShipManager pShipMan = ShipManager.privInstance();
+            ShipManager pShipMan = privInstance();
 
             Debug.Assert(pShipMan != null);
             Debug.Assert(pShipMan.pMissile != null);
@@ -165,7 +165,7 @@ namespace SpaceInvaders.GameObjects
         public static Missile ActivateMissile()
         {
 
-            ShipManager pShipMan = ShipManager.privInstance();
+            ShipManager pShipMan = privInstance();
             Debug.Assert(pShipMan != null);
             
             // copy over safe copy
@@ -176,18 +176,18 @@ namespace SpaceInvaders.GameObjects
             pShipMan.pMissile.ActivateCollisionSprite();
             //pShipMan.pMissile.clearMark();
 
-             pShipMan.pMissleSFX.execute();
+            pShipMan.pMissileSFX.execute();
             
             return pShipMan.pMissile;
         }
 
         public static Ship ActivateShip()
         {
-            ShipManager pShipMan = ShipManager.privInstance();
+            ShipManager pShipMan = privInstance();
             Debug.Assert(pShipMan != null);
 
-            pShipMan.pShip.SetMiState(ShipManager.eMiState.Ready);
-            pShipMan.pShip.SetMvState(ShipManager.eMvState.Either);
+            pShipMan.pShip.SetMiState(eMiState.Ready);
+            pShipMan.pShip.SetMvState(eMvState.Either);
 
             SpriteBatchManager.Find(SpriteBatchID.Ship).Attach(pShipMan.pShip.getPSprite());
             GameObjectManager.Insert(pShipMan.pShip);
@@ -200,11 +200,11 @@ namespace SpaceInvaders.GameObjects
 
         public static void ReactivateShip()
         {
-            ShipManager pShipMan = ShipManager.privInstance();
+            ShipManager pShipMan = privInstance();
             Debug.Assert(pShipMan != null);
 
-            pShipMan.pShip.SetMiState(ShipManager.eMiState.Ready);
-            pShipMan.pShip.SetMvState(ShipManager.eMvState.Either);
+            pShipMan.pShip.SetMiState(eMiState.Ready);
+            pShipMan.pShip.SetMvState(eMvState.Either);
 
             SpriteBatchManager.Find(SpriteBatchID.Ship).Attach(pShipMan.pShip.getPSprite());
             pShipMan.pShip.ActivateCollisionSprite();
@@ -213,11 +213,11 @@ namespace SpaceInvaders.GameObjects
 
         public static void DeactivateShip()
         {
-            ShipManager pShipMan = ShipManager.privInstance();
+            ShipManager pShipMan = privInstance();
             Debug.Assert(pShipMan != null);
 
-            pShipMan.pShip.SetMiState(ShipManager.eMiState.End);
-            pShipMan.pShip.SetMvState(ShipManager.eMvState.Neither);
+            pShipMan.pShip.SetMiState(eMiState.End);
+            pShipMan.pShip.SetMvState(eMvState.Neither);
 
             //DeathAnim(3.0f);
             //  pShipMan.pShip.Remove();
@@ -227,22 +227,22 @@ namespace SpaceInvaders.GameObjects
         }
 
         // Data: ----------------------------------------------
-        private static ShipManager instance = null;
+        private static ShipManager instance;
 
         // Active
-        private Ship pShip;
-        private Missile pMissile;
-        private MissileSFXCMD pMissleSFX;
+        private readonly Ship pShip;
+        private readonly Missile pMissile;
+        private readonly MissileSFXCMD pMissileSFX;
        // private ShipDeathAnimCMD pDeathAnim;
 
         // Reference
-        private ShipStateReady pStateReady;
-        private ShipStateMissileFlying pStateMissileFlying;
-        private ShipStateEnd pStateEnd;
+        private readonly ShipStateReady pStateReady;
+        private readonly ShipStateMissileFlying pStateMissileFlying;
+        private readonly ShipStateEnd pStateEnd;
 
-        private MvEither pEither;
-        private MvLeftOnly pLeftO;
-        private MvRightOnly pRightO;
-        private MvNeither pNeither;
+        private readonly MvEither pEither;
+        private readonly MvLeftOnly pLeftO;
+        private readonly MvRightOnly pRightO;
+        private readonly MvNeither pNeither;
     }
 }

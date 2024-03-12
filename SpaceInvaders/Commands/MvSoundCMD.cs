@@ -7,10 +7,10 @@ namespace SpaceInvaders.Commands
     internal sealed class MvSoundCMD : Command
     {
         int count;
-        private IrrKlang.ISoundSource sndV1; 
-        private IrrKlang.ISoundSource sndV2; 
-        private IrrKlang.ISoundSource sndV3; 
-        private IrrKlang.ISoundSource sndV4;
+        private readonly IrrKlang.ISoundSource sndV1; 
+        private readonly IrrKlang.ISoundSource sndV2; 
+        private readonly IrrKlang.ISoundSource sndV3; 
+        private readonly IrrKlang.ISoundSource sndV4;
        // private Grid pGrid;
         public MvSoundCMD()
         {

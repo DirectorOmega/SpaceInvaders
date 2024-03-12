@@ -6,7 +6,6 @@ namespace SpaceInvaders.CollisionSystem
     {
         public CPMan(int numStart, int deltaAdd): base(numStart,deltaAdd)
         {
-
         }
     }
 }

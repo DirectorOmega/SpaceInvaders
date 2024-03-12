@@ -34,38 +34,25 @@ namespace SpaceInvaders.GraphicalObjects
             }
         }
 
-#if DEBUG
         public static Texture Add(TextureID Name, string pTextureName)
         {
             TextureManager pTMan = TextureManager.getInstance();
             Debug.Assert(pTMan != null);
 
-            Texture pNode = (Texture)pTMan.baseAdd();
+            Texture pNode = (Texture)pTMan.BaseAdd();
             Debug.Assert(pTextureName != null);
             
             pNode.Set(Name, new Azul.Texture(pTextureName));
 
             return pNode;
         }
-#else
-       public static Texture Add(TextureID Name, string pTextureName)
-        {
-            Texture pNode = (Texture) TextureManager.getInstance().baseAdd();   
-            pNode.Set(Name, new Azul.Texture(pTextureName));
-            return pNode;
-        }
 
-
-#endif
-
-
-#if DEBUG
         public static Texture Add(TextureID Name, Azul.Texture tex )
         {
             TextureManager pTMan = TextureManager.getInstance();
             Debug.Assert(pTMan != null);
 
-            Texture pNode = (Texture)pTMan.baseAdd();
+            Texture pNode = (Texture)pTMan.BaseAdd();
             Debug.Assert(pNode != null);
 
             pNode.Set(Name, tex);
@@ -73,46 +60,20 @@ namespace SpaceInvaders.GraphicalObjects
             return pNode; 
         }
 
-
-#else
-        public static Texture Add(TextureID Name, Azul.Texture tex)
-        {
-            Texture pNode = (Texture) TextureManager.getInstance().baseAdd();
-            pNode.Set(Name, tex);
-            return pNode;
-        }
-
-#endif
-
-
-#if DEBUG
         protected override DLink dCreateNode()
         {
             DLink newNode = new Texture();
             Debug.Assert(newNode != null);
             return newNode;
         }
-#else
-        protected override DLink dCreateNode()
-        {
-            return (DLink) new Texture();
-        }
-#endif
 
-#if DEBUG
         public static Texture Find(TextureID texture)
         {
             TextureManager mrT = TextureManager.getInstance();
             Debug.Assert(mrT != null);
             Texture target = TextureManager.toFind(texture);
-            return (Texture)mrT.baseFind(target);
+            return (Texture)mrT.BaseFind(target);
         }
-#else
-        public static Texture Find(TextureID texture)
-        {
-          return (Texture) TextureManager.getInstance().baseFind(TextureManager.toFind(texture));
-        }
-#endif
 
         private static Texture toFind(TextureID invaders)
         {
@@ -128,11 +89,7 @@ namespace SpaceInvaders.GraphicalObjects
             Texture left = (Texture)pLinkA;
             Texture right = (Texture)pLinkB;
 
-            if (left.GetName() == right.GetName())
-            {
-                return true;
-            }
-            return false;
+            return left.GetName() == right.GetName();
         }
 
         protected override void dClearNode(DLink pLink)

@@ -13,13 +13,13 @@ namespace SpaceInvaders.GameObjects
 
         public void Attach(GameObject toAttach)
         {
-            GhostNode pNode = (GhostNode)this.baseAdd();
+            GhostNode pNode = (GhostNode)this.BaseAdd();
             pNode.Set(toAttach);
         }
 
         public GameObject Detatch()
         {
-            GhostNode toReturn = (GhostNode)getActiveHead();
+            GhostNode toReturn = (GhostNode)GetActiveHead();
             if (toReturn != null)
             {
                 baseRemove(toReturn);

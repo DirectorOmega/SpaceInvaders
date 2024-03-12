@@ -36,7 +36,7 @@ namespace SpaceInvaders.GraphicalObjects
             Texture pTex = TextureManager.Find(TName);
             Debug.Assert(pTex != null);
 
-            Image pNode = (Image)IMan.baseAdd();
+            Image pNode = (Image)IMan.BaseAdd();
             Debug.Assert(pNode != null);
 
             pNode.Set(Name, pTex, texRect);
@@ -49,7 +49,7 @@ namespace SpaceInvaders.GraphicalObjects
             ImageManager piMan = ImageManager.getInstance();
             Debug.Assert(piMan != null);
 
-            Image pNode = (Image)piMan.baseAdd();
+            Image pNode = (Image)piMan.BaseAdd();
             Debug.Assert(pNode != null);
 
             pNode.Set(Name,pTex,rect);
@@ -103,7 +103,7 @@ namespace SpaceInvaders.GraphicalObjects
             Debug.Assert(piMan != null);
 
             Image target = ImageManager.toFind(image);
-            return (Image)piMan.baseFind(target);
+            return (Image)piMan.BaseFind(target);
         }
 
         private static Image toFind(ImageID invaders)

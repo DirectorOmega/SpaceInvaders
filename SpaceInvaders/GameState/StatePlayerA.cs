@@ -12,9 +12,9 @@ namespace SpaceInvaders.GameState
 {
     internal sealed class StatePlayerA : GameState
     {
-        //move theese out of this to prevent skew when adding playerB
-        //TODO: player b is in but theese methods are duplicated I NEED to remove theese to prevent skew
-        private void CreateGrid(float startx = 50, float starty = 800, float offsetx = 55.0f, float offsety = -55.0f)
+        //move these out of this to prevent skew when adding playerB
+        //TODO: player b is in but these methods are duplicated I NEED to remove these to prevent skew
+        private static void CreateGrid(float startx = 50, float starty = 800, float offsetx = 55.0f, float offsety = -55.0f)
         {
             BombRoot br = new BombRoot(SpriteID.NullSprite, -50, -50);
             br.setName(GameObjectType.bombRoot);
@@ -67,8 +67,7 @@ namespace SpaceInvaders.GameState
             }
         }
 
-
-        private void setupShields()
+        private static void SetupShields()
         {
             BoxSpriteManager.Add(SpriteID.ShieldBrick, new Azul.Rect(0.0f, 0.0f, 6.0f, 6.0f));
 
@@ -77,16 +76,13 @@ namespace SpaceInvaders.GameState
             ShieldFactory SF = new ShieldFactory(SpriteBatchManager.Find(SpriteBatchID.Shield), pShieldTree);
 
             SF.setShieldRoot(new ShieldRoot(SpriteID.NullSprite,0,0));
-
-            Shield s;
-            s = SF.Create(225, 225);
-            s = SF.Create(375, 225);
-            s = SF.Create(525, 225);
-            s = SF.Create(675, 225);
-
+            SF.Create(225, 225);
+            SF.Create(375, 225);
+            SF.Create(525, 225);
+            SF.Create(675, 225);
         }
 
-        private void setupWalls()
+        private static void SetupWalls()
         {
             int sh = GameStateManager.getScreenHeight();
             int sw = GameStateManager.getScreenWidth();
@@ -98,26 +94,22 @@ namespace SpaceInvaders.GameState
 
             BoxSpriteManager.Add(SpriteID.Bumper, new Azul.Rect(0.0f, 0.0f, 25.0f, 200.0f));
 
-            GameObject rw = new Sidewall(SpriteID.NullSprite, sw - (24.0f / 2), sh / 2);
-            GameObject lw = new Sidewall(SpriteID.NullSprite, 25.0f / 2, sh / 2);
-            GameObject tw = new Topwall(SpriteID.NullSprite, sw / 2, sh - 25);
-            GameObject bw = new BottomWall(SpriteID.NullSprite, sw / 2, 25);
-            GameObject lb = new Bumper(SpriteID.NullSprite, sw / 10, 0);
-            GameObject rb = new Bumper(SpriteID.NullSprite, sw - sw / 10, 0);
+            Sidewall rw = new Sidewall(SpriteID.NullSprite, sw - (24.0f / 2), sh / 2);
+            Sidewall lw = new Sidewall(SpriteID.NullSprite, 25.0f / 2, sh / 2);
+            Topwall tw = new Topwall(SpriteID.NullSprite, sw / 2, sh - 25);
+            BottomWall bw = new BottomWall(SpriteID.NullSprite, sw / 2, 25);
+            Bumper lb = new Bumper(SpriteID.NullSprite, sw / 10, 0);
+            Bumper rb = new Bumper(SpriteID.NullSprite, sw - sw / 10, 0);
 
-            lw.
-            CollisionObject.setColRect(BoxSpriteManager.Find(SpriteID.VerticalWall));
-            rw.            CollisionObject.setColRect(BoxSpriteManager.Find(SpriteID.VerticalWall));
+            lw.CollisionObject.setColRect(BoxSpriteManager.Find(SpriteID.VerticalWall));
+            rw.CollisionObject.setColRect(BoxSpriteManager.Find(SpriteID.VerticalWall));
 
-            tw.
-            CollisionObject.setColRect(BoxSpriteManager.Find(SpriteID.HorizontalWall));
-            bw.            CollisionObject.setColRect(BoxSpriteManager.Find(SpriteID.HorizontalWall));
+            tw.CollisionObject.setColRect(BoxSpriteManager.Find(SpriteID.HorizontalWall));
+            bw.CollisionObject.setColRect(BoxSpriteManager.Find(SpriteID.HorizontalWall));
 
-            lb.
-            CollisionObject.setColRect(BoxSpriteManager.Find(SpriteID.Bumper));
-            rb.            CollisionObject.setColRect(BoxSpriteManager.Find(SpriteID.Bumper));
+            lb.CollisionObject.setColRect(BoxSpriteManager.Find(SpriteID.Bumper));
+            rb.CollisionObject.setColRect(BoxSpriteManager.Find(SpriteID.Bumper));
 
-            SpriteBatchManager sbmt = SpriteBatchManager.getInstance();
             SpriteBatch barrier = SpriteBatchManager.Find(SpriteBatchID.Shield);
 
             barrier.Attach(lw.getPSprite());
@@ -296,17 +288,14 @@ namespace SpaceInvaders.GameState
         bool SpawnField = true;
         int numLives;
         int nextlifeProgress;
-        int waveNum=0;
-        float gridStartx = 50;
-        float gridStarty = 700;
-        float GridYwaveOffset = 20;
-        float waveTimeMultiplier = .5f;
+        int waveNum;
+        readonly float gridStartx = 50;
+        readonly float gridStarty = 700;
+        readonly float GridYwaveOffset = 20;
+        readonly float waveTimeMultiplier = .5f;
 
-        public override float getWaveMult()
-        {
-            return waveTimeMultiplier*waveNum;
-        }
-        
+        public override float getWaveMult() => waveTimeMultiplier * waveNum;
+
         LifeCounter lc;
         AnimationSprite SquidAnim, OctoAnim, CrabAnim;
         GridMoveCmd gridMv;
@@ -330,8 +319,8 @@ namespace SpaceInvaders.GameState
 
                 SpawnField = false;
                 CreateGrid(gridStartx, gridStarty - (waveNum * GridYwaveOffset));
-                setupShields();
-                setupWalls();
+                SetupShields();
+                SetupWalls();
 
                 SquidAnim = new AnimationSprite();
 

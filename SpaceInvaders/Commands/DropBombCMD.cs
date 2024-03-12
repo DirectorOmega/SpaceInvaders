@@ -4,7 +4,7 @@ namespace SpaceInvaders.Commands
 {
     internal sealed class UFODropBombCMD : Command
     {
-        UFORoot dropper;
+        private readonly UFORoot dropper;
 
         public UFODropBombCMD(UFORoot u) => dropper = u;
 
@@ -17,15 +17,9 @@ namespace SpaceInvaders.Commands
     
     internal sealed class DropBombCMD : Command
     {
-        //Alien dropper;
-        //BombRoot br;
-        Column dropper;
+        private readonly Column dropper;
 
-        public DropBombCMD(Column c)
-        {
-            dropper = c;
-            // this.br = br;
-        }
+        public DropBombCMD(Column c) => dropper = c;
 
         public override void execute(float deltaTime)
         {

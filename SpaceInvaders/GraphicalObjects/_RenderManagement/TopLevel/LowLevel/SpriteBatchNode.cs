@@ -1,4 +1,6 @@
-﻿namespace SpaceInvaders.GraphicalObjects
+﻿using System.Diagnostics;
+
+namespace SpaceInvaders.GraphicalObjects
 {
     internal sealed class SpriteBatchNode : SBNLink
     {
@@ -16,6 +18,7 @@
 
         public void Set(baseSprite sprite,SpriteBatchNodeManager parent)
         {
+            Debug.Assert(sprite != null);
             pSprite = sprite;
             pSprite.setSBNode(this);
             pSBNM = parent;

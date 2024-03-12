@@ -4,7 +4,6 @@ namespace SpaceInvaders.FontSystem
 {
     abstract class GMan : baseManager
     {
-
 #if DEBUG
         private GLink pActive;
         private GLink pReserved;

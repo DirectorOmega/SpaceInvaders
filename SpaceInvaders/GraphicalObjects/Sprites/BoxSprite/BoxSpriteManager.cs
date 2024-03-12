@@ -18,7 +18,7 @@ namespace SpaceInvaders.GraphicalObjects
             BoxSpriteManager pTMan = BoxSpriteManager.getInstance();
             Debug.Assert(pTMan != null);
 
-            BoxSprite pNode = (BoxSprite)pTMan.baseAdd();
+            BoxSprite pNode = (BoxSprite)pTMan.BaseAdd();
             Debug.Assert(pNode != null);
 
             pNode.Set(Name, color, screenRect);
@@ -31,7 +31,7 @@ namespace SpaceInvaders.GraphicalObjects
             BoxSpriteManager pTMan = BoxSpriteManager.getInstance();
             Debug.Assert(pTMan != null);
 
-            BoxSprite pNode = (BoxSprite)pTMan.baseAdd();
+            BoxSprite pNode = (BoxSprite)pTMan.BaseAdd();
             Debug.Assert(pNode != null);
 
             pNode.Set(Name, screenRect);
@@ -88,7 +88,7 @@ namespace SpaceInvaders.GraphicalObjects
 
 
             BoxSprite target = BoxSpriteManager.toFind(sprite);
-            return (BoxSprite)bsMan.baseFind(target);
+            return (BoxSprite)bsMan.BaseFind(target);
 
         }
 

@@ -12,8 +12,8 @@ namespace SpaceInvaders.CollisionSystem
 
         public static void ClearStored()
         {
-            CollisionPairManager pMan = CollisionPairManager.getInstance();
-            CollisionPair cur = (CollisionPair)pMan.baseGetPAHead();
+            CollisionPairManager pMan = getInstance();
+            CollisionPair cur = (CollisionPair)pMan.BaseGetPAHead();
 
             //this check because single player doesn't store it's state.
             if (cur != null)
@@ -21,22 +21,22 @@ namespace SpaceInvaders.CollisionSystem
                 if (cur.GetName() == CollisionPairName.reserveList)
                 {
                     pMan.baseSetPlayerB();
-                    CollisionPairManager.Clear();
+                    Clear();
                 }
                 else
                 {
                     pMan.baseSetPlayerA();
-                    CollisionPairManager.Clear();
+                    Clear();
                 }
             }
             pMan.nullHeads();
         }
 
-        public static void StorePlayerA() => CollisionPairManager.getInstance().baseStorePlayerA();
-        public static void SetPlayerA() => CollisionPairManager.getInstance().baseSetPlayerA();
+        public static void StorePlayerA() => getInstance().baseStorePlayerA();
+        public static void SetPlayerA() => getInstance().baseSetPlayerA();
 
-        public static void StorePlayerB() => CollisionPairManager.getInstance().baseStorePlayerB();
-        public static void SetPlayerB() => CollisionPairManager.getInstance().baseSetPlayerB();
+        public static void StorePlayerB() => getInstance().baseStorePlayerB();
+        public static void SetPlayerB() => getInstance().baseSetPlayerB();
 
         private CollisionPairManager(int numStart = 5, int deltaAdd = 3)
             : base(numStart, deltaAdd)
@@ -47,29 +47,29 @@ namespace SpaceInvaders.CollisionSystem
         public static CollisionPairManager getInstance()
         {
             if (pInstance == null)
-                CollisionPairManager.Create();
+                Create();
             return pInstance;
         }
 
         public static CollisionPair getActiveColPair()
         {
-            CollisionPairManager pMan = CollisionPairManager.getInstance();
+            CollisionPairManager pMan = getInstance();
             return pMan.pActiveColPair;
         }
 
         public static void Remove(CollisionPair pNode)
         {
             Debug.Assert(pNode != null);
-            CollisionPairManager pMan = CollisionPairManager.getInstance();
+            CollisionPairManager pMan = getInstance();
             pMan.baseRemove(pNode);
         }
 
         public static void Process()
         {
             // get the singleton
-            CollisionPairManager pColPairMan = CollisionPairManager.getInstance();
+            CollisionPairManager pColPairMan = getInstance();
 
-            CollisionPair pColPair = (CollisionPair)pColPairMan.getActiveHead();
+            CollisionPair pColPair = (CollisionPair)pColPairMan.GetActiveHead();
 
             while (pColPair != null)
             {
@@ -87,25 +87,19 @@ namespace SpaceInvaders.CollisionSystem
 
         internal static void Clear()
         {
-            CollisionPairManager t = CollisionPairManager.getInstance();
-            CollisionPair e = (CollisionPair)t.getActiveHead();
-            CollisionPair ePrev;
+            CollisionPairManager t = getInstance();
+            CollisionPair e = (CollisionPair) t.GetActiveHead();
             while (e != null)
             {
                 if (e.pNext != null)
                 {
-                    e = (CollisionPair)e.pNext;
-                    ePrev = (CollisionPair)e.pPrev;
-
+                    e = (CollisionPair) e.pNext;
                     t.baseRemove(e.pPrev);
                 }
                 else
                 {
-
                     t.baseRemove(e);
                     e = null;
-
-                    // e = (TimeEvent)e.pNext;
                 }
             }
         }
@@ -117,18 +111,15 @@ namespace SpaceInvaders.CollisionSystem
             Debug.Assert(pInstance == null);
 
             if (pInstance == null)
-            {
                 pInstance = new CollisionPairManager(numStart, deltaAdd);
-            }
         }
 
-#if DEBUG
         public static CollisionPair Add(CollisionPairName Name, GameObject treeRootA, GameObject treeRootB)
         {
-            CollisionPairManager pTMan = CollisionPairManager.getInstance();
+            CollisionPairManager pTMan = getInstance();
             Debug.Assert(pTMan != null);
 
-            CollisionPair pNode = (CollisionPair)pTMan.baseAdd();
+            CollisionPair pNode = (CollisionPair)pTMan.BaseAdd();
             Debug.Assert(pNode != null);
 
             pNode.dClean();
@@ -136,45 +127,21 @@ namespace SpaceInvaders.CollisionSystem
 
             return pNode;
         }
-#else
-        public static CollisionPair Add(CollisionPairName Name, GameObject treeRootA, GameObject treeRootB)
-        {
-            CollisionPair pNode = (CollisionPair) CollisionPairManager.getInstance().baseAdd();
-            pNode.Set(Name, treeRootA, treeRootB);
-            return pNode;
-        }
 
-#endif
-
-
-#if DEBUG
         protected override DLink dCreateNode()
         {
             DLink newNode = new CollisionPair();
             Debug.Assert(newNode != null);
             return newNode;
         }
-#else
-        protected override DLink dCreateNode()
-        {
-            return (DLink) new CollisionPair();
-        }
-#endif
 
-#if DEBUG
         public static CollisionPair Find(CollisionPairName name)
         {
-            CollisionPairManager mrT = CollisionPairManager.getInstance();
+            CollisionPairManager mrT = getInstance();
             Debug.Assert(mrT != null);
-            CollisionPair target = CollisionPairManager.toFind(name);
-            return (CollisionPair)mrT.baseFind(target);
+            CollisionPair target = toFind(name);
+            return (CollisionPair)mrT.BaseFind(target);
         }
-#else
-        public static CollisionPair Find(CollisionPairName name)
-        {
-          return (CollisionPair) CollisionPairManager.getInstance().baseFind(CollisionPairManager.toFind(name));
-        }
-#endif
 
         private static CollisionPair toFind(CollisionPairName name)
         {

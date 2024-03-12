@@ -2,7 +2,7 @@
 
 namespace SpaceInvaders.GraphicalObjects
 {
-    //Just a warpper for baseManager to allow for generation of clearer class diagrams.
+    //Just a wrapper for baseManager to allow for generation of clearer class diagrams.
     abstract class TexMan : baseManager
     {
 #if DEBUG

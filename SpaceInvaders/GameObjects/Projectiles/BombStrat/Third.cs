@@ -5,7 +5,7 @@ namespace SpaceInvaders.GameObjects
     internal sealed class ThirdStrat : BombStrat
     {
 
-        GameSprite f1, f2, f3, f4;
+        readonly GameSprite f1, f2, f3, f4;
 
         public ThirdStrat()
         {

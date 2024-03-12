@@ -29,7 +29,7 @@ namespace SpaceInvaders.FontSystem
         //----------------------------------------------------------------------
         public static void Create(int reserveNum = 3, int reserveGrow = 1)
         {
-            // make sure values are ressonable 
+            // make sure values are reasonable 
             Debug.Assert(reserveNum > 0);
             Debug.Assert(reserveGrow > 0);
 
@@ -52,11 +52,11 @@ namespace SpaceInvaders.FontSystem
 //            //pMan.baseDestroy();
 //        }
 
-        public static Font Add(FontName name, SpriteBatchID SB_Name, String pMessage, Glyph.Name glyphName, float xStart, float yStart)
+        public static Font Add(FontName name, SpriteBatchID SB_Name, string pMessage, Glyph.Name glyphName, float xStart, float yStart)
         {
             FontManager pMan = FontManager.privGetInstance();
 
-            Font pNode = (Font)pMan.baseAdd();
+            Font pNode = (Font)pMan.BaseAdd();
             Debug.Assert(pNode != null);
 
             pNode.Set(name, pMessage, glyphName, xStart, yStart);
@@ -70,7 +70,7 @@ namespace SpaceInvaders.FontSystem
             return pNode;
         }
 
-        public static void AddXml(Glyph.Name glyphName, String assetName, TextureID textName) 
+        public static void AddXml(Glyph.Name glyphName, string assetName, TextureID textName) 
             => GlyphManager.AddXml(glyphName, assetName, textName);
 
         public static void Remove(Glyph pNode)
@@ -87,7 +87,7 @@ namespace SpaceInvaders.FontSystem
             // Compare functions only compares two Nodes
             pMan.pRefNode.name = name;
 
-            Font pData = (Font)pMan.baseFind(pMan.pRefNode);
+            Font pData = (Font)pMan.BaseFind(pMan.pRefNode);
             return pData;
         }
 
@@ -152,7 +152,7 @@ namespace SpaceInvaders.FontSystem
         //----------------------------------------------------------------------
         // Data
         //----------------------------------------------------------------------
-        private static FontManager pInstance = null;
+        private static FontManager pInstance;
         private Font pRefNode;
     }
 }

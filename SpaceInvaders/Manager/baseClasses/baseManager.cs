@@ -9,22 +9,16 @@ namespace SpaceInvaders.Manager
         DLink pReserveHead;
         DLink pActiveHead;
 
-        DLink P1Head;
-        DLink P2Head;
+        protected DLink P1Head { get; set; }
+        protected DLink P2Head { get; set; }
 
-        int mDeltaAdd;
-        int mNumActive;
-        int mNumReserved;
+        protected int mDeltaAdd { get; private set; }
+        public int mNumActive { get; protected set; }
+        public int mNumReserved { get; protected set; }
 
-        protected DLink baseGetPAHead()
-        {
-            return P1Head;
-        }
+        public int GetTotal() => mNumActive + mNumReserved;
 
-        protected DLink baseGetPBHead()
-        {
-            return P2Head;
-        }
+        protected DLink BaseGetPAHead() => P1Head;
 
         protected void nullHeads()
         {
@@ -34,18 +28,11 @@ namespace SpaceInvaders.Manager
 
         protected void baseStorePlayerA()
         {
-            P1Head = this.getActiveHead();
+            P1Head = this.GetActiveHead();
             this.setActiveHead(null);
         }
 
-        protected bool AHeadEmpty()
-        {
-            if(null == P1Head)
-            {
-                return true;
-            }
-            return false;
-        }
+        protected bool AHeadEmpty() => null == P1Head;
 
         protected void baseSetPlayerA()
         {
@@ -54,19 +41,13 @@ namespace SpaceInvaders.Manager
 
         protected void baseStorePlayerB()
         {
-            P2Head = this.getActiveHead();
+            P2Head = this.GetActiveHead();
             this.setActiveHead(null);
         }
 
-        protected void baseSetPlayerB()
-        {
-            this.setActiveHead(P2Head);
-        }
+        protected void baseSetPlayerB() => this.setActiveHead(P2Head);
 
-        protected DLink getActiveHead()
-        {
-            return pActiveHead;
-        }
+        protected DLink GetActiveHead() => pActiveHead;
 
         protected void setActiveHead(DLink pHead)
         {
@@ -83,14 +64,14 @@ namespace SpaceInvaders.Manager
             generateReserves(numStart);
         }
 
-        protected DLink baseAddSort(DLink toAdd)
+        protected DLink BaseAddSort(DLink toAdd)
         {
             //DLink.addToFront(ref pActiveHead, toAdd);
             DLink.baseSortAdd(ref pActiveHead, toAdd);
             return toAdd;
         }
 
-       //private copyconstructor
+       //private copy constructor
         private baseManager(baseManager x){}
 
         ~baseManager()
@@ -118,12 +99,9 @@ namespace SpaceInvaders.Manager
 
         protected DLink getFromReserve()
         {
-            
             mNumReserved--;
             if (null == pReserveHead)
-            {
                 generateReserves(3);
-            }
             return DLink.PullFromFront(ref pReserveHead);
         }
       
@@ -134,33 +112,26 @@ namespace SpaceInvaders.Manager
             return  newLink;
         }
 
-        public DLink baseAdd()
-        {
-            return addToActive(getFromReserve());
-        }
+        public DLink BaseAdd() => addToActive(getFromReserve());
 
-        public DLink baseFind(DLink pTarget)
+        public DLink BaseFind(DLink pTarget)
         {
             DLink cur = pActiveHead;
             while (cur != null)
             {
                 if (dCompareNodes(cur,pTarget))
-                {
                     break;
-                }
                 cur = cur.pNext;
             }
             return cur;
         }
 
-
         //Remove moves a given node from the active list and puts it at the head of reserve list
-        //I put bool in now because I wanna rework all of theese to do error/status enums.
-        //I also wanna refactor theese eventually to use Error Enums and add more error handling or correction. But I don't quite understand what would be useful just yet.
+        //I put bool in now because I wanna rework all of these to do error/status Enums.
+        //I also wanna refactor these eventually to use Error Enums and add more error handling or correction. But I don't quite understand what would be useful just yet.
         public bool baseRemove(DLink toRemove)
         {
             Debug.Assert(toRemove != null);
-
 
             removeFromActive(ref toRemove);
             toRemove.dClean();
@@ -181,7 +152,6 @@ namespace SpaceInvaders.Manager
             mNumReserved++;
         }
 
-
         abstract protected DLink dCreateNode();
 
         abstract protected bool dCompareNodes(DLink pLinkA, DLink pLinkB);
@@ -193,23 +163,6 @@ namespace SpaceInvaders.Manager
             DLink.baseSortAdd(ref pActiveHead, toAdd);
             return toAdd; 
         }
-
-
-        public int getActive()
-        {
-            return mNumActive;
-        }
-
-        public int getReserve()
-        {
-            return mNumReserved;
-        }
-
-        public int getTotal()
-        {
-            return mNumActive+mNumReserved;
-        }
-
 
         // these are just here to allow you to ensure that the length of the list is what is reported by the number.
         //mainly because I wanna automate test cases so I don't want to have to look to make sure the list is properly linked.

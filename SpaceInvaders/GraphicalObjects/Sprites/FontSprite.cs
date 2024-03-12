@@ -5,31 +5,23 @@ namespace SpaceInvaders.GraphicalObjects
 {
     internal sealed class FontSprite : baseSprite
     {
-        public Glyph.Name GetGlyphName()
-        {
-            return this.glyphName;
-        }
-
-        override public SpriteID getName()
-        {
-            return this.Name;
-        }
+        public Glyph.Name GetGlyphName() => glyphName;
+        override public SpriteID getName() => Name;
 
         public FontSprite()
             : base()
         {
             // Create a dummy sprite, it will get correctly linked in Set()
 
-            this.pAzulSprite = new Azul.Sprite();
-            this.pScreenRect = new Azul.Rect();
-            this.pColor = new Azul.Color(1.0f, 1.0f, 1.0f);
+            pAzulSprite = new Azul.Sprite();
+            pScreenRect = new Azul.Rect();
+            pColor = new Azul.Color(1.0f, 1.0f, 1.0f);
 
-            this.pMessage = null;
-            this.glyphName = Glyph.Name.Uninitialized;
+            pMessage = null;
+            glyphName = Glyph.Name.Uninitialized;
 
-            this.x = 0.0f;
-            this.y = 0.0f;
-
+            x = 0.0f;
+            y = 0.0f;
         }
 
         ~FontSprite()
@@ -37,10 +29,10 @@ namespace SpaceInvaders.GraphicalObjects
 #if (TRACK_DESTRUCTOR)   
             Debug.WriteLine("~GameSprite():{0} ", this.GetHashCode());
 #endif
-            this.pAzulSprite = null;
-            this.pScreenRect = null;
-            this.pColor = null;
-            this.pMessage = null;
+            pAzulSprite = null;
+            pScreenRect = null;
+            pColor = null;
+            pMessage = null;
         }
 
         public void Set(FontName name, String pMessage, Glyph.Name glyphName, float xStart, float yStart)
@@ -48,24 +40,24 @@ namespace SpaceInvaders.GraphicalObjects
             Debug.Assert(pMessage != null);
             this.pMessage = pMessage;
 
-            this.x = xStart;
-            this.y = yStart;
+            x = xStart;
+            y = yStart;
 
             this.name = name;
             this.glyphName = glyphName;
 
             // Force color to white
-            Debug.Assert(this.pColor != null);
-            this.pColor.Set(1.0f, 1.0f, 1.0f);
+            Debug.Assert(pColor != null);
+            pColor.Set(1.0f, 1.0f, 1.0f);
         }
 
         public void SetColor(float red, float green, float blue, float alpha = 1.0f)
         {
-            Debug.Assert(this.pColor != null);
-            this.pColor.Set(red, green, blue, alpha);
+            Debug.Assert(pColor != null);
+            pColor.Set(red, green, blue, alpha);
         }
 
-        public void UpdateMessage(String pMessage)
+        public void UpdateMessage(string pMessage)
         {
             Debug.Assert(pMessage != null);
             this.pMessage = pMessage;

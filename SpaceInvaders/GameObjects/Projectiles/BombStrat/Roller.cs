@@ -3,8 +3,8 @@
 namespace SpaceInvaders.GameObjects
 {
     internal sealed class Roller : BombStrat
-    {  
-        GameSprite f1, f2, f3, f4;
+    {
+        readonly GameSprite f1, f2, f3, f4;
         
         public Roller()
         {

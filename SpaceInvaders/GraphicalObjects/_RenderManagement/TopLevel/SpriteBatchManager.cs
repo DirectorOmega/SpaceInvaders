@@ -23,7 +23,7 @@ namespace SpaceInvaders.GraphicalObjects
             SpriteBatchManager psbMan = SpriteBatchManager.getInstance();
             Debug.Assert(psbMan != null);
 
-            SpriteBatch pNode = (SpriteBatch)psbMan.baseAdd();
+            SpriteBatch pNode = (SpriteBatch)psbMan.BaseAdd();
             Debug.Assert(pNode != null);
 
             pNode.Set(id);
@@ -36,7 +36,7 @@ namespace SpaceInvaders.GraphicalObjects
             SpriteBatchManager SBM = SpriteBatchManager.getInstance();
             Debug.Assert(SBM != null);
             //  pSpriteBatchRef = pActiveHead;
-            SpriteBatch cur = (SpriteBatch)SBM.getActiveHead();
+            SpriteBatch cur = (SpriteBatch)SBM.GetActiveHead();
             while (cur != null)
             {
                 cur.StorePlayerA();
@@ -50,7 +50,7 @@ namespace SpaceInvaders.GraphicalObjects
             SpriteBatchManager SBM = SpriteBatchManager.getInstance();
             Debug.Assert(SBM != null);
             //  pSpriteBatchRef = pActiveHead;
-            SpriteBatch cur = (SpriteBatch)SBM.getActiveHead();
+            SpriteBatch cur = (SpriteBatch)SBM.GetActiveHead();
             while (cur != null)
             {
                 cur.SetPlayerA();
@@ -63,7 +63,7 @@ namespace SpaceInvaders.GraphicalObjects
             SpriteBatchManager SBM = SpriteBatchManager.getInstance();
             Debug.Assert(SBM != null);
             //  pSpriteBatchRef = pActiveHead;
-            SpriteBatch cur = (SpriteBatch)SBM.getActiveHead();
+            SpriteBatch cur = (SpriteBatch)SBM.GetActiveHead();
             while (cur != null)
             {
                 cur.StorePlayerB();
@@ -76,7 +76,7 @@ namespace SpaceInvaders.GraphicalObjects
             SpriteBatchManager SBM = SpriteBatchManager.getInstance();
             Debug.Assert(SBM != null);
             //  pSpriteBatchRef = pActiveHead;
-            SpriteBatch cur = (SpriteBatch)SBM.getActiveHead();
+            SpriteBatch cur = (SpriteBatch)SBM.GetActiveHead();
             while (cur != null)
             {
                 cur.SetPlayerB();
@@ -89,7 +89,7 @@ namespace SpaceInvaders.GraphicalObjects
             SpriteBatchManager SBM = SpriteBatchManager.getInstance();
             Debug.Assert(SBM != null);
             //  pSpriteBatchRef = pActiveHead;
-            SpriteBatch cur = (SpriteBatch)SBM.getActiveHead();
+            SpriteBatch cur = (SpriteBatch)SBM.GetActiveHead();
             while (cur != null)
             {
                 cur.ClearStored();
@@ -146,7 +146,7 @@ namespace SpaceInvaders.GraphicalObjects
 
 
             SpriteBatch target = SpriteBatchManager.toFind(batchName);
-            return (SpriteBatch)bsMan.baseFind(target);
+            return (SpriteBatch)bsMan.BaseFind(target);
 
         }
 
@@ -173,7 +173,7 @@ namespace SpaceInvaders.GraphicalObjects
             SpriteBatchManager SBM = SpriteBatchManager.getInstance();
             Debug.Assert(SBM != null);
             //  pSpriteBatchRef = pActiveHead;
-            SpriteBatch cur = (SpriteBatch)SBM.getActiveHead();
+            SpriteBatch cur = (SpriteBatch)SBM.GetActiveHead();
             while (cur != null)
             {
                 cur.Draw();
